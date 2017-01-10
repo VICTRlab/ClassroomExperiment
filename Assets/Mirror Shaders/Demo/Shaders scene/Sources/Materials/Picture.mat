@@ -1,0 +1,226 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Picture
+  m_Shader: {fileID: 4800000, guid: 894ed7b5fe8968e458e5634d3085b106, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 5
+  m_CustomRenderQueue: 2450
+  stringTagMap: {}
+  m_SavedProperties:
+    serializedVersion: 2
+    m_TexEnvs:
+    - first:
+        name: _BumpMap
+      second:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - first:
+        name: _DetailAlbedoMap
+      second:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - first:
+        name: _DetailMask
+      second:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - first:
+        name: _DetailNormalMap
+      second:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - first:
+        name: _DirtMapBW
+      second:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - first:
+        name: _EmissionMap
+      second:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - first:
+        name: _MainTex
+      second:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - first:
+        name: _MetallicGlossMap
+      second:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - first:
+        name: _OcclusionMap
+      second:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - first:
+        name: _ParallaxMap
+      second:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - first:
+        name: _ReflectionTex
+      second:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - first:
+        name: __Cubemap
+      second:
+        m_Texture: {fileID: 8900000, guid: 844fd92ddae38db43ba6f197e5815e2d, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - first:
+        name: __Diffusemap
+      second:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - first:
+        name: __Reflectionmask
+      second:
+        m_Texture: {fileID: 2800000, guid: 87db03816c0e6754fbb7bf08d7782cf4, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - first:
+        name: _ActiveDirtmaskBW
+      second: 0
+    - first:
+        name: _BlurReflection
+      second: 0.616
+    - first:
+        name: _Brightness
+      second: 0
+    - first:
+        name: _BumpScale
+      second: 1
+    - first:
+        name: _ColorToDiffuse
+      second: 1
+    - first:
+        name: _CubemapEdges
+      second: 0
+    - first:
+        name: _CubemapIntensity
+      second: 0.422
+    - first:
+        name: _Cutoff
+      second: 0.5
+    - first:
+        name: _DetailNormalMapScale
+      second: 1
+    - first:
+        name: _DstBlend
+      second: 0
+    - first:
+        name: _Exposure
+      second: 0.637
+    - first:
+        name: _Glossiness
+      second: 0.5
+    - first:
+        name: _InvertDirtMap
+      second: 0
+    - first:
+        name: _InvertReflectionMask
+      second: 0
+    - first:
+        name: _MaskIntensity
+      second: 1
+    - first:
+        name: _MaskSpread
+      second: 0
+    - first:
+        name: _Metallic
+      second: 0
+    - first:
+        name: _Mode
+      second: 0
+    - first:
+        name: _ModeScreenOffOverlayOn
+      second: 0
+    - first:
+        name: _OcclusionStrength
+      second: 1
+    - first:
+        name: _Parallax
+      second: 0.02
+    - first:
+        name: _SrcBlend
+      second: 1
+    - first:
+        name: _U
+      second: 0
+    - first:
+        name: _UVSec
+      second: 0
+    - first:
+        name: _ZWrite
+      second: 1
+    - first:
+        name: __Transparency
+      second: 0.5
+    - first:
+        name: _node_1193
+      second: 7.672573
+    - first:
+        name: _node_1448
+      second: 2.56
+    - first:
+        name: _node_152
+      second: 3.23
+    - first:
+        name: _node_1656
+      second: 0
+    - first:
+        name: _node_2036
+      second: 0
+    - first:
+        name: _node_3515
+      second: 5
+    - first:
+        name: _node_3900
+      second: 6.4
+    - first:
+        name: _node_4795
+      second: 1.081
+    - first:
+        name: _node_6829
+      second: -0.07
+    - first:
+        name: _node_6956
+      second: 1
+    - first:
+        name: _node_9569
+      second: 0.433
+    - first:
+        name: _node_9888
+      second: 0.608
+    m_Colors:
+    - first:
+        name: _Color
+      second: {r: 0.29411763, g: 0.29411763, b: 0.29411763, a: 1}
+    - first:
+        name: _ColorTint
+      second: {r: 1, g: 1, b: 1, a: 1}
+    - first:
+        name: _EmissionColor
+      second: {r: 0, g: 0, b: 0, a: 1}
