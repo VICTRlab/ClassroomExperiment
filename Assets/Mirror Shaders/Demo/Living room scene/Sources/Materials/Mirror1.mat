@@ -138,7 +138,7 @@ Material:
       second: 0
     - first:
         name: _Glossiness
-      second: 0.524
+      second: 0.5
     - first:
         name: _InvertReflectionMask
       second: 1
@@ -168,7 +168,7 @@ Material:
       second: 0.02
     - first:
         name: _SpecularIntensity
-      second: 0.25
+      second: 0.465
     - first:
         name: _SrcBlend
       second: 1
