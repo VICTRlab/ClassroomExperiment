@@ -20,7 +20,6 @@ public class HeartBeatScript : MonoBehaviour {
 	void Update () {
 
         beatTime -= Time.deltaTime;
-        Debug.Log(beatTime);
         HeartImage.transform.localScale = Vector3.Lerp(originalImageScale/1.5f, originalImageScale, beatTime);
         if ( beatTime < 0)
         {
