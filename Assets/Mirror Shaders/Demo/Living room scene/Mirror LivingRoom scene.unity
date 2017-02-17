@@ -358,7 +358,6 @@ Prefab:
       objectReference: {fileID: 2100000, guid: 67dbe07cd4178764fb24a6169c811ab1, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7c6bcbf392d0a0846b6effe8c0070f80, type: 3}
-  m_RootGameObject: {fileID: 517561314}
   m_IsPrefabParent: 0
 --- !u!1001 &45174888
 Prefab:
@@ -401,7 +400,6 @@ Prefab:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d54235d38bf011b49b8a4a5d366710c1, type: 2}
-  m_RootGameObject: {fileID: 1299025524}
   m_IsPrefabParent: 0
 --- !u!1 &82179082
 GameObject:
@@ -529,7 +527,6 @@ Prefab:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f832f94fab5851741a59bdf8ef183a59, type: 3}
-  m_RootGameObject: {fileID: 1565155653}
   m_IsPrefabParent: 0
 --- !u!1 &85712833
 GameObject:
@@ -651,7 +648,6 @@ Prefab:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 81eeaff141269eb4bb525753bebdb680, type: 3}
-  m_RootGameObject: {fileID: 1863984516}
   m_IsPrefabParent: 0
 --- !u!1001 &89900774
 Prefab:
@@ -706,7 +702,6 @@ Prefab:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b05882c2208d52541b961d9e52cc101a, type: 3}
-  m_RootGameObject: {fileID: 1036900946}
   m_IsPrefabParent: 0
 --- !u!1 &102297166
 GameObject:
@@ -833,7 +828,6 @@ Prefab:
       objectReference: {fileID: 2100000, guid: f901cd8e037c4db4db0fa4aad7ebbde7, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f1ad4ea871056ed49a468e097910cf65, type: 3}
-  m_RootGameObject: {fileID: 383012633}
   m_IsPrefabParent: 0
 --- !u!1001 &111081573
 Prefab:
@@ -876,7 +870,6 @@ Prefab:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e5d528a369797af46a21abf48b4cd9a3, type: 2}
-  m_RootGameObject: {fileID: 305471216}
   m_IsPrefabParent: 0
 --- !u!1 &112903742
 GameObject:
@@ -1020,7 +1013,6 @@ Prefab:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7aa82589748976341b12f614afaddafb, type: 2}
-  m_RootGameObject: {fileID: 1897426430}
   m_IsPrefabParent: 0
 --- !u!1 &149147782
 GameObject:
@@ -1225,6 +1217,8 @@ MonoBehaviour:
   m_TextureSize: 256
   m_ClipPlaneOffset: 0.07
   m_ReflectLayers: {}
+  m_ReflectionTexture: {fileID: 0}
+  m_OldReflectionTextureSize: 0
 --- !u!95 &175907056
 Animator:
   serializedVersion: 3
@@ -1336,7 +1330,6 @@ Prefab:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d4c7db1041f92204fb380b0780de5ebc, type: 2}
-  m_RootGameObject: {fileID: 1607467285}
   m_IsPrefabParent: 0
 --- !u!1 &184912454
 GameObject:
@@ -1461,7 +1454,6 @@ Prefab:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c0f76563cc599cd4ba3b740c628fb48e, type: 3}
-  m_RootGameObject: {fileID: 149147782}
   m_IsPrefabParent: 0
 --- !u!1 &209617778
 GameObject:
@@ -1731,7 +1723,6 @@ Prefab:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c612ff4ce69d9844798e3848b698c44d, type: 3}
-  m_RootGameObject: {fileID: 2048210051}
   m_IsPrefabParent: 0
 --- !u!1 &303903695
 GameObject:
@@ -1928,7 +1919,6 @@ Prefab:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 58967f0b3b73f614e820f337013cbb2e, type: 2}
-  m_RootGameObject: {fileID: 1307356660}
   m_IsPrefabParent: 0
 --- !u!1001 &334868396
 Prefab:
@@ -1987,7 +1977,6 @@ Prefab:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 58967f0b3b73f614e820f337013cbb2e, type: 2}
-  m_RootGameObject: {fileID: 1812798048}
   m_IsPrefabParent: 0
 --- !u!1001 &339227004
 Prefab:
@@ -2042,7 +2031,6 @@ Prefab:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c0f76563cc599cd4ba3b740c628fb48e, type: 3}
-  m_RootGameObject: {fileID: 945432471}
   m_IsPrefabParent: 0
 --- !u!1001 &354458110
 Prefab:
@@ -2089,7 +2077,6 @@ Prefab:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bff38b8ab297ddf4ab3e4e8c93f1734f, type: 2}
-  m_RootGameObject: {fileID: 702463672}
   m_IsPrefabParent: 0
 --- !u!1 &362897216
 GameObject:
@@ -2264,6 +2251,8 @@ MonoBehaviour:
   m_TextureSize: 1024
   m_ClipPlaneOffset: 0.07
   m_ReflectLayers: {}
+  m_ReflectionTexture: {fileID: 0}
+  m_OldReflectionTextureSize: 1024
 --- !u!1 &385470802
 GameObject:
   m_ObjectHideFlags: 0
@@ -2442,7 +2431,6 @@ Prefab:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6b6ad17d1a3d7f74c835c063df0291af, type: 2}
-  m_RootGameObject: {fileID: 209751327}
   m_IsPrefabParent: 0
 --- !u!1 &409154605
 GameObject:
@@ -3023,7 +3011,6 @@ Prefab:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 81eeaff141269eb4bb525753bebdb680, type: 3}
-  m_RootGameObject: {fileID: 2105897872}
   m_IsPrefabParent: 0
 --- !u!1 &559200717
 GameObject:
@@ -3124,6 +3111,8 @@ MonoBehaviour:
   m_TextureSize: 1024
   m_ClipPlaneOffset: 0.07
   m_ReflectLayers: {}
+  m_ReflectionTexture: {fileID: 0}
+  m_OldReflectionTextureSize: 1024
 --- !u!65 &562842555
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3341,7 +3330,6 @@ Prefab:
       objectReference: {fileID: 2100000, guid: 6e75974a7b39ce6498a199dad7d7e4da, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d1663e62a9da9f64ba6217076d98ff3c, type: 3}
-  m_RootGameObject: {fileID: 1232678104}
   m_IsPrefabParent: 0
 --- !u!1001 &598254814
 Prefab:
@@ -3384,7 +3372,6 @@ Prefab:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e84b0078858551a48a9f2b44f97af9ed, type: 2}
-  m_RootGameObject: {fileID: 1673681261}
   m_IsPrefabParent: 0
 --- !u!1001 &609661542
 Prefab:
@@ -3447,7 +3434,6 @@ Prefab:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c612ff4ce69d9844798e3848b698c44d, type: 3}
-  m_RootGameObject: {fileID: 175907054}
   m_IsPrefabParent: 0
 --- !u!1001 &642323849
 Prefab:
@@ -3494,7 +3480,6 @@ Prefab:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dd57e91d6fa6c034cbb2537382b8b11c, type: 2}
-  m_RootGameObject: {fileID: 19007507}
   m_IsPrefabParent: 0
 --- !u!1 &697353002
 GameObject:
@@ -4075,7 +4060,6 @@ Prefab:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 56e35b0a4ffd2f242a46d86e415af4b3, type: 2}
-  m_RootGameObject: {fileID: 739283985}
   m_IsPrefabParent: 0
 --- !u!1 &871177537
 GameObject:
@@ -4189,7 +4173,6 @@ Prefab:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2be597d4063b6fb44862bacae02ad844, type: 2}
-  m_RootGameObject: {fileID: 1617623155}
   m_IsPrefabParent: 0
 --- !u!4 &893424475
 Transform:
@@ -4373,7 +4356,6 @@ Prefab:
       objectReference: {fileID: 2100000, guid: 323e687805782624dab9d4e123a51120, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 77b753e9f1b81864fbff19911c6e3bcb, type: 3}
-  m_RootGameObject: {fileID: 1072064611}
   m_IsPrefabParent: 0
 --- !u!1 &932717859
 GameObject:
@@ -4683,7 +4665,6 @@ Prefab:
       objectReference: {fileID: 2100000, guid: 352b3ffd295531243867d69ac926cfda, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bb5e83afca0902c4ebc37571006cbff9, type: 3}
-  m_RootGameObject: {fileID: 552836912}
   m_IsPrefabParent: 0
 --- !u!1 &962126725
 GameObject:
@@ -5026,7 +5007,6 @@ Prefab:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 733eb7d0ef0678c45bc943f31b8f5b81, type: 2}
-  m_RootGameObject: {fileID: 1901964022}
   m_IsPrefabParent: 0
 --- !u!1 &1072064611
 GameObject:
@@ -5118,7 +5098,6 @@ Prefab:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5fd4810160263bd4fa022abc40236381, type: 2}
-  m_RootGameObject: {fileID: 2126781703}
   m_IsPrefabParent: 0
 --- !u!4 &1085901442
 Transform:
@@ -5350,7 +5329,6 @@ Prefab:
       objectReference: {fileID: 2100000, guid: 6e75974a7b39ce6498a199dad7d7e4da, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d1663e62a9da9f64ba6217076d98ff3c, type: 3}
-  m_RootGameObject: {fileID: 581028800}
   m_IsPrefabParent: 0
 --- !u!1 &1135044071
 GameObject:
@@ -5515,7 +5493,6 @@ Prefab:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 544754ca49030ed4480d8f3be4f83ba0, type: 2}
-  m_RootGameObject: {fileID: 1938569355}
   m_IsPrefabParent: 0
 --- !u!1 &1148668647
 GameObject:
@@ -5658,7 +5635,6 @@ Prefab:
       objectReference: {fileID: 2100000, guid: 430c3eda9acbc9a499c51b72cb393fe2, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0adadce8262371c4491c7fe52057f150, type: 3}
-  m_RootGameObject: {fileID: 562842553}
   m_IsPrefabParent: 0
 --- !u!1001 &1166548317
 Prefab:
@@ -5717,7 +5693,6 @@ Prefab:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 38cd97cfab855004c901bfc5300f4ac4, type: 3}
-  m_RootGameObject: {fileID: 1608936465}
   m_IsPrefabParent: 0
 --- !u!1 &1171967898
 GameObject:
@@ -6269,7 +6244,6 @@ Prefab:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c0f76563cc599cd4ba3b740c628fb48e, type: 3}
-  m_RootGameObject: {fileID: 1989409435}
   m_IsPrefabParent: 0
 --- !u!1 &1299025524
 GameObject:
@@ -6496,6 +6470,8 @@ MonoBehaviour:
   m_TextureSize: 1024
   m_ClipPlaneOffset: 4.722
   m_ReflectLayers: {}
+  m_ReflectionTexture: {fileID: 0}
+  m_OldReflectionTextureSize: 1024
 --- !u!95 &1313304936
 Animator:
   serializedVersion: 3
@@ -6638,7 +6614,6 @@ Prefab:
       objectReference: {fileID: 2100000, guid: 6e75974a7b39ce6498a199dad7d7e4da, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d1663e62a9da9f64ba6217076d98ff3c, type: 3}
-  m_RootGameObject: {fileID: 1230195513}
   m_IsPrefabParent: 0
 --- !u!4 &1331858429
 Transform:
@@ -6762,7 +6737,6 @@ Prefab:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 58967f0b3b73f614e820f337013cbb2e, type: 2}
-  m_RootGameObject: {fileID: 786093409}
   m_IsPrefabParent: 0
 --- !u!1001 &1443143993
 Prefab:
@@ -6965,7 +6939,6 @@ Prefab:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: deaa903cc3a8ece4c8d119d5ffb9b487, type: 3}
-  m_RootGameObject: {fileID: 1635779880}
   m_IsPrefabParent: 0
 --- !u!1 &1449692705
 GameObject:
@@ -7205,6 +7178,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ba90bee27bb21c438dbf8d671d3e5f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  flipYAxis: 1
+  m_DisablePixelLights: 1
+  m_TextureSize: 1024
+  m_ClipPlaneOffset: 0.07
+  m_ReflectLayers: {}
+  m_ReflectionTexture: {fileID: 0}
+  m_OldReflectionTextureSize: 1024
 --- !u!23 &1478921699
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -7378,7 +7358,6 @@ Prefab:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 38cd97cfab855004c901bfc5300f4ac4, type: 3}
-  m_RootGameObject: {fileID: 1313304934}
   m_IsPrefabParent: 0
 --- !u!4 &1539963522
 Transform:
@@ -7516,7 +7495,6 @@ Prefab:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 660499960cf740847955f813add2e0d1, type: 2}
-  m_RootGameObject: {fileID: 184912454}
   m_IsPrefabParent: 0
 --- !u!1 &1565155653
 GameObject:
@@ -7859,6 +7837,8 @@ MonoBehaviour:
   m_TextureSize: 1024
   m_ClipPlaneOffset: 4.722
   m_ReflectLayers: {}
+  m_ReflectionTexture: {fileID: 0}
+  m_OldReflectionTextureSize: 1024
 --- !u!1 &1613649008
 GameObject:
   m_ObjectHideFlags: 0
@@ -8989,7 +8969,6 @@ Prefab:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f2ee25c09321ae44fb568847120a7a60, type: 2}
-  m_RootGameObject: {fileID: 726854766}
   m_IsPrefabParent: 0
 --- !u!1001 &1876993434
 Prefab:
@@ -9052,7 +9031,6 @@ Prefab:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c612ff4ce69d9844798e3848b698c44d, type: 3}
-  m_RootGameObject: {fileID: 2137300175}
   m_IsPrefabParent: 0
 --- !u!1 &1897426430
 GameObject:
@@ -9086,6 +9064,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ba90bee27bb21c438dbf8d671d3e5f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  flipYAxis: 0
+  m_DisablePixelLights: 1
+  m_TextureSize: 1024
+  m_ClipPlaneOffset: 0.92
+  m_ReflectLayers: {}
+  m_ReflectionTexture: {fileID: 0}
+  m_OldReflectionTextureSize: 1024
 --- !u!64 &1897426432
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -9205,7 +9190,6 @@ Prefab:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d433bcd1bff045a42b75765276240481, type: 2}
-  m_RootGameObject: {fileID: 1613649008}
   m_IsPrefabParent: 0
 --- !u!1 &1901964022
 GameObject:
@@ -9357,7 +9341,6 @@ Prefab:
       objectReference: {fileID: 2100000, guid: 6e75974a7b39ce6498a199dad7d7e4da, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d1663e62a9da9f64ba6217076d98ff3c, type: 3}
-  m_RootGameObject: {fileID: 1631499218}
   m_IsPrefabParent: 0
 --- !u!4 &1917826692
 Transform:
@@ -9877,6 +9860,8 @@ MonoBehaviour:
   m_TextureSize: 512
   m_ClipPlaneOffset: 0.07
   m_ReflectLayers: {}
+  m_ReflectionTexture: {fileID: 0}
+  m_OldReflectionTextureSize: 512
 --- !u!95 &2048210053
 Animator:
   serializedVersion: 3
@@ -10068,7 +10053,6 @@ Prefab:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b2f4fae089218834c89d9268e26f4a40, type: 2}
-  m_RootGameObject: {fileID: 112903742}
   m_IsPrefabParent: 0
 --- !u!1 &2085440199
 GameObject:
@@ -10397,6 +10381,8 @@ MonoBehaviour:
   m_TextureSize: 256
   m_ClipPlaneOffset: 0.07
   m_ReflectLayers: {}
+  m_ReflectionTexture: {fileID: 0}
+  m_OldReflectionTextureSize: 0
 --- !u!95 &2137300177
 Animator:
   serializedVersion: 3
