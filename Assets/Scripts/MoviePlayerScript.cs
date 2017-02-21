@@ -17,21 +17,6 @@ public class MoviePlayerScript : MonoBehaviour {
         r = moviePlayer.GetComponent<Renderer>();
         movie = (MovieTexture)r.material.mainTexture;
 
-        if (Input.GetKeyDown("5"))
-        {
-            if(played)
-            {
-                movie.Pause();
-                played = !played;
-            }
-            else
-            {
-                movie.Play();
-                played = !played;
-            }
-            
-        }
-
     }
 	
 	// Update is called once per frame
@@ -45,9 +30,27 @@ public class MoviePlayerScript : MonoBehaviour {
         {
             movie.Play();
             played = true;
+            coolDown = 99999f;
         }
 
-	}
+        if (Input.GetKeyDown("5"))
+        {
+            if (played)
+            {
+                Debug.Log("Pausing");
+                movie.Pause();
+                played = !played;
+            }
+            else
+            {
+                Debug.Log("Playing");
+                movie.Play();
+                played = !played;
+            }
+
+        }
+
+    }
 
     void OnTriggerEnter(Collider col)
     {
