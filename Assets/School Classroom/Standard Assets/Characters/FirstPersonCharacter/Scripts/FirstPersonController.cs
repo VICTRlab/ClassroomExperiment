@@ -41,6 +41,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private float m_NextStep;
         private bool m_Jumping;
         private AudioSource m_AudioSource;
+        private bool sitting = false;
 
         // Use this for initialization
         private void Start()
@@ -81,6 +82,22 @@ namespace UnityStandardAssets.Characters.FirstPerson
             }
 
             m_PreviouslyGrounded = m_CharacterController.isGrounded;
+
+            if (Input.GetKeyDown("4"))
+            {
+                if(sitting)
+                {
+
+                    this.GetComponentInChildren<Camera>().transform.position += new Vector3(0f, 0.5f, 0f);
+                    sitting = !sitting;
+                }
+                else
+                {
+                    this.GetComponentInChildren<Camera>().transform.position -= new Vector3(0f, 0.5f, 0f);
+                    sitting = !sitting;
+                }
+
+            }
         }
 
 

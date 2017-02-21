@@ -19,8 +19,9 @@ public class SceneControllerManagerScript : MonoBehaviour {
     public GameObject Projector;
     MeshRenderer ProjectorDisplay;
     public Material movie;
-    public Material wikitext;
+    public Material wikitext, wikitext2;
     bool standardProjector = true;
+    int projectorSlide = 0;
 
 	// Use this for initialization
 	void Start () {
@@ -55,8 +56,31 @@ public class SceneControllerManagerScript : MonoBehaviour {
             switchProjector(standardProjector);
             standardProjector = !standardProjector;
         }
-	
+
+        if (Input.GetKeyDown("q"))
+        {
+            changeProjectorSlide(projectorSlide, false);
+        }
+
+        if (Input.GetKeyDown("e"))
+        {
+            changeProjectorSlide(projectorSlide, true);
+        }
 	}
+
+    void changeProjectorSlide(int slide, bool right)
+    {
+        if (right)
+        {
+            slide++;
+            ProjectorDisplay.material = wikitext2;
+        }
+        else
+        {
+            slide--;
+            ProjectorDisplay.material = wikitext;
+        }
+    }
 
     void switchPortrait(bool standardPort)
     {

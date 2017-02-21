@@ -17,6 +17,21 @@ public class MoviePlayerScript : MonoBehaviour {
         r = moviePlayer.GetComponent<Renderer>();
         movie = (MovieTexture)r.material.mainTexture;
 
+        if (Input.GetKeyDown("5"))
+        {
+            if(played)
+            {
+                movie.Pause();
+                played = !played;
+            }
+            else
+            {
+                movie.Play();
+                played = !played;
+            }
+            
+        }
+
     }
 	
 	// Update is called once per frame

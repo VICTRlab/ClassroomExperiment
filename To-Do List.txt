@@ -11,14 +11,14 @@ Details:
 -What do we ultimately want on the projector? To set up difference videos 
 
 2D First product:
--2D game with face grafting all implemented smoothly. 
++2D game with face grafting all implemented smoothly. 
 -Write procedure to upload content on the projector, facial grafting, importing characters, animation (and partly, code)
--Implement extra controllers such as video (forward, play, pause, etc.) and slideshow playing forward/backward
++Implement extra controllers such as video (forward, play, pause, etc.) and slideshow playing forward/backward (Can only do Play, Pause, Restart)
 -Write procedure/document to edit certain variables such as delaytime for video
 -Minor head/face animation for 2D version (breathing or something when looking into the mirror)
--Adding collision detection for the tables
--Be able to sit or stand on a chair
--We do want to keep generic character (m/f) as backup
--Remove the UI concepts (but keep the code) and Dicelab logo
++Adding collision detection for the tables
++Be able to sit or stand on a chair
++We do want to keep generic character (m/f) as backup
++Remove the UI concepts (but keep the code) and Dicelab logo
 
 Coordinate with Subuhi that lab is available after 5PM Tuesday.
