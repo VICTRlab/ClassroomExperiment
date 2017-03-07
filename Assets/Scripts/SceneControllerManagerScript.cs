@@ -19,9 +19,9 @@ public class SceneControllerManagerScript : MonoBehaviour {
     public GameObject Projector;
     MeshRenderer ProjectorDisplay;
     public Material movie;
-    public Material wikitext, wikitext2;
+    public Material[] slides;
     bool standardProjector = true;
-    int projectorSlide = 0;
+    int projectorSlide = 1; // Slide starts as 1. I already added prevention in case no slides are added.
 
 	// Use this for initialization
 	void Start () {
@@ -39,46 +39,51 @@ public class SceneControllerManagerScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+        // Switches the portrait on the UI
         if (Input.GetKeyDown("1"))
         {
             switchPortrait(standardPort);
             standardPort = !standardPort;
         }
 
+        // Switches the avatar
         if (Input.GetKeyDown("2"))
         {
             switchAvatar(standardAvat);
             standardAvat = !standardAvat;
         }
 
+        // Switches the projector between movie and slides
         if (Input.GetKeyDown("3"))
         {
             switchProjector(standardProjector);
             standardProjector = !standardProjector;
         }
 
+        // Go back one slide
         if (Input.GetKeyDown("q"))
         {
-            changeProjectorSlide(projectorSlide, false);
+            changeProjectorSlide(false);
         }
 
+        // Go forward one slide
         if (Input.GetKeyDown("e"))
         {
-            changeProjectorSlide(projectorSlide, true);
+            changeProjectorSlide(true);
         }
 	}
 
-    void changeProjectorSlide(int slide, bool right)
+    void changeProjectorSlide(bool right)
     {
-        if (right)
+        if (right && ((projectorSlide != slides.Length && (projectorSlide != 0))))
         {
-            slide++;
-            ProjectorDisplay.material = wikitext2;
+            projectorSlide++;
+            ProjectorDisplay.material = slides[projectorSlide-1];
         }
-        else
+        if (!right && ((projectorSlide != 1) && (projectorSlide != 0)))
         {
-            slide--;
-            ProjectorDisplay.material = wikitext;
+            projectorSlide--;
+            ProjectorDisplay.material = slides[projectorSlide-1];
         }
     }
 
@@ -110,8 +115,8 @@ public class SceneControllerManagerScript : MonoBehaviour {
 
     void switchProjector(bool standardProjector)
     {
-        if (standardProjector)
-            ProjectorDisplay.material = wikitext;
+        if (standardProjector && ((projectorSlide != 1) && (projectorSlide != 0)))
+            ProjectorDisplay.material = slides[projectorSlide-1];
         else
             ProjectorDisplay.material = movie;
     }
