@@ -1,0 +1,141 @@
+newmtl Eyelash
+    Ns 20.000000
+    d 1.000000
+    Ka 0.196078 0.196078 0.196078
+    Kd 1.000000 1.000000 1.000000
+    Ks 0.898039 0.898039 0.898039
+    map_Kd JaimeModelExported_Default_08.jpg
+    map_D JaimeModelExported_Default_10.jpg
+    map_Ks JaimeModelExported_Default_09.jpg
+newmtl Skin_Body
+    Ns 20.000000
+    d 1.000000
+    Ka 0.196078 0.196078 0.196078
+    Kd 1.000000 1.000000 1.000000
+    Ks 0.898039 0.898039 0.898039
+    map_Kd JaimeModelExported_Default_01.jpg
+    map_Bump JaimeModelExported_Default_04.jpg
+    map_Ks JaimeModelExported_Default_02.jpg
+newmtl Skin_Head
+    Ns 20.000000
+    d 1.000000
+    Ka 0.196078 0.196078 0.196078
+    Kd 1.000000 1.000000 1.000000
+    Ks 0.898039 0.898039 0.898039
+    map_Kd JaimeModelExported_Default_03.jpg
+    map_D JaimeModelExported_Default_06.jpg
+    map_Bump JaimeModelExported_Default_07.jpg
+    map_Ks JaimeModelExported_Default_05.jpg
+newmtl Fingernail
+    Ns 30.000002
+    d 1.000000
+    Ka 0.196078 0.196078 0.196078
+    Kd 1.000000 1.000000 1.000000
+    Ks 0.898039 0.898039 0.898039
+    map_Kd JaimeModelExported_Default_11.jpg
+    map_Bump JaimeModelExported_Default_13.jpg
+    map_Ks JaimeModelExported_Default_12.jpg
+newmtl Toenail
+    Ns 30.000002
+    d 1.000000
+    Ka 0.196078 0.196078 0.196078
+    Kd 1.000000 1.000000 1.000000
+    Ks 0.898039 0.898039 0.898039
+    map_Kd JaimeModelExported_Default_14.jpg
+    map_Bump JaimeModelExported_Default_16.jpg
+    map_Ks JaimeModelExported_Default_15.jpg
+newmtl Tongue
+    Ns 30.000002
+    d 1.000000
+    Ka 0.196078 0.196078 0.196078
+    Kd 1.000000 1.000000 1.000000
+    Ks 0.898039 0.898039 0.898039
+    map_Kd JaimeModelExported_Default_17.jpg
+    map_Bump JaimeModelExported_Default_19.jpg
+    map_Ks JaimeModelExported_Default_18.jpg
+newmtl Scalp_High_polytail
+    Ns 10.000000
+    d 1.000000
+    Ka 0.584314 0.584314 0.584314
+    Kd 1.000000 1.000000 1.000000
+    Ks 0.898039 0.898039 0.898039
+    map_Kd JaimeModelExported_Default_21.jpg
+    map_D JaimeModelExported_Default_23.jpg
+    map_Bump JaimeModelExported_Default_24.jpg
+    map_Ks JaimeModelExported_Default_22.jpg
+newmtl High_polytail
+    Ns 10.000000
+    d 1.000000
+    Ka 0.584314 0.584314 0.584314
+    Kd 1.000000 1.000000 1.000000
+    Ks 0.898039 0.898039 0.898039
+    map_Kd JaimeModelExported_Default_25.jpg
+    map_D JaimeModelExported_Default_27.jpg
+    map_Bump JaimeModelExported_Default_28.jpg
+    map_Ks JaimeModelExported_Default_26.jpg
+newmtl Eye
+    Ns 40.000000
+    d 1.000000
+    Ka 0.196078 0.196078 0.196078
+    Kd 1.000000 1.000000 1.000000
+    Ks 0.898039 0.898039 0.898039
+    map_Kd JaimeModelExported_Default_29.jpg
+    map_Bump JaimeModelExported_Default_31.jpg
+newmtl Cornea
+    Ns 63.000000
+    d 0.800000
+    Ka 0.196078 0.196078 0.196078
+    Kd 1.000000 1.000000 1.000000
+    Ks 0.898039 0.898039 0.898039
+    map_Kd JaimeModelExported_Default_33.jpg
+    map_Bump JaimeModelExported_Default_35.jpg
+newmtl Upper___Teeth
+    Ns 35.000000
+    d 1.000000
+    Ka 0.196078 0.196078 0.196078
+    Kd 1.000000 1.000000 1.000000
+    Ks 0.898039 0.898039 0.898039
+    map_Kd JaimeModelExported_Default_37.jpg
+newmtl Lower___Teeth
+    Ns 35.000000
+    d 1.000000
+    Ka 0.196078 0.196078 0.196078
+    Kd 1.000000 1.000000 1.000000
+    Ks 0.898039 0.898039 0.898039
+    map_Kd JaimeModelExported_Default_38.jpg
+newmtl Boxers
+    Ns 14.000000
+    d 1.000000
+    Ka 0.815686 0.815686 0.815686
+    Kd 1.000000 1.000000 1.000000
+    Ks 0.898039 0.898039 0.898039
+    map_Kd JaimeModelExported_Default_39.jpg
+    map_Bump JaimeModelExported_Default_41.jpg
+    map_Ks JaimeModelExported_Default_40.jpg
+newmtl Jeans
+    Ns 10.000000
+    d 1.000000
+    Ka 0.501961 0.501961 0.501961
+    Kd 1.000000 1.000000 1.000000
+    Ks 0.898039 0.898039 0.898039
+    map_Kd JaimeModelExported_Default_42.jpg
+    map_Bump JaimeModelExported_Default_44.jpg
+    map_Ks JaimeModelExported_Default_43.jpg
+newmtl Shirt
+    Ns 20.000000
+    d 1.000000
+    Ka 1.000000 1.000000 1.000000
+    Kd 1.000000 1.000000 1.000000
+    Ks 0.898039 0.898039 0.898039
+    map_Kd JaimeModelExported_Default_45.jpg
+    map_Bump JaimeModelExported_Default_47.jpg
+    map_Ks JaimeModelExported_Default_46.jpg
+newmtl Boots
+    Ns 12.000000
+    d 1.000000
+    Ka 0.839216 0.839216 0.839216
+    Kd 0.921569 0.901961 0.800000
+    Ks 0.792157 0.933333 0.925490
+    map_Kd JaimeModelExported_Default_48.jpg
+    map_Bump JaimeModelExported_Default_50.jpg
+    map_Ks JaimeModelExported_Default_49.jpg
