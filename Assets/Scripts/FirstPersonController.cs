@@ -66,7 +66,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
             // the jump state needs to read here to make sure it is not missed
             if (!m_Jump)
             {
-                m_Jump = CrossPlatformInputManager.GetButtonDown("Jump");
+				// NO JUMPING
+//                m_Jump = CrossPlatformInputManager.GetButtonDown("Jump");
             }
 
             if (!m_PreviouslyGrounded && m_CharacterController.isGrounded)
@@ -229,7 +230,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
 #if !MOBILE_INPUT
             // On standalone builds, walk/run speed is modified by a key press.
             // keep track of whether or not the character is walking or running
-            m_IsWalking = !Input.GetKey(KeyCode.LeftShift);
+
+			// ALWAYS WALKING
+			m_IsWalking = true;
+//            m_IsWalking = !Input.GetKey(KeyCode.LeftShift);
 #endif
             // set the desired speed to be walking or running
             speed = m_IsWalking ? m_WalkSpeed : m_RunSpeed;
