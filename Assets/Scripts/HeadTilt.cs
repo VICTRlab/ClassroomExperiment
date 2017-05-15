@@ -28,5 +28,7 @@ public class HeadTilt : MonoBehaviour {
 		float z = neckLength * Mathf.Sin(pitch * Mathf.Deg2Rad);
 		float y = neckLength * Mathf.Cos(pitch * Mathf.Deg2Rad);
 		transform.localPosition = new Vector3 (transform.localPosition.x, y, z);
+
+		neck.localRotation = transform.localRotation;
 	}
 }
