@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 341252196}
-  m_IndirectSpecularColor: {r: 0.44627446, g: 0.4960441, b: 0.5746636, a: 1}
+  m_IndirectSpecularColor: {r: 0.44627333, g: 0.49604332, b: 0.5746622, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -7100,7 +7100,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   neckLength: 0.27
-  neckBend: 0
+  swayAmplitude: 15
+  swayPeriod: 0.25
 --- !u!33 &1802491519
 MeshFilter:
   m_ObjectHideFlags: 0

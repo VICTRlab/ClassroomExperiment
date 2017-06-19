@@ -9,15 +9,6 @@ public class MainMenuScript : MonoBehaviour {
     bool mode2d = true;
     public Button ConfirmButton;
 
-	// Use this for initialization
-	void Start () {
-	    
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 
     // Button press to change 2D <-> 3D. It also cancelled the confirmation button's color
     public void changeText() {
@@ -36,19 +27,13 @@ public class MainMenuScript : MonoBehaviour {
     // Do NOT move the VRSettings.enabled to the same as the changeText() button; for some reason in this version of Unity, VRSettings must be enabled at least ONE frame after LoadDeviceByName is ran.
     // This button must be pressed before Start begins, or else it will just run 2D mode.
     public void confirm() {
-//        if(!mode2d)
-//            VRSettings.enabled = true;
-//        else
-//            VRSettings.enabled = false;
 		VRSettings.enabled = !mode2d;
         ConfirmButton.GetComponentInChildren<Image>().color = Color.yellow;
         ConfirmButton.GetComponentInChildren<Text>().text = "Confirmed";
     }
 
     // Start game button press
-    public void startGame()
-    {
-//        SceneManager.LoadScene("Experiment Class", LoadSceneMode.Additive);
+    public void startGame() {
 		SceneManager.LoadScene("Experiment Class");
     }
 }
