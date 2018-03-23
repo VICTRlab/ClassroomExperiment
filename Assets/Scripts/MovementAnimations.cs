@@ -44,7 +44,7 @@ public class MovementAnimations : MonoBehaviour {
             bones[74].localRotation = rightShoulderRelaxed;
         }
 
-        if (!VRSettings.enabled)  {
+        if (!UnityEngine.XR.XRSettings.enabled)  {
             float z = neckLength * Mathf.Sin(pitch * Mathf.Deg2Rad);
             float y = neckLength * Mathf.Cos(pitch * Mathf.Deg2Rad);
             transform.localPosition = new Vector3(transform.localPosition.x, y, z);
@@ -54,12 +54,12 @@ public class MovementAnimations : MonoBehaviour {
             // SHREYA PLEASE TEST ALL OF THIS
 
             // Get current headset rotation and set mesh's neck's rotation to match
-            Quaternion headRot = InputTracking.GetLocalRotation(VRNode.Head);
+            Quaternion headRot = UnityEngine.XR.InputTracking.GetLocalRotation(UnityEngine.XR.XRNode.Head);
             neck.localRotation = headRot;
 
             // Recenter the camera when they press center button on Oculus Remote
             if (Input.GetKeyDown(KeyCode.JoystickButton0)) {
-                InputTracking.Recenter();
+                UnityEngine.XR.InputTracking.Recenter();
             }
         }
 

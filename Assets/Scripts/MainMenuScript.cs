@@ -14,10 +14,10 @@ public class MainMenuScript : MonoBehaviour {
     public void changeText() {
         if(mode2d) {
             this.GetComponentInChildren<Text>().text = "3D Mode";
-            VRSettings.LoadDeviceByName("Oculus");
+            UnityEngine.XR.XRSettings.LoadDeviceByName("Oculus");
         } else {
             this.GetComponentInChildren<Text>().text = "2D Mode";
-            VRSettings.LoadDeviceByName("");
+            UnityEngine.XR.XRSettings.LoadDeviceByName("");
         }
 		mode2d = !mode2d;
 		ConfirmButton.GetComponentInChildren<Image>().color = Color.white;
@@ -27,7 +27,7 @@ public class MainMenuScript : MonoBehaviour {
     // Do NOT move the VRSettings.enabled to the same as the changeText() button; for some reason in this version of Unity, VRSettings must be enabled at least ONE frame after LoadDeviceByName is ran.
     // This button must be pressed before Start begins, or else it will just run 2D mode.
     public void confirm() {
-		VRSettings.enabled = !mode2d;
+		UnityEngine.XR.XRSettings.enabled = !mode2d;
         ConfirmButton.GetComponentInChildren<Image>().color = Color.yellow;
         ConfirmButton.GetComponentInChildren<Text>().text = "Confirmed";
     }
