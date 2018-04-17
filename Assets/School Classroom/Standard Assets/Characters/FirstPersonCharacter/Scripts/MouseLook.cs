@@ -9,12 +9,14 @@ namespace UnityStandardAssets.Characters.FirstPerson
     {
         public float XSensitivity = 2f;
         public float YSensitivity = 2f;
-        public bool clampVerticalRotation = true;
+        public bool clampVerticalRotation = false;
         public float MinimumX = -90F;
         public float MaximumX = 90F;
         public bool smooth;
         public float smoothTime = 5f;
+        public float lookSpeed = 4f;
         public bool lockCursor = true;
+        public Vector3 lookThresholds = new Vector3(5.0f, 10.0f, 180.0f);
 
 
         private Quaternion m_CharacterTargetRot;
@@ -27,17 +29,67 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_CameraTargetRot = camera.localRotation;
         }
 
+        public void VRRotation(Transform character, Transform head, Transform camera)
+        {
+            var charRot = character.rotation;
+            var charAngles = charRot.eulerAngles;
+            charAngles.x = 0.0f;
+            charAngles.z = 0.0f;
+            var charQ = Quaternion.Euler(charAngles);
+
+            var camRot = camera.rotation;
+            var camAngles = camRot.eulerAngles;
+            camAngles.x = 0.0f;
+            camAngles.z = 0.0f;
+            var camQ = Quaternion.Euler(camAngles);
+
+            var yDiff = Quaternion.Angle(charQ, camQ);
+
+            // Apply y rotation to player
+            if (yDiff > lookThresholds.y)
+            {
+                //character.rotation = Quaternion.RotateTowards(charQ, camQ, lookSpeed * Time.deltaTime);
+                var dy = Mathf.Clamp((yDiff - lookThresholds.y) / lookThresholds.y, 0.0f, 1.0f);
+                character.rotation = Quaternion.Slerp(charQ, camQ, lookSpeed * Time.deltaTime * dy);
+            }
+
+            // v1
+            //float qa = Quaternion.Angle(character.rotation, camera.rotation);
+
+            //if (qa > lookThresholds.x)
+            //{
+            //    if (smooth)
+            //    {
+            //        character.rotation = Quaternion.Slerp(character.rotation, camera.rotation,
+            //            smoothTime * Time.deltaTime);
+            //    }
+            //    else
+            //    {
+            //        character.rotation = camera.rotation;
+            //    }
+            //}
+
+            //camAngles = camRot.eulerAngles;
+            //camAngles.x = Mathf.Clamp(camAngles.x, -90.0f, 90.0f);
+            //// X rotation can be applied to head transform
+            //if (Mathf.Abs(qe.x) > lookThresholds.x)
+            //{
+
+            //}
+
+            UpdateCursorLock();
+        }
 
         public void LookRotation(Transform character, Transform camera)
         {
             float yRot = CrossPlatformInputManager.GetAxis("Mouse X") * XSensitivity;
             float xRot = CrossPlatformInputManager.GetAxis("Mouse Y") * YSensitivity;
 
-            m_CharacterTargetRot *= Quaternion.Euler (0f, yRot, 0f);
-            m_CameraTargetRot *= Quaternion.Euler (-xRot, 0f, 0f);
+            m_CharacterTargetRot *= Quaternion.Euler (-xRot, yRot, 0f);
+            //m_CameraTargetRot *= Quaternion.Euler (-xRot, 0f, 0f);
 
-            if(clampVerticalRotation)
-                m_CameraTargetRot = ClampRotationAroundXAxis (m_CameraTargetRot);
+            //if(clampVerticalRotation)
+            //    m_CameraTargetRot = ClampRotationAroundXAxis (m_CameraTargetRot);
 
             if(smooth)
             {

@@ -18,6 +18,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         [SerializeField] private float m_StickToGroundForce;
         [SerializeField] private float m_GravityMultiplier;
         [SerializeField] private MouseLook m_MouseLook;
+        public bool lookEnabled = false;
         [SerializeField] private bool m_UseFovKick;
         [SerializeField] private FOVKick m_FovKick = new FOVKick();
         [SerializeField] private bool m_UseHeadBob;
@@ -42,6 +43,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private bool m_Jumping;
         private AudioSource m_AudioSource;
         private bool sitting = false;
+
+        public Transform head;
 
         // Use this for initialization
         private void Start()
@@ -257,7 +260,12 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         private void RotateView()
         {
-            m_MouseLook.LookRotation (transform, m_Camera.transform);
+            //m_MouseLook.LookRotation (transform, m_Camera.transform);
+            if (lookEnabled)
+            {
+                m_MouseLook.VRRotation(transform, head, m_Camera.transform);
+            }
+            
         }
 
 

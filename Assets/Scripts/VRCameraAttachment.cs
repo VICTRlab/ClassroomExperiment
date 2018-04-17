@@ -36,6 +36,8 @@ public class VRCameraAttachment : MonoBehaviour
 
     public bool attached = false;
 
+    public UnityStandardAssets.Characters.FirstPerson.FirstPersonController FPS;
+
     public struct TransformOffset
     {
         public Vector3 position;
@@ -68,10 +70,20 @@ public class VRCameraAttachment : MonoBehaviour
     // AttachTo transform (negate the camera's local transform and rotation)
     void Resync()
     {
+        Vector3 lookDir = VRCamera.transform.forward;
+        lookDir.y = 0.0f;
+        lookDir.Normalize();
+
+        if (FPS != null)
+        {
+            FPS.transform.rotation = Quaternion.LookRotation(lookDir);
+        }
+
         if (!attached && AttachTo != null)
         {
             Attach(AttachTo);
             attached = true;
+            FPS.lookEnabled = true;
         }
 
         //offset.position = -VRCamera.localPosition;

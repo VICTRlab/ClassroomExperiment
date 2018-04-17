@@ -28,49 +28,51 @@ public class SceneControllerManagerScript : MonoBehaviour {
 
         UIPortrait = UIPortraitObject.GetComponent<Image>();
         
-        // Turn off all child renderer from StandardAvatar's childrens
-        foreach (Renderer r in StandardAvatar.GetComponentsInChildren<Renderer>())
-            r.enabled = false;
-
+        if (StandardAvatar != null)
+        {
+            // Turn off all child renderer from StandardAvatar's childrens
+            foreach (Renderer r in StandardAvatar.GetComponentsInChildren<Renderer>())
+                r.enabled = false;
+        }
+        
         ProjectorDisplay = Projector.GetComponent<MeshRenderer>();
-
     }
 	
 	// Update is called once per frame
 	void Update () {
 
-        // Switches the portrait on the UI
-        if (Input.GetKeyDown("1"))
-        {
-            switchPortrait(standardPort);
-            standardPort = !standardPort;
-        }
+        //// Switches the portrait on the UI
+        //if (Input.GetKeyDown("1"))
+        //{
+        //    switchPortrait(standardPort);
+        //    standardPort = !standardPort;
+        //}
 
-        // Switches the avatar
-        if (Input.GetKeyDown("2"))
-        {
-            switchAvatar(standardAvat);
-            standardAvat = !standardAvat;
-        }
+        //// Switches the avatar
+        //if (Input.GetKeyDown("2"))
+        //{
+        //    switchAvatar(standardAvat);
+        //    standardAvat = !standardAvat;
+        //}
 
-        // Switches the projector between movie and slides
-        if (Input.GetKeyDown("3"))
-        {
-            switchProjector(standardProjector);
-            standardProjector = !standardProjector;
-        }
+        //// Switches the projector between movie and slides
+        //if (Input.GetKeyDown("3"))
+        //{
+        //    switchProjector(standardProjector);
+        //    standardProjector = !standardProjector;
+        //}
 
-        // Go back one slide
-        if (Input.GetKeyDown("q"))
-        {
-            changeProjectorSlide(false);
-        }
+        //// Go back one slide
+        //if (Input.GetKeyDown("q"))
+        //{
+        //    changeProjectorSlide(false);
+        //}
 
-        // Go forward one slide
-        if (Input.GetKeyDown("e"))
-        {
-            changeProjectorSlide(true);
-        }
+        //// Go forward one slide
+        //if (Input.GetKeyDown("e"))
+        //{
+        //    changeProjectorSlide(true);
+        //}
 	}
 
     void changeProjectorSlide(bool right)
