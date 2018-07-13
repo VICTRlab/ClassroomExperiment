@@ -7,6 +7,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
     [Serializable]
     public class MouseLook
     {
+        public bool enabled = true;
         public float XSensitivity = 2f;
         public float YSensitivity = 2f;
         public bool clampVerticalRotation = false;
@@ -80,29 +81,40 @@ namespace UnityStandardAssets.Characters.FirstPerson
             UpdateCursorLock();
         }
 
-        public void LookRotation(Transform character, Transform camera)
+        public void LookRotation(Transform character, Transform head, Transform camera)
         {
             float yRot = CrossPlatformInputManager.GetAxis("Mouse X") * XSensitivity;
             float xRot = CrossPlatformInputManager.GetAxis("Mouse Y") * YSensitivity;
 
-            m_CharacterTargetRot *= Quaternion.Euler (-xRot, yRot, 0f);
+            //m_CharacterTargetRot *= Quaternion.Euler (-xRot, yRot, 0f);
             //m_CameraTargetRot *= Quaternion.Euler (-xRot, 0f, 0f);
 
             //if(clampVerticalRotation)
             //    m_CameraTargetRot = ClampRotationAroundXAxis (m_CameraTargetRot);
 
-            if(smooth)
+
+            var nextCharacterRot = character.rotation * Quaternion.Euler(0.0f, yRot * lookSpeed * Time.deltaTime, 0.0f);
+            var nextHeadRot = head.localRotation * Quaternion.Euler(-xRot * lookSpeed * Time.deltaTime, 0.0f, 0.0f);
+
+            if (smooth)
             {
-                character.localRotation = Quaternion.Slerp (character.localRotation, m_CharacterTargetRot,
-                    smoothTime * Time.deltaTime);
-                camera.localRotation = Quaternion.Slerp (camera.localRotation, m_CameraTargetRot,
-                    smoothTime * Time.deltaTime);
+                character.rotation = Quaternion.Slerp(character.rotation, nextCharacterRot, smoothTime * Time.deltaTime);
+                //head.rotation = Quaternion.Slerp(head.rotation, nextHeadRot, smoothTime * Time.deltaTime);
+                //character.localRotation = Quaternion.Slerp (character.localRotation, m_CharacterTargetRot,
+                //    smoothTime * Time.deltaTime);
+                //camera.localRotation = Quaternion.Slerp (camera.localRotation, m_CameraTargetRot,
+                //    smoothTime * Time.deltaTime);
             }
             else
             {
-                character.localRotation = m_CharacterTargetRot;
-                camera.localRotation = m_CameraTargetRot;
+                character.rotation = nextCharacterRot;
+                head.localRotation = nextHeadRot;
+
+                //character.localRotation = m_CharacterTargetRot;
+                //camera.localRotation = m_CameraTargetRot;
             }
+
+            
 
             UpdateCursorLock();
         }

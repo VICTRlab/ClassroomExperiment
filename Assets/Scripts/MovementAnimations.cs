@@ -10,7 +10,7 @@ public class MovementAnimations : MonoBehaviour {
 	float yaw { get { return transform.localRotation.eulerAngles.y; } }
 	float roll { get { return transform.localRotation.eulerAngles.z; } }
     Transform[] bones;
-    Transform neck;
+    public Transform neck;
 
     [SerializeField] float swayAmplitude;
     [SerializeField] float swayPeriod;
@@ -24,7 +24,7 @@ public class MovementAnimations : MonoBehaviour {
 //        for (int i = 0; i < bones.Length; i++)
 //            print(bones[i].name + "  " + i.ToString());
 
-        neck = bones[8];
+        //neck = bones[8];
 
         leftShoulderRelaxed = bones[41].localRotation;
         rightShoulderRelaxed = bones[74].localRotation;
@@ -44,26 +44,29 @@ public class MovementAnimations : MonoBehaviour {
             bones[74].localRotation = rightShoulderRelaxed;
         }
 
-        if (!UnityEngine.XR.XRSettings.enabled)  {
-            float z = neckLength * Mathf.Sin(pitch * Mathf.Deg2Rad);
-            float y = neckLength * Mathf.Cos(pitch * Mathf.Deg2Rad);
-            transform.localPosition = new Vector3(transform.localPosition.x, y, z);
-            neck.localRotation = transform.localRotation;
-        } else {
-            
-            // SHREYA PLEASE TEST ALL OF THIS
+        Quaternion headRot = UnityEngine.XR.InputTracking.GetLocalRotation(UnityEngine.XR.XRNode.Head);
+        neck.localRotation = headRot;
 
-            // Get current headset rotation and set mesh's neck's rotation to match
-            Quaternion headRot = UnityEngine.XR.InputTracking.GetLocalRotation(UnityEngine.XR.XRNode.Head);
-            neck.localRotation = headRot;
+        //if (!UnityEngine.XR.XRSettings.enabled)  {
+        //    float z = neckLength * Mathf.Sin(pitch * Mathf.Deg2Rad);
+        //    float y = neckLength * Mathf.Cos(pitch * Mathf.Deg2Rad);
+        //    transform.localPosition = new Vector3(transform.localPosition.x, y, z);
+        //    neck.localRotation = transform.localRotation;
+        //} else {
 
-            // Recenter the camera when they press center button on Oculus Remote
-            if (Input.GetKeyDown(KeyCode.JoystickButton0)) {
-                UnityEngine.XR.InputTracking.Recenter();
-            }
-        }
+        //    // SHREYA PLEASE TEST ALL OF THIS
+
+        //    // Get current headset rotation and set mesh's neck's rotation to match
+        //    Quaternion headRot = UnityEngine.XR.InputTracking.GetLocalRotation(UnityEngine.XR.XRNode.Head);
+        //    neck.localRotation = headRot;
+
+        //    // Recenter the camera when they press center button on Oculus Remote
+        //    if (Input.GetKeyDown(KeyCode.JoystickButton0)) {
+        //        UnityEngine.XR.InputTracking.Recenter();
+        //    }
+        //}
 
 
 
-	}
+    }
 }

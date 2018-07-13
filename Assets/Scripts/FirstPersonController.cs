@@ -18,7 +18,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
         [SerializeField] private float m_StickToGroundForce;
         [SerializeField] private float m_GravityMultiplier;
         [SerializeField] private MouseLook m_MouseLook;
-        public bool lookEnabled = false;
+        public bool lookVREnabled = false;
+        public bool lookControllerEnabled = true;
         [SerializeField] private bool m_UseFovKick;
         [SerializeField] private FOVKick m_FovKick = new FOVKick();
         [SerializeField] private bool m_UseHeadBob;
@@ -224,7 +225,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         private void GetInput(out float speed)
         {
-            // Read input
+            // Movement/left stick input
             float horizontal = CrossPlatformInputManager.GetAxis("Horizontal");
             float vertical = CrossPlatformInputManager.GetAxis("Vertical");
 
@@ -260,12 +261,68 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         private void RotateView()
         {
-            //m_MouseLook.LookRotation (transform, m_Camera.transform);
-            if (lookEnabled)
+            if (m_MouseLook.enabled)
             {
-                m_MouseLook.VRRotation(transform, head, m_Camera.transform);
+                if (lookVREnabled)
+                {
+                    m_MouseLook.VRRotation(transform, head, m_Camera.transform); 
+                }
+
+                m_MouseLook.LookRotation(transform, head, m_Camera.transform);
             }
-            
+
+            var headAngles = head.localRotation.eulerAngles;
+            if (headAngles.y >= 179.9f || headAngles.z >= 179.9f)
+            {
+                headAngles.y = 0.0f;
+                headAngles.z = 0.0f;
+                if (headAngles.x < 90)
+                {
+                    headAngles.x = 90.0f;
+                }
+                else if (headAngles.x > 270.0f)
+                {
+                    headAngles.x = 270.0f;
+                }
+
+                //Debug.Log(string.Format("{0} vs {1}", headAngles, head.localRotation.eulerAngles));
+                //headAngles.x = hx;
+                head.localRotation = Quaternion.Euler(headAngles);
+            }
+
+            //if (lookVREnabled)
+            //{
+            //    m_MouseLook.VRRotation(transform, head, m_Camera.transform);
+            //}
+
+            //if (lookControllerEnabled)
+            //{
+            //    // Looking/right stick input
+            //    float rhorizontal = CrossPlatformInputManager.GetAxis("Mouse X");
+            //    float rvertical = CrossPlatformInputManager.GetAxis("Mouse Y");
+
+            //    //Quaternion controlRot = Quaternion.Euler(new Vector3(rvertical, rhorizontal, 0.0f) * m_MouseLook.lookSpeed);
+
+            //    transform.rotation *= Quaternion.Euler(0.0f, rhorizontal * m_MouseLook.lookSpeed * Time.deltaTime, 0.0f);
+            //    head.rotation *= Quaternion.Euler(rvertical * m_MouseLook.lookSpeed * Time.deltaTime, 0.0f, 0.0f);
+
+
+
+            //    //var charRot = transform.rotation;
+            //    //var charAngles = charRot.eulerAngles;
+            //    //charAngles.x = 0.0f;
+            //    //charAngles.z = 0.0f;
+            //    //var charQ = Quaternion.Euler(charAngles);
+
+            //    //var camRot = m_Camera.transform.rotation;
+            //    //var camAngles = m_Camera.transform.eulerAngles;
+            //    //camAngles.x = 0.0f;
+            //    //camAngles.z = 0.0f;
+            //    //var camQ = Quaternion.Euler(camAngles);
+
+            //    //head.rotation = Quaternion.Slerp(charQ, camQ, m_MouseLook.lookSpeed * Time.deltaTime);
+            //    //head.rotation *= controlRot;
+            //}
         }
 
 

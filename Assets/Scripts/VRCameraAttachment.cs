@@ -83,7 +83,7 @@ public class VRCameraAttachment : MonoBehaviour
         {
             Attach(AttachTo);
             attached = true;
-            FPS.lookEnabled = true;
+            //FPS.lookVREnabled = true;
         }
 
         //offset.position = -VRCamera.localPosition;

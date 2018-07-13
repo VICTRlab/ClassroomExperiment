@@ -1,7 +1,5 @@
 fileFormatVersion: 2
-guid: 90e11a73078b1ea42b623fda3417b4ae
-timeCreated: 1515660727
-licenseType: Pro
+guid: e7326790cbfd68f47a6164ddb821889f
 PluginImporter:
   externalObjects: {}
   serializedVersion: 2
@@ -11,36 +9,16 @@ PluginImporter:
   isOverridable: 0
   platformData:
   - first:
-      '': Editor
-    second:
-      enabled: 0
-      settings:
-        CPU: X86
-        OS: Windows
-  - first:
-      Android: Android
-    second:
-      enabled: 0
-      settings:
-        CPU: ARMv7
-  - first:
       Any: 
     second:
-      enabled: 0
+      enabled: 1
       settings: {}
   - first:
       Editor: Editor
     second:
-      enabled: 1
+      enabled: 0
       settings:
-        CPU: X86
         DefaultValueInitialized: true
-        OS: Windows
-  - first:
-      Standalone: Win
-    second:
-      enabled: 1
-      settings: {}
   userData: 
   assetBundleName: 
   assetBundleVariant: 

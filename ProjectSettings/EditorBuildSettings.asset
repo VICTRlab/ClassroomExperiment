@@ -47,9 +47,12 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Experiment Class.unity
     guid: cdd3f57935e7836498e09f4cd1f3b9ad
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Heidi1.unity
     guid: 400ec48231f1e92488f296490fd8845c
   - enabled: 0
     path: Assets/Scenes/Heidi2.unity
     guid: 7c020a748f372cb4983ed044e04d19f3
+  - enabled: 1
+    path: Assets/Scenes/ClassroomVideo.unity
+    guid: e67e46fd62a28f740b7fa49518dca99e
