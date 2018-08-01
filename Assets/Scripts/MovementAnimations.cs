@@ -19,19 +19,19 @@ public class MovementAnimations : MonoBehaviour {
     Quaternion rightShoulderRelaxed;
 
 	void Start () {
-        bones = transform.parent.parent.Find("Sam_Avatar/CC_Base_Body").GetComponent<SkinnedMeshRenderer>().bones;
+        //bones = transform.parent.parent.Find("Sam_Avatar/CC_Base_Body").GetComponent<SkinnedMeshRenderer>().bones;
 
 //        for (int i = 0; i < bones.Length; i++)
 //            print(bones[i].name + "  " + i.ToString());
 
         //neck = bones[8];
 
-        leftShoulderRelaxed = bones[41].localRotation;
-        rightShoulderRelaxed = bones[74].localRotation;
+        //leftShoulderRelaxed = bones[41].localRotation;
+        //rightShoulderRelaxed = bones[74].localRotation;
 	}
 	
 	void Update () {
-
+        return;
         // SHOULDERS (CLAVICLE) ARE INDEXED AT 41 AND 74
         // THIS DOESN'T WORK YET BECAUSE CURRENT AVATAR DOES NOT HAVE HANDS AT SIDE
         if (transform.parent.parent.GetComponent<CharacterController>().velocity.sqrMagnitude > 0) {
