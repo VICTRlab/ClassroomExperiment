@@ -46,24 +46,105 @@ public class PercentVisibleTracker : MonoBehaviour {
     public int rowCount = 20;
     public int colCount = 20;
 
-    Vector3[] testVectors;
-	
-	// Update is called once per frame
-	void Update () {
+    public class TestPoint
+    {
+        public Vector3 point;
+        public bool visible = false;
+    }
+    public int testPointsVisible = 0;
+    TestPoint[] testPoints;
 
-        if (!initialized)
+    void recomputeVisibility()
+    {
+
+        // Need to compute the actual amount of screen visible using the viewport coordinates
+        // The quad points are in this order:
+        //  2 -------- 1
+        //    |      |
+        //  0 -------- 3
+
+        Vector3 lowerLeft = points[0].world;
+        Vector3 right = (points[3].world - lowerLeft);
+        Vector3 up = (points[2].world - lowerLeft);
+
+        float colWidth = right.magnitude / colCount;
+        float rowHeight = up.magnitude / rowCount;
+
+
+
+        right = right.normalized * colWidth;
+        up = up.normalized * rowHeight;
+
+
+        testPointsVisible = 0;
+        int k = 0;
+        for (int i = 0; i < rowCount; i++)
         {
-            testVectors = new Vector3[rowCount * colCount];
-            points = new ScreenVisiblePoint[mesh.mesh.vertices.Length];
-
-            for (int i = 0; i < points.Length; i++)
+            Vector3 rx = right * (float)i;
+            for (int j = 0; j < colCount; j++)
             {
-                points[i] = new ScreenVisiblePoint();
-                points[i].world = mesh.transform.TransformPoint(mesh.mesh.vertices[i]);
+                Vector3 cy = up * (float)j;
+
+                Vector3 p = lowerLeft + rx + cy;
+                Vector3 s = camera.WorldToViewportPoint(p);
+                bool visible = ScreenVisiblePoint.isVisible(s);
+
+                if (visible)
+                {
+                    testPointsVisible++;
+                }
+
+                testPoints[k].point = p;
+                testPoints[k].visible = visible;
+
+                k++;
             }
-            
-            initialized = true;
         }
+    }
+
+    private void Start()
+    {
+        testPoints = new TestPoint[rowCount * colCount];
+
+        for (int i = 0; i < testPoints.Length; i++)
+        {
+            testPoints[i] = new TestPoint();
+        }
+
+        points = new ScreenVisiblePoint[mesh.mesh.vertices.Length];
+
+        for (int i = 0; i < points.Length; i++)
+        {
+            points[i] = new ScreenVisiblePoint();
+            points[i].world = mesh.transform.TransformPoint(mesh.mesh.vertices[i]);
+        }
+    }
+
+    // Update is called once per frame
+    void Update () {
+
+        //if (!initialized)
+        //{
+
+            
+        //    initialized = true;
+        //}
+
+        Vector3 camForward = camera.transform.forward;
+
+        Vector3 screenForward = (mesh.transform.position - camera.transform.position).normalized;
+
+        float angle = Vector3.Angle(camForward, screenForward);
+
+        if (angle <= 90.0f)
+        {
+            lookScore = 1.0f - angle / 90.0f;
+        }
+        else
+        {
+            lookScore = (90.0f - angle) / 90.0f;
+        }
+
 
         int numVisible = 0;
         for (int i = 0; i < points.Length; i++)
@@ -75,60 +156,15 @@ public class PercentVisibleTracker : MonoBehaviour {
             }
         }
 
+        recomputeVisibility();
+
         if (numVisible == points.Length)
         {
             percentVisible = 1.0f;
         }
-        else if (numVisible == 0)
-        {
-            percentVisible = 0.0f;
-        }
         else
-        {
-
-
-            // Need to compute the actual amount of screen visible using the viewport coordinates
-            // The quad points are in this order:
-            //  2 -------- 1
-            //    |      |
-            //  0 -------- 3
-
-            Vector3 lowerLeft = points[0].world;
-            Vector3 right = (points[3].world - lowerLeft);
-            Vector3 up = (points[2].world - lowerLeft);
-
-            float colWidth = right.magnitude / colCount;
-            float rowHeight = up.magnitude / rowCount;
-
-            
-
-            right = right.normalized * colWidth;
-            up = up.normalized * rowHeight;
-
-
-            int subVisible = 0;
-            int k = 0;
-            for (int i = 0; i < rowCount; i++)
-            {
-                Vector3 rx = right * (float)i;
-                for(int j = 0; j < colCount; j++)
-                {
-                    Vector3 cy = up * (float)j;
-
-                    Vector3 p = lowerLeft + rx + cy;
-                    Vector3 s = camera.WorldToViewportPoint(p);
-                    bool visible = ScreenVisiblePoint.isVisible(s);
-
-                    if (visible)
-                    {
-                        subVisible++;
-                    }
-
-                    testVectors[k++] = p;
-                }
-            }
-
-            percentVisible = (float)subVisible / (rowCount * colCount);
+        { 
+            percentVisible = (float)testPointsVisible / (rowCount * colCount);
 
             //Vector3 topDiff = points[1].screen - points[2].screen;
             //Vector3 botDiff = points[3].screen - points[0].screen;
@@ -150,20 +186,7 @@ public class PercentVisibleTracker : MonoBehaviour {
         // Compute look score: compare the camera forward direction with the 
         // camera position to center of screen vector
 
-        Vector3 camForward = camera.transform.forward;
 
-        Vector3 screenForward = (mesh.transform.position - camera.transform.position).normalized;
-
-        float angle = Vector3.Angle(camForward, screenForward);
-
-        if (angle <= 90.0f)
-        {
-            lookScore = 1.0f - angle / 90.0f;
-        }
-        else
-        {
-            lookScore = (90.0f - angle) / 90.0f;
-        }
 
         //Debug.Log(pointLog);
 
@@ -172,16 +195,25 @@ public class PercentVisibleTracker : MonoBehaviour {
 
     void OnDrawGizmos()
     {
+        if (points == null || testPoints == null) return;
+
         Gizmos.color = Color.yellow;
         for (int i = 0; i < points.Length; i++)
         {
             Gizmos.DrawSphere(points[i].world, 0.5f);
         }
 
-        Gizmos.color = Color.green;
-        foreach (Vector3 v in testVectors)
+        foreach (TestPoint p in testPoints)
         {
-            Gizmos.DrawSphere(v, 0.1f);
+            if (p.visible)
+            {
+                Gizmos.color = Color.green;
+            }
+            else
+            {
+                Gizmos.color = Color.red;
+            }
+            Gizmos.DrawSphere(p.point, 0.1f);
         }
     }
 }
