@@ -32,6 +32,8 @@ public class Experiment : MonoBehaviour {
 
     public float SitTime = 1.0f;
 
+    bool startedSitting = false;
+
     public VideoController projectorController;
 
     public Seat seat;
@@ -42,17 +44,15 @@ public class Experiment : MonoBehaviour {
     private void Awake()
     {
         Instance = this;
-        //UnityEngine.XR.XRSettings.enabled = false;
+        UnityEngine.XR.XRSettings.enabled = false;
 
-        //var ovrGO = GameObject.Find("OVRCameraRig");
+        var ovrGO = GameObject.Find("OVRCameraRig");
 
-        //var ovrManager = ovrGO.GetComponent<OVRManager>();
-        //ovrManager.enabled = false;
+        var ovrManager = ovrGO.GetComponent<OVRManager>();
+        ovrManager.enabled = false;
 
-        //var ovrCameraRig = ovrGO.GetComponent<OVRCameraRig>();
-        //ovrCameraRig.enabled = false;
-
-        //ovrManager.SetActive(false);   
+        var ovrCameraRig = ovrGO.GetComponent<OVRCameraRig>();
+        ovrCameraRig.enabled = false;
     }
 
     // Use this for initialization
@@ -63,18 +63,25 @@ public class Experiment : MonoBehaviour {
 
     IEnumerator SitDown()
     {
+        if (startedSitting) yield break;
+        startedSitting = true;
+
         float t = 0.0f;
 
-        Vector3 startPos = fps.transform.localPosition;
-        Vector3 endPos = new Vector3(0, -0.5f, 0);
-        Quaternion startRot = fps.transform.localRotation;
-        Quaternion endRot = Quaternion.AngleAxis(90.0f, Vector3.up);
+        Vector3 startPos = fps.transform.position;
+        Vector3 endPos = seat.transform.position + new Vector3(0, -0.25f, 0);
+        Quaternion startRot = fps.transform.rotation;
+        Quaternion endRot = seat.transform.rotation;// Quaternion.AngleAxis(90.0f, Vector3.up);
+
+        Vector3 lookTowards = projectorController.transform.position - seat.transform.position;
+
+        endRot = Quaternion.LookRotation(lookTowards.normalized, Vector3.up);
 
         while (t <= SitTime)
         {
             float lt = t / SitTime;
-            fps.transform.localPosition = Vector3.Lerp(startPos, endPos, lt);
-            fps.transform.localRotation = Quaternion.Slerp(startRot, endRot, lt);
+            fps.transform.position = Vector3.Lerp(startPos, endPos, lt);
+            fps.transform.rotation = Quaternion.Slerp(startRot, endRot, lt);
 
             t += Time.deltaTime;
             yield return new WaitForEndOfFrame();
@@ -89,10 +96,11 @@ public class Experiment : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-        if (CurrentProgress == Progress.SelectedAvatar && seat.Seated && Input.GetButton("XboxA") && !fps.sitting)
+        if (CurrentProgress == Progress.SelectedAvatar && seat.Seated && Input.GetButton("XboxA") && !fps.sitting
+            && !startedSitting) 
         {
             arrow.gameObject.SetActive(false);
-            fps.transform.parent = seat.transform;
+            //fps.transform.parent = seat.transform;
             StartCoroutine(SitDown());
             return;
         }

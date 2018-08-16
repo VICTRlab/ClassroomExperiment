@@ -94,7 +94,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
 
             var nextCharacterRot = character.rotation * Quaternion.Euler(0.0f, yRot * lookSpeed * Time.deltaTime, 0.0f);
-            var nextHeadRot = head.localRotation * Quaternion.Euler(-xRot * lookSpeed * Time.deltaTime, 0.0f, 0.0f);
+            var nextHeadRot = head.localRotation * Quaternion.Euler(xRot * lookSpeed * Time.deltaTime, 0.0f, 0.0f);
 
             if (smooth)
             {
