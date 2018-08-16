@@ -28,8 +28,7 @@ public class Experiment : MonoBehaviour {
 
     public float avatarScale = 0.01f;
 
-	// Use this for initialization
-	void Start ()
+    private void Awake()
     {
         Instance = this;
         UnityEngine.XR.XRSettings.enabled = false;
@@ -42,7 +41,13 @@ public class Experiment : MonoBehaviour {
         var ovrCameraRig = ovrGO.GetComponent<OVRCameraRig>();
         ovrCameraRig.enabled = false;
 
-        //ovrManager.SetActive(false);
+        //ovrManager.SetActive(false);   
+    }
+
+    // Use this for initialization
+    void Start ()
+    {
+
 	}
 	
 	// Update is called once per frame
