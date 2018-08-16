@@ -14,8 +14,6 @@ public class VideoController : MonoBehaviour {
     public int speedIndex = 3;
     int defaultSpeedIndex;
 
-    public bool reverse = false;
-
     public bool playing = false;
 
     public bool enteredRoom = false;
@@ -48,38 +46,8 @@ public class VideoController : MonoBehaviour {
     {
         if (player == null) return;
 
-        // `: Toggle play/pause
-        if (Input.GetKeyDown(KeyCode.BackQuote))
-        {
-            if (!clipSelected)
-            {
-                LoadClipFromFile();
-                clipSelected = true;
-            }
-
-            playing = !playing;
-
-            if (playing)
-            {
-                player.Play();
-            }
-            else
-            {
-                player.Pause();
-            }
-        }
-
         if (playing)
         {
-            // 1: Rewind (hold)
-            if (Input.GetKeyDown(KeyCode.Alpha1))
-            {
-                reverse = true;
-            }
-            else
-            {
-                reverse = false;
-            }
             // 2: slow down speed
             if (Input.GetKeyDown(KeyCode.Alpha2))
             {
@@ -98,16 +66,9 @@ public class VideoController : MonoBehaviour {
 
             float currentPlaybackSpeed = Speeds[speedIndex];
 
-            if (reverse)
+            if (player.playbackSpeed != currentPlaybackSpeed)
             {
-                player.time = player.time - rewindTime;
-            }
-            else
-            {
-                if (player.playbackSpeed != currentPlaybackSpeed)
-                {
-                    player.playbackSpeed = currentPlaybackSpeed;
-                }
+                player.playbackSpeed = currentPlaybackSpeed;
             }
         }
         
