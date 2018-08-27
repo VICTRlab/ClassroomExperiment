@@ -7,6 +7,7 @@ using SFB;
 public class VideoController : MonoBehaviour {
 
     public VideoPlayer player;
+    public AudioSource audioSource;
 
     public float[] Speeds =
         { 0.125f, 0.25f, 0.5f, 0.75f, 1.0f, 1.5f, 2.0f, 4.0f };
@@ -71,6 +72,5 @@ public class VideoController : MonoBehaviour {
                 player.playbackSpeed = currentPlaybackSpeed;
             }
         }
-        
     }
 }

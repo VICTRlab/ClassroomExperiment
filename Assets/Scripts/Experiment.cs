@@ -41,6 +41,8 @@ public class Experiment : MonoBehaviour {
 
     public UnityStandardAssets.Characters.FirstPerson.FirstPersonController fps;
 
+    float volumeControl = 1.0f;
+
     private void Awake()
     {
         Instance = this;
@@ -53,6 +55,8 @@ public class Experiment : MonoBehaviour {
 
         var ovrCameraRig = ovrGO.GetComponent<OVRCameraRig>();
         ovrCameraRig.enabled = false;
+
+        volumeControl = projectorController.audioSource.volume;
     }
 
     // Use this for initialization
@@ -77,11 +81,16 @@ public class Experiment : MonoBehaviour {
 
         endRot = Quaternion.LookRotation(lookTowards.normalized, Vector3.up);
 
+        float startFOV = Camera.main.fieldOfView;
+        float endFOV = 45.0f;
+
         while (t <= SitTime)
         {
             float lt = t / SitTime;
             fps.transform.position = Vector3.Lerp(startPos, endPos, lt);
             fps.transform.rotation = Quaternion.Slerp(startRot, endRot, lt);
+
+            Camera.main.fieldOfView = Mathf.Lerp(startFOV, endFOV, lt);
 
             t += Time.deltaTime;
             yield return new WaitForEndOfFrame();
@@ -91,6 +100,12 @@ public class Experiment : MonoBehaviour {
         Debug.Log("Seated");
         fps.sitting = true;
         yield break;
+    }
+
+    public void SendSignal(string msg)
+    {
+        Debug.Log(msg);
+        // TODO: insert BIOPAC TTL message here
     }
 	
 	// Update is called once per frame
@@ -107,17 +122,40 @@ public class Experiment : MonoBehaviour {
 
         if (CurrentProgress == Progress.Seated && Input.GetButton("XboxA"))
         {
-            CurrentProgress = Progress.VideoStarted;
-            Debug.Log("Starting video");
-            projectorController.player.Play();
+            StartVideo();
             return;
         }
-
-        if (CurrentProgress == Progress.VideoStarted)
-        {
-
-        }
 	}
+
+    public void StartVideo()
+    {
+        CurrentProgress = Progress.VideoStarted;
+        SendSignal("Starting video");
+        projectorController.player.Play();
+        StartCoroutine(CheckVideoStatus());
+    }
+
+    public void StopVideo()
+    {
+        CurrentProgress = Progress.End;
+        SendSignal("Video finished");
+        projectorController.player.Stop();
+    }
+
+    public IEnumerator CheckVideoStatus()
+    {
+        if (projectorController == null) yield break;
+
+        yield return new WaitForSeconds(1.0f);
+
+        while (projectorController.player.isPlaying)
+        {
+            Debug.Log("Playing...");
+            yield return null;
+        }
+
+        StopVideo();
+    }
 
     public void LoadParticipantAvatar()
     {
@@ -223,6 +261,20 @@ public class Experiment : MonoBehaviour {
                 LoadVideoFromFile();
             }
         }
+
+
+        GUILayout.BeginHorizontal();
+
+        GUILayout.Label("Video volume");
+        volumeControl = GUILayout.HorizontalSlider(volumeControl, 0.0f, 1.0f);
+
+        if (projectorController.audioSource.volume != volumeControl)
+        {
+            projectorController.audioSource.volume = volumeControl;
+        }
+
+        GUILayout.EndHorizontal();
+
         GUILayout.EndVertical();
     }
 }
