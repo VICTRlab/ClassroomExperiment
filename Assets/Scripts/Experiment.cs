@@ -21,9 +21,6 @@ public class Experiment : MonoBehaviour {
 
     public Progress CurrentProgress = Progress.Begin;
 
-    public string participantAvatarFile;
-    public string videoFile;
-
     public GameObject participantAvatar;
     public Transform participantSkeletonRoot;
     public Transform participantStart;
@@ -41,29 +38,39 @@ public class Experiment : MonoBehaviour {
 
     public UnityStandardAssets.Characters.FirstPerson.FirstPersonController fps;
 
-    float volumeControl = 1.0f;
+    //float volumeControl = 1.0f;
 
     private void Awake()
     {
         Instance = this;
-        UnityEngine.XR.XRSettings.enabled = false;
 
-        var ovrGO = GameObject.Find("OVRCameraRig");
+        if (ExperimentConfig.Instance.interfaceMode == ExperimentConfig.InterfaceMode.Desktop)
+        {
+            UnityEngine.XR.XRSettings.enabled = false;
 
-        var ovrManager = ovrGO.GetComponent<OVRManager>();
-        ovrManager.enabled = false;
+            var ovrGO = GameObject.Find("OVRCameraRig");
 
-        var ovrCameraRig = ovrGO.GetComponent<OVRCameraRig>();
-        ovrCameraRig.enabled = false;
+            var ovrManager = ovrGO.GetComponent<OVRManager>();
+            ovrManager.enabled = false;
 
-        volumeControl = projectorController.audioSource.volume;
+            var ovrCameraRig = ovrGO.GetComponent<OVRCameraRig>();
+            ovrCameraRig.enabled = false;
+        }
+        else
+        {
+            UnityEngine.XR.XRSettings.enabled = true;
+        }
+
+        if (!string.IsNullOrEmpty(ExperimentConfig.Instance.participantAvatarFile))
+        {
+            LoadParticipantAvatar(ExperimentConfig.Instance.participantAvatarFile);
+        }
+
+        if (!string.IsNullOrEmpty(ExperimentConfig.Instance.videoFile))
+        {
+            LoadVideoFromFile(ExperimentConfig.Instance.videoFile);
+        }
     }
-
-    // Use this for initialization
-    void Start ()
-    {
-
-	}
 
     IEnumerator SitDown()
     {
@@ -71,6 +78,8 @@ public class Experiment : MonoBehaviour {
         startedSitting = true;
 
         float t = 0.0f;
+
+        var fpsRB = fps.GetComponent<Rigidbody>();
 
         Vector3 startPos = fps.transform.position;
         Vector3 endPos = seat.transform.position + new Vector3(0, -0.25f, 0);
@@ -81,19 +90,14 @@ public class Experiment : MonoBehaviour {
 
         endRot = Quaternion.LookRotation(lookTowards.normalized, Vector3.up);
 
-        float startFOV = Camera.main.fieldOfView;
-        float endFOV = 45.0f;
-
         while (t <= SitTime)
         {
             float lt = t / SitTime;
             fps.transform.position = Vector3.Lerp(startPos, endPos, lt);
             fps.transform.rotation = Quaternion.Slerp(startRot, endRot, lt);
 
-            Camera.main.fieldOfView = Mathf.Lerp(startFOV, endFOV, lt);
-
             t += Time.deltaTime;
-            yield return new WaitForEndOfFrame();
+            yield return new WaitForFixedUpdate();
         }
 
         CurrentProgress = Progress.Seated;
@@ -132,7 +136,16 @@ public class Experiment : MonoBehaviour {
         CurrentProgress = Progress.VideoStarted;
         SendSignal("Starting video");
         projectorController.player.Play();
-        StartCoroutine(CheckVideoStatus());
+        //StartCoroutine(CheckVideoStatus());
+        projectorController.player.loopPointReached += (src) =>
+        {
+            StopVideo();
+        };
+    }
+
+    private void Player_loopPointReached(UnityEngine.Video.VideoPlayer source)
+    {
+        throw new NotImplementedException();
     }
 
     public void StopVideo()
@@ -142,22 +155,21 @@ public class Experiment : MonoBehaviour {
         projectorController.player.Stop();
     }
 
-    public IEnumerator CheckVideoStatus()
-    {
-        if (projectorController == null) yield break;
+    //public IEnumerator CheckVideoStatus()
+    //{
+    //    if (projectorController == null) yield break;
 
-        yield return new WaitForSeconds(1.0f);
+    //    yield return new WaitForSeconds(1.0f);
 
-        while (projectorController.player.isPlaying)
-        {
-            Debug.Log("Playing...");
-            yield return null;
-        }
+    //    while (projectorController.player.isPlaying)
+    //    {
+    //        yield return null;
+    //    }
 
-        StopVideo();
-    }
+    //    StopVideo();
+    //}
 
-    public void LoadParticipantAvatar()
+    public void LoadParticipantAvatar(string participantAvatarFile)
     {
         using (var assetLoader = new TriLib.AssetLoader())
         {
@@ -199,7 +211,7 @@ public class Experiment : MonoBehaviour {
         }
     }
 
-    public void LoadVideoFromFile()
+    public void LoadVideoFromFile(string videoFile)
     {
         try
         {
@@ -232,49 +244,47 @@ public class Experiment : MonoBehaviour {
 
     private void OnGUI()
     {
-        GUILayout.BeginHorizontal();
-        if (GUILayout.Button("Load model"))
-        {
-            participantAvatarFile = LoadFile("Choose participant avatar", "", "fbx");
+        //GUILayout.BeginHorizontal();
+        //if (GUILayout.Button("Load model"))
+        //{
+        //    participantAvatarFile = LoadFile("Choose participant avatar", "", "fbx");
 
-            if (!string.IsNullOrEmpty(participantAvatarFile))
-            {
-                LoadParticipantAvatar();
-            }
-        }
+        //    if (!string.IsNullOrEmpty(participantAvatarFile))
+        //    {
+        //        LoadParticipantAvatar();
+        //    }
+        //}
 
-        if (!string.IsNullOrEmpty(participantAvatarFile))
-        {
-            GUILayout.Label(participantAvatarFile);
-        }
+        //if (!string.IsNullOrEmpty(participantAvatarFile))
+        //{
+        //    GUILayout.Label(participantAvatarFile);
+        //}
 
-        GUILayout.EndHorizontal();
+        //GUILayout.EndHorizontal();
 
-        GUILayout.BeginVertical();
-        if (GUILayout.Button("Load video"))
-        {
+        //GUILayout.BeginVertical();
+        //if (GUILayout.Button("Load video"))
+        //{
 
-            videoFile = LoadFile("Choose video clip", "", "mp4");
+        //    videoFile = LoadFile("Choose video clip", "", "mp4");
 
-            if (!string.IsNullOrEmpty(videoFile))
-            {
-                LoadVideoFromFile();
-            }
-        }
+        //    if (!string.IsNullOrEmpty(videoFile))
+        //    {
+        //        LoadVideoFromFile();
+        //    }
+        //}
 
 
-        GUILayout.BeginHorizontal();
+        //GUILayout.BeginHorizontal();
 
-        GUILayout.Label("Video volume");
-        volumeControl = GUILayout.HorizontalSlider(volumeControl, 0.0f, 1.0f);
+        //GUILayout.Label("Video volume");
+        //volumeControl = GUILayout.HorizontalSlider(volumeControl, 0.0f, 1.0f);
 
-        if (projectorController.audioSource.volume != volumeControl)
-        {
-            projectorController.audioSource.volume = volumeControl;
-        }
+        //if (projectorController.audioSource.volume != volumeControl)
+        //{
+        //    projectorController.audioSource.volume = volumeControl;
+        //}
 
-        GUILayout.EndHorizontal();
-
-        GUILayout.EndVertical();
+        //GUILayout.EndHorizontal();
     }
 }

@@ -34,6 +34,6 @@ public class MainMenuScript : MonoBehaviour {
 
     // Start game button press
     public void startGame() {
-		SceneManager.LoadScene("Experiment Class");
+        SceneManager.LoadScene("ClassroomVideo");
     }
 }

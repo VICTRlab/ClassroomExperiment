@@ -781,9 +781,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 307eff68cca88bf4a84bf17212008335, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interfaceMode: 0
   CurrentProgress: 0
-  participantAvatarFile: 
-  videoFile: 
   participantAvatar: {fileID: 0}
   participantSkeletonRoot: {fileID: 0}
   participantStart: {fileID: 597000183}
@@ -7543,7 +7542,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mesh: {fileID: 1648767287}
-  camera: {fileID: 2002834568}
+  currentCam: {fileID: 2002834568}
   percentVisible: 0
   lookScore: 0
   rowCount: 20

@@ -41,7 +41,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/SampleScenes/Scenes/RollerBall.unity
     guid: 7eaa63fd5f544054c91b4364fe194584
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/MainMenu.unity
     guid: 00e6b328214b60243a53b2ac4a267e57
   - enabled: 0
@@ -56,3 +56,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ClassroomVideo.unity
     guid: e67e46fd62a28f740b7fa49518dca99e
+  m_configObjects: {}

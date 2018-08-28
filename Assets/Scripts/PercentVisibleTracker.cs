@@ -35,13 +35,13 @@ public class PercentVisibleTracker : MonoBehaviour {
 
     public MeshFilter mesh;
 
-    public Camera camera;
+    public Camera currentCam;
 
     public float percentVisible = 0.0f;
 
     public float lookScore = 0.0f;
 
-    bool initialized = false;
+    //bool initialized = false;
 
     public int rowCount = 20;
     public int colCount = 20;
@@ -56,7 +56,6 @@ public class PercentVisibleTracker : MonoBehaviour {
 
     void recomputeVisibility()
     {
-
         // Need to compute the actual amount of screen visible using the viewport coordinates
         // The quad points are in this order:
         //  2 -------- 1
@@ -86,7 +85,7 @@ public class PercentVisibleTracker : MonoBehaviour {
                 Vector3 cy = up * (float)j;
 
                 Vector3 p = lowerLeft + rx + cy;
-                Vector3 s = camera.WorldToViewportPoint(p);
+                Vector3 s = currentCam.WorldToViewportPoint(p);
                 bool visible = ScreenVisiblePoint.isVisible(s);
 
                 if (visible)
@@ -130,9 +129,9 @@ public class PercentVisibleTracker : MonoBehaviour {
         //    initialized = true;
         //}
 
-        Vector3 camForward = camera.transform.forward;
+        Vector3 camForward = currentCam.transform.forward;
 
-        Vector3 screenForward = (mesh.transform.position - camera.transform.position).normalized;
+        Vector3 screenForward = (mesh.transform.position - currentCam.transform.position).normalized;
 
         float angle = Vector3.Angle(camForward, screenForward);
 
@@ -149,7 +148,7 @@ public class PercentVisibleTracker : MonoBehaviour {
         int numVisible = 0;
         for (int i = 0; i < points.Length; i++)
         {
-            points[i].update(camera);
+            points[i].update(currentCam);
             if (points[i].visible)
             {
                 numVisible++;

@@ -86,6 +86,16 @@ namespace UnityStandardAssets.Characters.FirstPerson
             float yRot = CrossPlatformInputManager.GetAxis("Mouse X") * XSensitivity;
             float xRot = CrossPlatformInputManager.GetAxis("Mouse Y") * YSensitivity;
 
+            if (ExperimentConfig.Instance.interfaceMode == ExperimentConfig.InterfaceMode.VR)
+            {
+                xRot = 0.0f;
+
+                if (Experiment.Instance.CurrentProgress >= Experiment.Progress.Seated)
+                {
+                    yRot = 0.0f;
+                }
+            }
+
             //m_CharacterTargetRot *= Quaternion.Euler (-xRot, yRot, 0f);
             //m_CameraTargetRot *= Quaternion.Euler (-xRot, 0f, 0f);
 
