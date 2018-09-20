@@ -31,6 +31,8 @@ public class Experiment : MonoBehaviour {
 
     bool startedSitting = false;
 
+    public Canvas fadeCanvas;
+
     public VideoController projectorController;
 
     public Seat seat;
@@ -61,9 +63,9 @@ public class Experiment : MonoBehaviour {
             UnityEngine.XR.XRSettings.enabled = true;
         }
 
-        if (!string.IsNullOrEmpty(ExperimentConfig.Instance.participantAvatarFile))
+        if (!string.IsNullOrEmpty(ExperimentConfig.Instance.sessionAvatar))
         {
-            LoadParticipantAvatar(ExperimentConfig.Instance.participantAvatarFile);
+            LoadParticipantAvatar(ExperimentConfig.Instance.sessionAvatar);
         }
 
         if (!string.IsNullOrEmpty(ExperimentConfig.Instance.videoFile))
@@ -72,6 +74,11 @@ public class Experiment : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Fires when the character sits down at the desk. Yields on fixed update because it
+    /// modifies character position and look direction.
+    /// </summary>
+    /// <returns></returns>
     IEnumerator SitDown()
     {
         if (startedSitting) yield break;
@@ -84,7 +91,7 @@ public class Experiment : MonoBehaviour {
         Vector3 startPos = fps.transform.position;
         Vector3 endPos = seat.transform.position + new Vector3(0, -0.25f, 0);
         Quaternion startRot = fps.transform.rotation;
-        Quaternion endRot = seat.transform.rotation;// Quaternion.AngleAxis(90.0f, Vector3.up);
+        Quaternion endRot = seat.transform.rotation;
 
         Vector3 lookTowards = projectorController.transform.position - seat.transform.position;
 
@@ -153,6 +160,33 @@ public class Experiment : MonoBehaviour {
         CurrentProgress = Progress.End;
         SendSignal("Video finished");
         projectorController.player.Stop();
+        StartCoroutine(FadeOut());
+    }
+
+    IEnumerator FadeOut()
+    {
+        Debug.Log("Fading out...");
+
+        var cg = fadeCanvas.GetComponent<CanvasGroup>();
+
+        float fadeTime = 5.0f;
+
+        float t = 0.0f;
+
+        while (t < fadeTime)
+        {
+            t += Time.deltaTime;
+
+            cg.alpha = t / fadeTime;
+            yield return null;
+        }
+
+        cg.interactable = false;
+
+        Application.Quit();
+
+        yield return null;
+        
     }
 
     //public IEnumerator CheckVideoStatus()
@@ -240,51 +274,5 @@ public class Experiment : MonoBehaviour {
         }
 
         return string.Empty;
-    }
-
-    private void OnGUI()
-    {
-        //GUILayout.BeginHorizontal();
-        //if (GUILayout.Button("Load model"))
-        //{
-        //    participantAvatarFile = LoadFile("Choose participant avatar", "", "fbx");
-
-        //    if (!string.IsNullOrEmpty(participantAvatarFile))
-        //    {
-        //        LoadParticipantAvatar();
-        //    }
-        //}
-
-        //if (!string.IsNullOrEmpty(participantAvatarFile))
-        //{
-        //    GUILayout.Label(participantAvatarFile);
-        //}
-
-        //GUILayout.EndHorizontal();
-
-        //GUILayout.BeginVertical();
-        //if (GUILayout.Button("Load video"))
-        //{
-
-        //    videoFile = LoadFile("Choose video clip", "", "mp4");
-
-        //    if (!string.IsNullOrEmpty(videoFile))
-        //    {
-        //        LoadVideoFromFile();
-        //    }
-        //}
-
-
-        //GUILayout.BeginHorizontal();
-
-        //GUILayout.Label("Video volume");
-        //volumeControl = GUILayout.HorizontalSlider(volumeControl, 0.0f, 1.0f);
-
-        //if (projectorController.audioSource.volume != volumeControl)
-        //{
-        //    projectorController.audioSource.volume = volumeControl;
-        //}
-
-        //GUILayout.EndHorizontal();
     }
 }
