@@ -1,17 +1,48 @@
-﻿using System.Collections;
+﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Distractions : MonoBehaviour {
-
+public class Distractions : MonoBehaviour
+{
     public static Distractions Instance;
+
+    public enum DistractionType
+    {
+        Phone,
+        Stretch,
+        NumTypes
+    }
+
+    public static Dictionary<string, DistractionType> typeMap = new Dictionary<string, DistractionType>
+    {
+        { "phone", DistractionType.Phone },
+        { "stretch", DistractionType.Stretch }
+    };
+
+    public class DistractionEvent
+    {
+        /// <summary>
+        /// When the event should occur relative to the start of the video playback
+        /// </summary>
+        public TimeSpan runAt = TimeSpan.Zero;
+        /// <summary>
+        /// Which distraction agent to use
+        /// </summary>
+        public int index = 0;
+        /// <summary>
+        /// Which type of distraction to use
+        /// </summary>
+        public DistractionType type = DistractionType.Phone;
+    }
+
+    public List<DistractionEvent> distractionEvents = new List<DistractionEvent>();
+
+    public int distractionIndex = 0;
 
     public AudioSource[] sources;
 
     public Vector2 Frequency = new Vector2(1.0f, 10.0f);
-
-    float lastPlayed = 0.0f;
-    float untilNext = 0.0f;
 
     bool hasBegun = false;
 
@@ -20,39 +51,103 @@ public class Distractions : MonoBehaviour {
         Instance = this;
     }
 
-    // Use this for initialization
-    void Start () {
-		
-	}
-
-    void Distract()
+    public void PrepareDistractions()
     {
-        lastPlayed = Time.time;
-        int sourceIndex = Random.Range(0, sources.Length);
+        if (ExperimentConfig.Instance.eventsFromFile)
+        {
+            LoadFromFile(ExperimentConfig.Instance.eventCues);
+        }
+        else
+        {
+            Autogenerate(Experiment.Instance.projectorController.player.clip.length);
+        }
+    }
 
-        sources[sourceIndex].Play();
-        untilNext = Random.Range(Frequency.x, Frequency.y);
+    public void LoadFromFile(string filename)
+    {
+        var fi = new FileInfo(filename);
+        if (!fi.Exists)
+        {
+            Debug.LogError("Error: file does not exist." + fi.FullName);
+            return;
+        }
 
-        Experiment.Instance.SendSignal("Distraction from " + sources[sourceIndex].name);
+        distractionEvents.Clear();
+        using (var fin = fi.OpenText())
+        {
+            var contents = fin.ReadToEnd().Split(new char[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
+
+            foreach(var d in contents)
+            {
+                var c = d.Split(new char[] { ' ', '\t' }, StringSplitOptions.RemoveEmptyEntries);
+
+                if (c.Length != 3)
+                {
+                    Debug.LogError("Unable to parse distration entry: " + d);
+                    continue;
+                }
+                var timestamp = c[0];
+                var index = c[1];
+                var type = c[2];
+
+                DistractionEvent de = new DistractionEvent();
+
+                de.runAt = TimeSpan.Parse(timestamp);
+                de.index = int.Parse(index);
+                de.type = typeMap[type];
+
+                Debug.Log(string.Format("Adding distraction event: {0}, {1}, {2}",
+                    de.runAt.ToString(), de.index, de.type));
+
+                distractionEvents.Add(de);
+            }
+        }
+    }
+
+    /// <summary>
+    /// Generates distraction events to occur for the length of the video clip
+    /// </summary>
+    /// <param name="clipLength">Length of clip in seconds</param>
+    public void Autogenerate(double clipLength)
+    {
+        distractionEvents.Clear();
+        double t = UnityEngine.Random.Range(Frequency.x, Frequency.y);
+        while (t < clipLength)
+        {
+            DistractionEvent de = new DistractionEvent
+            {
+                runAt = TimeSpan.FromSeconds(t),
+                index = UnityEngine.Random.Range(0, sources.Length),
+                type = (DistractionType)UnityEngine.Random.Range(0, (int)DistractionType.NumTypes)
+            };
+            distractionEvents.Add(de);
+            t += UnityEngine.Random.Range(Frequency.x, Frequency.y);
+        }
+    }
+
+    void Distract(DistractionEvent de)
+    {
+        sources[de.index].Play();
+        Experiment.Instance.SendSignal("Distraction from " + sources[de.index].name);
     }
 	
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+    {
 		if (Experiment.Instance.CurrentProgress == Experiment.Progress.VideoStarted && !hasBegun)
         {
             hasBegun = true;
-
-            untilNext = Random.Range(Frequency.x, Frequency.y);
-            lastPlayed = Time.time;
         }
 
-        if (Experiment.Instance.CurrentProgress != Experiment.Progress.End && hasBegun)
+        if (hasBegun && Experiment.Instance.CurrentProgress != Experiment.Progress.End)
         {
-            float currentTime = Time.time;
+            TimeSpan diff = DateTime.Now - Experiment.Instance.recordingBeganAt;
 
-            if (currentTime - lastPlayed > untilNext)
+            if (distractionIndex < distractionEvents.Count 
+                && diff >= distractionEvents[distractionIndex].runAt)
             {
-                Distract();
+                Distract(distractionEvents[distractionIndex]);
+                distractionIndex++;
             }
         }
 	}

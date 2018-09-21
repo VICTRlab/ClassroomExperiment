@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Seat : MonoBehaviour
 {
-    public bool Seated = false;
+    public bool InRange = false;
 
 	// Use this for initialization
 	void Start () {
@@ -19,6 +19,6 @@ public class Seat : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log("In range of seat");
-        Seated = true;
+        InRange = true;
     }
 }

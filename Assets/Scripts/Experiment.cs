@@ -34,13 +34,19 @@ public class Experiment : MonoBehaviour {
     public Canvas fadeCanvas;
 
     public VideoController projectorController;
+    public PercentVisibleTracker screenTracker;
 
     public Seat seat;
     public ArrowPulse arrow;
 
     public UnityStandardAssets.Characters.FirstPerson.FirstPersonController fps;
 
-    //float volumeControl = 1.0f;
+    public int frameNumber = 0;
+    public DateTime recordingBeganAt;
+    public bool currentlyRecording = false;
+    StreamWriter recordingStream;
+
+    List<string> experimentEvents = new List<string>();
 
     private void Awake()
     {
@@ -116,13 +122,15 @@ public class Experiment : MonoBehaviour {
     public void SendSignal(string msg)
     {
         Debug.Log(msg);
+        experimentEvents.Add(msg);
         // TODO: insert BIOPAC TTL message here
     }
 	
 	// Update is called once per frame
 	void Update ()
     {
-        if (CurrentProgress == Progress.SelectedAvatar && seat.Seated && Input.GetButton("XboxA") && !fps.sitting
+        // Check for sit down event
+        if (CurrentProgress == Progress.SelectedAvatar && seat.InRange && Input.GetButton("XboxA") && !fps.sitting
             && !startedSitting) 
         {
             arrow.gameObject.SetActive(false);
@@ -136,33 +144,127 @@ public class Experiment : MonoBehaviour {
             StartVideo();
             return;
         }
+
+        if (currentlyRecording)
+        {
+            UpdateRecording();
+        }
 	}
 
+    /// <summary>
+    /// Starts recording experiment data
+    /// </summary>
+    void BeginRecording()
+    {
+        frameNumber = 0;
+        currentlyRecording = true;
+        recordingBeganAt = DateTime.Now;
+        var nowStr = string.Format("{0}-{1}-{2}-{3}-{4}-{5}", recordingBeganAt.Year, recordingBeganAt.Month,
+                recordingBeganAt.Day, recordingBeganAt.Hour, recordingBeganAt.Minute, recordingBeganAt.Second);
+        var recordingStreamPath = string.Format("{0}/{1}/unitydata-{2}.csv",
+            ExperimentConfig.Instance.dataFolder, ExperimentConfig.Instance.sessionName, nowStr);
+
+        var fi = new FileInfo(recordingStreamPath);
+        if (!fi.Directory.Exists)
+        {
+            fi.Directory.Create();
+        }
+        // Write a config file in the same location listing the avatar filename, video clip, and distraction source
+        using (var outLog = File.Create(string.Format("{0}/settings-{1}.txt", fi.FullName, nowStr)))
+        using (var logOut = new StreamWriter(outLog))
+        {
+            logOut.WriteLine("Session avatar: " + ExperimentConfig.Instance.sessionAvatar);
+            logOut.WriteLine("Session name: " + ExperimentConfig.Instance.sessionName);
+            logOut.WriteLine("Video clip: " + ExperimentConfig.Instance.videoFile);
+            if (ExperimentConfig.Instance.eventsFromFile)
+            {
+                logOut.WriteLine("Event source: " + ExperimentConfig.Instance.eventCues);
+            }
+            else
+            {
+                logOut.WriteLine("Event source: auto-generated");
+            }   
+        }
+
+        recordingStream = new StreamWriter(new FileStream(recordingStreamPath, FileMode.Create, FileAccess.Write));
+
+        string header="Frame,UnityTime,VideoTime,PosX,PosY,PosZ,AngleX,AngleY,AngleZ,ScreenLookScore,ScreenPercentVisible,Events";
+
+        recordingStream.WriteLine(header);
+    }
+
+    /// <summary>
+    /// Writes current experiment state out to CSV file
+    /// </summary>
+    void UpdateRecording()
+    {
+        TimeSpan diff = DateTime.Now - recordingBeganAt;
+        var headPos = fps.head.position;
+        var headRot = fps.head.rotation.eulerAngles;
+        string events = string.Empty;
+        if (experimentEvents.Any())
+        {
+            events = string.Join(";", experimentEvents.ToArray());
+            experimentEvents.Clear();
+        }
+        string entry = string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11}",
+            frameNumber,
+            diff.TotalSeconds,
+            projectorController.player.time,
+            headPos.x, headPos.y, headPos.z,
+            headRot.x, headRot.y, headRot.z,
+            screenTracker.lookScore,
+            screenTracker.percentVisible,
+            events);
+
+        recordingStream.WriteLine(entry);
+
+        frameNumber++;
+    }
+
+    /// <summary>
+    /// Closes recording stream
+    /// </summary>
+    void EndRecording()
+    {
+        UpdateRecording();
+        currentlyRecording = false;
+        recordingStream.Close();
+        recordingStream = null;
+    }
+
+    /// <summary>
+    /// Starts playing video, recording experiment data
+    /// </summary>
     public void StartVideo()
     {
         CurrentProgress = Progress.VideoStarted;
+        Distractions.Instance.PrepareDistractions();
+        BeginRecording();
         SendSignal("Starting video");
         projectorController.player.Play();
-        //StartCoroutine(CheckVideoStatus());
         projectorController.player.loopPointReached += (src) =>
         {
             StopVideo();
         };
     }
 
-    private void Player_loopPointReached(UnityEngine.Video.VideoPlayer source)
-    {
-        throw new NotImplementedException();
-    }
-
+    /// <summary>
+    /// Fires when video clip stops to signal end of experiment.
+    /// </summary>
     public void StopVideo()
     {
         CurrentProgress = Progress.End;
-        SendSignal("Video finished");
+        SendSignal("Video finished. Shutting down...");
+        EndRecording();
         projectorController.player.Stop();
         StartCoroutine(FadeOut());
     }
 
+    /// <summary>
+    /// Fades the screen out to black when the video ends
+    /// </summary>
+    /// <returns></returns>
     IEnumerator FadeOut()
     {
         Debug.Log("Fading out...");
@@ -188,20 +290,6 @@ public class Experiment : MonoBehaviour {
         yield return null;
         
     }
-
-    //public IEnumerator CheckVideoStatus()
-    //{
-    //    if (projectorController == null) yield break;
-
-    //    yield return new WaitForSeconds(1.0f);
-
-    //    while (projectorController.player.isPlaying)
-    //    {
-    //        yield return null;
-    //    }
-
-    //    StopVideo();
-    //}
 
     public void LoadParticipantAvatar(string participantAvatarFile)
     {

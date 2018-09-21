@@ -789,9 +789,12 @@ MonoBehaviour:
   SitTime: 1
   fadeCanvas: {fileID: 248362385}
   projectorController: {fileID: 1342069105}
+  screenTracker: {fileID: 1648767288}
   seat: {fileID: 2064228368}
   arrow: {fileID: 1154164668}
   fps: {fileID: 569115578}
+  frameNumber: 0
+  recordingStarted: 0
 --- !u!4 &179928976
 Transform:
   m_ObjectHideFlags: 0
@@ -6885,6 +6888,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f5ef3da1d82e6f45aa68ba37912ff78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  distractionIndex: 0
   sources:
   - {fileID: 1200233784}
   - {fileID: 81543067}
@@ -9440,7 +9444,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8adca5871d7bd8342ab965d41964214f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Seated: 0
+  InRange: 0
 --- !u!135 &2064228369
 SphereCollider:
   m_ObjectHideFlags: 0
