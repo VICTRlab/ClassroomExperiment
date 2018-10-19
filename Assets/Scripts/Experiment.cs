@@ -119,60 +119,71 @@ public class Experiment : MonoBehaviour {
         yield break;
     }
 
-    public void SendSignal(string msg, float length, byte[] array = null)
+    public void SendSignal(string msg, float length, 
+        Distractions.Distraction distraction = Distractions.Distraction.None)
     {
         Debug.Log(msg);
         experimentEvents.Add(msg);
-        if (array != null)
+        if (distraction != Distractions.Distraction.None)
         {
-            StartCoroutine(SendTTL(length, array));
+            StartCoroutine(SendTTL(length, distraction));
         }
     }
 
-    List<byte[]> ttlCodes = new List<byte[]>()
-    {
-        new byte[]{0, 0},
-        new byte[]{0, 1}
-    };
+    Distractions.Distraction currentTTL = Distractions.Distraction.None;
 
-    byte[] currentTTL = null;
-
-    static readonly byte[] ttl_off = new byte[] { 0, 0 };
-
-    string bytesToString(byte[] bytes)
-    {
-        string s = "";
-        foreach(var b in bytes.Reverse())
+    static readonly Dictionary<Distractions.Distraction, string> ttl_codes =
+        new Dictionary<Distractions.Distraction, string>
         {
-            s += b.ToString();
+            {Distractions.Distraction.None, "00" },
+            {Distractions.Distraction.HumanAudio, "01" },
+            {Distractions.Distraction.HumanVisual, "02" },
+            {Distractions.Distraction.TechAudio, "03" },
+            {Distractions.Distraction.TechVisual, "04" },
+            {Distractions.Distraction.StartVideo, "05" },
+            {Distractions.Distraction.StopVideo, "06" },
+            {Distractions.Distraction.Mirror, "07" },
+            {Distractions.Distraction.Reset, "RR" },
+        };
+
+    IEnumerator SendTTL(float length, Distractions.Distraction distraction)
+    {
+        if (currentTTL != Distractions.Distraction.None)
+        {
+            Serial.Write(ttl_codes[Distractions.Distraction.None]);
+            Debug.Log("TTL code " + currentTTL + " was live, so writing stop code");
+            currentTTL = Distractions.Distraction.None;
         }
-        return s;
-    }
+        string code = ttl_codes[distraction];
+        Debug.Log("Writing TTL: " + distraction + "(" + code + ")");
+        Serial.Write(code);
+        // Reset just happens once at the beginning, so don't track it or try to erase afterward
+        if (distraction != Distractions.Distraction.Reset)
+        {
+            currentTTL = distraction;
 
-    IEnumerator SendTTL(float length, byte[] ttl)
-    {
-        if (currentTTL != null)
-        {
-            Serial.Write(ttl_off);
-            Debug.Log(bytesToString(currentTTL) + " was live, so writing off code");
-            currentTTL = null;
-        }
-        Debug.Log("Writing bytes to serial: " + bytesToString(ttl));
-        Serial.Write(ttl);
-        currentTTL = ttl;
-        yield return new WaitForSeconds(length);
-        if (currentTTL != null)
-        {
-            Serial.Write(ttl_off);
-            Debug.Log("Writing stop code:" + bytesToString(ttl_off));
-            currentTTL = null;
+            if (length > 0.0f)
+            {
+                yield return new WaitForSeconds(length);
+                if (currentTTL != Distractions.Distraction.None)
+                {
+                    Serial.Write(ttl_codes[Distractions.Distraction.None]);
+                    Debug.Log("Writing stop code: " + ttl_codes[Distractions.Distraction.None]);
+                    currentTTL = Distractions.Distraction.None;
+                }
+            }
         }
         
         yield break;
     }
-	
-	// Update is called once per frame
-	void Update ()
+
+    private void Start()
+    {
+        BeginRecording();
+    }
+
+    // Update is called once per frame
+    void Update ()
     {
         // Check for sit down event
         if (Input.GetButtonDown("XboxA"))
@@ -188,7 +199,6 @@ public class Experiment : MonoBehaviour {
 
             if (CurrentProgress == Progress.Seated)
             {
-                BeginRecording();
                 StartCoroutine(StartVideoDelayed(5.0f));
                 return;
             }
@@ -241,6 +251,8 @@ public class Experiment : MonoBehaviour {
         string header="Frame,UnityTime,VideoTime,PosX,PosY,PosZ,AngleX,AngleY,AngleZ,ScreenLookScore,ScreenPercentVisible,Events";
 
         recordingStream.WriteLine(header);
+
+        SendSignal("Initializing TTL", 0.0f, Distractions.Distraction.Reset);
     }
 
     /// <summary>
@@ -285,11 +297,11 @@ public class Experiment : MonoBehaviour {
 
     IEnumerator StartVideoDelayed(float seconds)
     {
+        SendSignal("Started video playback", seconds, Distractions.Distraction.StartVideo);
         yield return new WaitForSeconds(seconds);
         CurrentProgress = Progress.VideoStarted;
         Distractions.Instance.PrepareDistractions();
-        SendSignal("Started video playback", 0.01f, 
-            BitConverter.GetBytes((short)Distractions.Distraction.StartVideo));
+        
         projectorController.player.Play();
         projectorController.player.loopPointReached += (src) =>
         {
@@ -306,7 +318,7 @@ public class Experiment : MonoBehaviour {
         CurrentProgress = Progress.End;
         projectorController.player.Stop();
         SendSignal("Video finished. Shutting down in " + seconds.ToString() + " seconds...", seconds,
-            BitConverter.GetBytes((short)Distractions.Distraction.StopVideo));
+            Distractions.Distraction.Reset);
         yield return new WaitForSeconds(seconds);
         EndRecording();
         

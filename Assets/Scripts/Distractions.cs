@@ -14,9 +14,10 @@ public class Distractions : MonoBehaviour
         HumanVisual, 
         TechAudio,
         TechVisual,
-        Count,
         StartVideo,
-        StopVideo
+        StopVideo,
+        Mirror,
+        Reset
     }
 
     //public static Dictionary<string, > typemap = new dictionary<string, distractiontype>
@@ -130,7 +131,7 @@ public class Distractions : MonoBehaviour
             {
                 runAt = TimeSpan.FromSeconds(t),
                 index = UnityEngine.Random.Range(0, Agents.Length),
-                distraction = (Distraction)UnityEngine.Random.Range(1, (int)Distraction.Count)
+                distraction = (Distraction)UnityEngine.Random.Range(1, 5)
             };
             distractionEvents.Add(de);
             t += UnityEngine.Random.Range(Frequency.x, Frequency.y);
@@ -139,10 +140,9 @@ public class Distractions : MonoBehaviour
 
     void Distract(DistractionEvent de)
     {
-        short dt = (short)de.distraction;
         float dl = Agents[de.index].Distract(de);
-        Experiment.Instance.SendSignal(de.distraction.ToString() 
-            + " distraction from " + Agents[de.index].name, dl, BitConverter.GetBytes(dt));
+        Experiment.Instance.SendSignal(de.distraction.ToString()
+            + " distraction from " + Agents[de.index].name, dl, de.distraction);
     }
 	
 	// Update is called once per frame

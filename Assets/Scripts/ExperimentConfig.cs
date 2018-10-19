@@ -50,6 +50,11 @@ public class ExperimentConfig : MonoBehaviour {
 
     public InterfaceMode interfaceMode;
 
+    public int selectedToolbar = 0;
+    public string[] toolbarNames = { "Experiment", "Serial" };
+
+    public string serialSend;
+
     private void RefreshConfig(bool isLoad = true)
     {
         FileInfo fi = new FileInfo(historyFilename);
@@ -206,113 +211,189 @@ public class ExperimentConfig : MonoBehaviour {
 
         Rect guiRect = new Rect(Screen.width * 0.4f, Screen.height * 0.2f, 100f, 40f);
 
-        if (GUI.Button(guiRect, "Video clip"))
-        {
-            videoFile = LoadFile("Choose video clip", "", "mp4");
-        }
-
-        if (!string.IsNullOrEmpty(videoFile))
-        {
-            Rect labelRect = new Rect(guiRect);
-            labelRect.x += 150f;
-            labelRect.width = 400f;
-            GUI.Label(labelRect, videoFile);
-        }
+        selectedToolbar = GUI.Toolbar(guiRect, selectedToolbar, toolbarNames);
         guiRect.y += 50f;
 
-        eventsFromFile = GUI.Toggle(guiRect, eventsFromFile, "Load events?");
-        guiRect.y += 50f;
-
-        if (eventsFromFile)
+        if (selectedToolbar == 0)
         {
-            if (GUI.Button(guiRect, "Event cues"))
+            if (GUI.Button(guiRect, "Video clip"))
             {
-                eventCues = LoadFile("Choose event cues file", "", "txt");
+                videoFile = LoadFile("Choose video clip", "", "mp4");
             }
 
-            if (!string.IsNullOrEmpty(eventCues))
+            if (!string.IsNullOrEmpty(videoFile))
             {
                 Rect labelRect = new Rect(guiRect);
                 labelRect.x += 150f;
                 labelRect.width = 400f;
-                GUI.Label(labelRect, eventCues);
+                GUI.Label(labelRect, videoFile);
             }
             guiRect.y += 50f;
+
+            eventsFromFile = GUI.Toggle(guiRect, eventsFromFile, "Load events?");
+            guiRect.y += 50f;
+
+            if (eventsFromFile)
+            {
+                if (GUI.Button(guiRect, "Event cues"))
+                {
+                    eventCues = LoadFile("Choose event cues file", "", "txt");
+                }
+
+                if (!string.IsNullOrEmpty(eventCues))
+                {
+                    Rect labelRect = new Rect(guiRect);
+                    labelRect.x += 150f;
+                    labelRect.width = 400f;
+                    GUI.Label(labelRect, eventCues);
+                }
+                guiRect.y += 50f;
+            }
+
+
+            if (GUI.Button(guiRect, "Data folder"))
+            {
+                dataFolder = ChooseFolder("Data folder", "");
+            }
+
+            if (!string.IsNullOrEmpty(dataFolder))
+            {
+                Rect labelRect = new Rect(guiRect);
+                labelRect.x += 150f;
+                labelRect.width = 400f;
+                GUI.Label(labelRect, dataFolder);
+            }
+            guiRect.y += 50f;
+
+            if (GUI.Button(guiRect, "Session avatar"))
+            {
+                sessionAvatar = LoadFile("Choose session avatar", "", "fbx");
+            }
+
+            if (!string.IsNullOrEmpty(sessionAvatar))
+            {
+                Rect labelRect = new Rect(guiRect);
+                labelRect.x += 150f;
+                labelRect.width = 400f;
+                GUI.Label(labelRect, sessionAvatar);
+            }
+            guiRect.y += 50f;
+
+            GUI.Label(guiRect, "Session name");
+            var nameRect = new Rect(guiRect);
+            nameRect.x += 150f;
+            nameRect.width = 200f;
+            sessionName = GUI.TextField(nameRect, sessionName);
+            guiRect.y += 50f;
+
+
+
+            GUI.Label(guiRect, "Interface");
+            var interfaceRect = new Rect(guiRect);
+            interfaceRect.x += 150f;
+            interfaceRect.width = 200f;
+            string interfaceStr = interfaceMode.ToString();
+            if (GUI.Button(interfaceRect, interfaceStr))
+            {
+                interfaceMode = (InterfaceMode)(1 - (int)interfaceMode);
+            }
+            guiRect.y += 50f;
+
+            if (GUI.Button(guiRect, "Start"))
+            {
+                readyToStart = true;
+            }
+
+            var quitRect = new Rect(guiRect);
+            quitRect.x += 150f;
+            if (GUI.Button(quitRect, "Quit"))
+            {
+                Application.Quit();
+            }
+            guiRect.y += 50f;
+
+            if (errors.Count > 0)
+            {
+                //guiRect.x = 0.2f * Screen.width;
+                guiRect.width = Mathf.Max(Screen.width - guiRect.x - 20, 300f);
+                guiRect.height = Mathf.Max(Screen.height - guiRect.y - 20f, 300f);
+                string total = "Errors!\n" + string.Join("\n", errors.ToArray());
+
+                var oldCol = GUI.contentColor;
+                GUI.contentColor = Color.yellow;
+                GUI.Label(guiRect, total);
+                GUI.contentColor = oldCol;
+            }
         }
-        
-
-        if (GUI.Button(guiRect, "Data folder"))
+        else if (selectedToolbar == 1)
         {
-            dataFolder = ChooseFolder("Data folder", "");
-        }
+            var sc = Serial.GetConfig();
 
-        if (!string.IsNullOrEmpty(dataFolder))
-        {
-            Rect labelRect = new Rect(guiRect);
-            labelRect.x += 150f;
-            labelRect.width = 400f;
-            GUI.Label(labelRect, dataFolder);
-        }
-        guiRect.y += 50f;
+            guiRect.width = 400f;
 
-        if (GUI.Button(guiRect, "Session avatar"))
-        {
-            sessionAvatar = LoadFile("Choose session avatar", "", "fbx");
-        }
+            sc.portName = GUI.TextField(guiRect, sc.portName);
+            guiRect.y += 50f;
 
-        if (!string.IsNullOrEmpty(sessionAvatar))
-        {
-            Rect labelRect = new Rect(guiRect);
-            labelRect.x += 150f;
-            labelRect.width = 400f;
-            GUI.Label(labelRect, sessionAvatar);
-        }
-        guiRect.y += 50f;
+            string speedStr = GUI.TextField(guiRect, sc.speed.ToString());
+            if (speedStr != sc.speed.ToString())
+            {
+                int newSpeed = sc.speed;
+                if (int.TryParse(speedStr, out newSpeed))
+                {
+                    sc.speed = newSpeed;
+                }
+            }
+            guiRect.y += 50f;
 
-        GUI.Label(guiRect, "Session name");
-        var nameRect = new Rect(guiRect);
-        nameRect.x += 150f;
-        nameRect.width = 200f;
-        sessionName = GUI.TextField(nameRect, sessionName);
-        guiRect.y += 50f;
+            int parityInt = (int)sc.parity;
 
+            parityInt = GUI.Toolbar(guiRect, parityInt, System.Enum.GetNames(typeof(System.IO.Ports.Parity)));
+            sc.parity = (System.IO.Ports.Parity)parityInt;
+            guiRect.y += 50f;
 
+            string dataBitsStr = GUI.TextField(guiRect, sc.dataBits.ToString());
+            if (dataBitsStr != sc.dataBits.ToString())
+            {
+                int newDB = sc.dataBits;
+                if (int.TryParse(dataBitsStr, out newDB))
+                {
+                    sc.dataBits = newDB;
+                }
+            }
+            guiRect.y += 50f;
 
-        GUI.Label(guiRect, "Interface");
-        var interfaceRect = new Rect(guiRect);
-        interfaceRect.x += 150f;
-        interfaceRect.width = 200f;
-        string interfaceStr = interfaceMode.ToString();
-        if (GUI.Button(interfaceRect, interfaceStr))
-        {
-            interfaceMode = (InterfaceMode)(1 - (int)interfaceMode);
-        }
-        guiRect.y += 50f;
+            int stopBit = (int)sc.stopBits;
+            stopBit = GUI.Toolbar(guiRect, stopBit, System.Enum.GetNames(typeof(System.IO.Ports.StopBits)));
+            sc.stopBits = (System.IO.Ports.StopBits)stopBit;
+            guiRect.y += 50f;
 
-        if (GUI.Button(guiRect, "Start"))
-        {
-            readyToStart = true;
-        }
-
-        var quitRect = new Rect(guiRect);
-        quitRect.x += 150f;
-        if (GUI.Button(quitRect, "Quit"))
-        {
-            Application.Quit();
-        }
-        guiRect.y += 50f;
-
-        if (errors.Count > 0)
-        {
-            //guiRect.x = 0.2f * Screen.width;
-            guiRect.width = Mathf.Max(Screen.width - guiRect.x - 20, 300f);
-            guiRect.height = Mathf.Max(Screen.height - guiRect.y - 20f, 300f);
-            string total = "Errors!\n" + string.Join("\n", errors.ToArray());
-
-            var oldCol = GUI.contentColor;
-            GUI.contentColor = Color.yellow;
-            GUI.Label(guiRect, total);
-            GUI.contentColor = oldCol;
+            if (GUI.Button(guiRect, "Close"))
+            {
+                Serial.ClosePort();
+            }
+            guiRect.x += 50f;
+            if (GUI.Button(guiRect, "Open"))
+            {
+                Serial.checkOpen();
+            }
+            guiRect.x -= 50f;
+            guiRect.y += 50f;
+            serialSend = GUI.TextField(guiRect, serialSend);
+            guiRect.y += 50f;
+            if (GUI.Button(guiRect, "Send str"))
+            {
+                Serial.Write(serialSend);
+            }
+            guiRect.x += 50f;
+            if (GUI.Button(guiRect, "Send bytes"))
+            {
+                List<byte> bytes = new List<byte>();
+                foreach(var c in serialSend)
+                {
+                    bytes.Add(System.BitConverter.GetBytes(c)[0]);
+                }
+                Serial.Write(bytes.ToArray());
+            }
         }
     }
 }

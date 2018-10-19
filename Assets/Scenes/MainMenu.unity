@@ -239,7 +239,7 @@ MonoBehaviour:
   portNames:
   - COM3
   speed: 115200
-  logDebugInfos: 0
+  logDebugInfos: 1
 --- !u!1 &1714018643
 GameObject:
   m_ObjectHideFlags: 0

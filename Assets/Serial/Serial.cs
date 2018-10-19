@@ -451,7 +451,10 @@ public class Serial : MonoBehaviour
 				s_serial.Close ();
 			}
 
-			s_serial = new SerialPort (portName, portSpeed);
+            Parity parity = GetConfig().parity;
+            int dataBits = GetConfig().dataBits;
+            StopBits stopBits = GetConfig().stopBits;
+            s_serial = new SerialPort(portName, portSpeed, parity, dataBits, stopBits);
 		}
 
 		if (!s_serial.IsOpen) {
@@ -476,6 +479,15 @@ public class Serial : MonoBehaviour
 
 		return s_serial.IsOpen;
 	}
+
+    public static void ClosePort()
+    {
+        if (s_serial != null && s_serial.IsOpen)
+        {
+            s_serial.Close();
+            s_serial = null;
+        }
+    }
 
 	// Data has been received, do what this instance has to do with it
 	protected void receivedData (string data)
@@ -540,63 +552,65 @@ public class Serial : MonoBehaviour
 		}
 	}
 
-	static string GetPortName ()
+	public static string GetPortName ()
 	{
 		SerialConfig config = GetConfig ();
 
-		if (s_debug) {
-			Debug.Log ("Prefered port names:\n" + string.Join ("\n", config.portNames));
-		}
+        return config.portName;
 
-		List<string> portNames = new List<string> ();
+		//if (s_debug) {
+		//	Debug.Log ("Prefered port names:\n" + string.Join ("\n", config.portNames));
+		//}
 
-		switch (Application.platform) {
+		//List<string> portNames = new List<string> ();
 
-		case RuntimePlatform.OSXPlayer:
-		case RuntimePlatform.OSXEditor:
-		case RuntimePlatform.LinuxEditor:
-		case RuntimePlatform.LinuxPlayer:
+		//switch (Application.platform) {
 
-			portNames.AddRange (System.IO.Ports.SerialPort.GetPortNames ());
+		//case RuntimePlatform.OSXPlayer:
+		//case RuntimePlatform.OSXEditor:
+		//case RuntimePlatform.LinuxEditor:
+		//case RuntimePlatform.LinuxPlayer:
 
-			if (portNames.Count == 0) {
-				portNames.AddRange (System.IO.Directory.GetFiles ("/dev/", "cu.*"));
-			}
-			break;
+		//	portNames.AddRange (System.IO.Ports.SerialPort.GetPortNames ());
 
-		case RuntimePlatform.WindowsEditor:
-		case RuntimePlatform.WindowsPlayer:
-		default:
+		//	if (portNames.Count == 0) {
+		//		portNames.AddRange (System.IO.Directory.GetFiles ("/dev/", "cu.*"));
+		//	}
+		//	break;
 
-			portNames.AddRange (System.IO.Ports.SerialPort.GetPortNames ());
-			break;
-		}
+		//case RuntimePlatform.WindowsEditor:
+		//case RuntimePlatform.WindowsPlayer:
+		//default:
 
-		if (s_debug) {
-			Debug.Log (portNames.Count + "available ports: \n" + string.Join ("\n", portNames.ToArray ()));
-		}
+		//	portNames.AddRange (System.IO.Ports.SerialPort.GetPortNames ());
+		//	break;
+		//}
 
-		// Looking for preferred names in config
-		foreach (string name in config.portNames) {
+		//if (s_debug) {
+		//	Debug.Log (portNames.Count + "available ports: \n" + string.Join ("\n", portNames.ToArray ()));
+		//}
 
-			string foundName = portNames.Find (s => s.Contains (name));
-			if (foundName != null) {
-				if (s_debug) {
-					Debug.Log ("Found port " + foundName);
-				}
-				return foundName;
-			}
-		}
+		//// Looking for preferred names in config
+		//foreach (string name in config.portNames) {
 
-		// Defaults to last port in list (most chance to be an Arduino port)
-		if (portNames.Count > 0)
-			return portNames [portNames.Count - 1];
-		else
-			return "";
+		//	string foundName = portNames.Find (s => s.Contains (name));
+		//	if (foundName != null) {
+		//		if (s_debug) {
+		//			Debug.Log ("Found port " + foundName);
+		//		}
+		//		return foundName;
+		//	}
+		//}
+
+		//// Defaults to last port in list (most chance to be an Arduino port)
+		//if (portNames.Count > 0)
+		//	return portNames [portNames.Count - 1];
+		//else
+		//	return "";
 	}
 
 
-	static SerialConfig GetConfig ()
+	public static SerialConfig GetConfig ()
 	{
 
 		if (s_config == null) {

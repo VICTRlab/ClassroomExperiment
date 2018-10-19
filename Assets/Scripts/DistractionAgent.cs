@@ -31,11 +31,13 @@ public class DistractionAgent : MonoBehaviour {
         //stretchGraph = PlayableGraph.Create();
         //stretchGraph.SetTimeUpdateMode(DirectorUpdateMode.GameTime);
         //stretchOutput = AnimationPlayableOutput.Create(stretchGraph, "Stretch", humanAnimator);
-        //stretchPlayable = AnimationClipPlayable.Create(stretchGraph, stretchClip);        //stretchOutput.SetSourcePlayable(stretchPlayable);
+        //stretchPlayable = AnimationClipPlayable.Create(stretchGraph, stretchClip);
+        //stretchOutput.SetSourcePlayable(stretchPlayable);
 
         //coughGraph = PlayableGraph.Create();
         //coughOutput = AnimationPlayableOutput.Create(coughGraph, "Cough", humanAnimator);
-        //coughPlayable = AnimationClipPlayable.Create(coughGraph, coughClip);        //coughOutput.SetSourcePlayable(coughPlayable);
+        //coughPlayable = AnimationClipPlayable.Create(coughGraph, coughClip);
+        //coughOutput.SetSourcePlayable(coughPlayable);
     }
 	
 	// Update is called once per frame
@@ -68,7 +70,6 @@ public class DistractionAgent : MonoBehaviour {
                 length = 3.0f;
                 break;
             case Distractions.Distraction.None:
-            case Distractions.Distraction.Count:
             default:
                 break;
         }
