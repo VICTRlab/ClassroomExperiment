@@ -119,31 +119,81 @@ public class Experiment : MonoBehaviour {
         yield break;
     }
 
-    public void SendSignal(string msg)
+    public void SendSignal(string msg, float length, byte[] array = null)
     {
         Debug.Log(msg);
         experimentEvents.Add(msg);
-        // TODO: insert BIOPAC TTL message here
+        if (array != null)
+        {
+            StartCoroutine(SendTTL(length, array));
+        }
+    }
+
+    List<byte[]> ttlCodes = new List<byte[]>()
+    {
+        new byte[]{0, 0},
+        new byte[]{0, 1}
+    };
+
+    byte[] currentTTL = null;
+
+    static readonly byte[] ttl_off = new byte[] { 0, 0 };
+
+    string bytesToString(byte[] bytes)
+    {
+        string s = "";
+        foreach(var b in bytes.Reverse())
+        {
+            s += b.ToString();
+        }
+        return s;
+    }
+
+    IEnumerator SendTTL(float length, byte[] ttl)
+    {
+        if (currentTTL != null)
+        {
+            Serial.Write(ttl_off);
+            Debug.Log(bytesToString(currentTTL) + " was live, so writing off code");
+            currentTTL = null;
+        }
+        Debug.Log("Writing bytes to serial: " + bytesToString(ttl));
+        Serial.Write(ttl);
+        currentTTL = ttl;
+        yield return new WaitForSeconds(length);
+        if (currentTTL != null)
+        {
+            Serial.Write(ttl_off);
+            Debug.Log("Writing stop code:" + bytesToString(ttl_off));
+            currentTTL = null;
+        }
+        
+        yield break;
     }
 	
 	// Update is called once per frame
 	void Update ()
     {
         // Check for sit down event
-        if (CurrentProgress == Progress.SelectedAvatar && seat.InRange && Input.GetButton("XboxA") && !fps.sitting
-            && !startedSitting) 
+        if (Input.GetButtonDown("XboxA"))
         {
-            arrow.gameObject.SetActive(false);
-            //fps.transform.parent = seat.transform;
-            StartCoroutine(SitDown());
-            return;
-        }
+            if (CurrentProgress == Progress.SelectedAvatar 
+                && seat.InRange && !fps.sitting && !startedSitting)
+            {
+                arrow.gameObject.SetActive(false);
+                //fps.transform.parent = seat.transform;
+                StartCoroutine(SitDown());
+                return;
+            }
 
-        if (CurrentProgress == Progress.Seated && Input.GetButton("XboxA"))
-        {
-            StartVideo();
-            return;
+            if (CurrentProgress == Progress.Seated)
+            {
+                BeginRecording();
+                StartCoroutine(StartVideoDelayed(5.0f));
+                return;
+            }
         }
+        
 
         if (currentlyRecording)
         {
@@ -170,7 +220,7 @@ public class Experiment : MonoBehaviour {
             fi.Directory.Create();
         }
         // Write a config file in the same location listing the avatar filename, video clip, and distraction source
-        using (var outLog = File.Create(string.Format("{0}/settings-{1}.txt", fi.FullName, nowStr)))
+        using (var outLog = File.Create(string.Format("{0}/settings-{1}.txt", fi.Directory.FullName, nowStr)))
         using (var logOut = new StreamWriter(outLog))
         {
             logOut.WriteLine("Session avatar: " + ExperimentConfig.Instance.sessionAvatar);
@@ -186,7 +236,7 @@ public class Experiment : MonoBehaviour {
             }   
         }
 
-        recordingStream = new StreamWriter(new FileStream(recordingStreamPath, FileMode.Create, FileAccess.Write));
+        recordingStream = new StreamWriter(fi.OpenWrite());
 
         string header="Frame,UnityTime,VideoTime,PosX,PosY,PosZ,AngleX,AngleY,AngleZ,ScreenLookScore,ScreenPercentVisible,Events";
 
@@ -233,32 +283,36 @@ public class Experiment : MonoBehaviour {
         recordingStream = null;
     }
 
-    /// <summary>
-    /// Starts playing video, recording experiment data
-    /// </summary>
-    public void StartVideo()
+    IEnumerator StartVideoDelayed(float seconds)
     {
+        yield return new WaitForSeconds(seconds);
         CurrentProgress = Progress.VideoStarted;
         Distractions.Instance.PrepareDistractions();
-        BeginRecording();
-        SendSignal("Starting video");
+        SendSignal("Started video playback", 0.01f, 
+            BitConverter.GetBytes((short)Distractions.Distraction.StartVideo));
         projectorController.player.Play();
         projectorController.player.loopPointReached += (src) =>
         {
-            StopVideo();
+            StartCoroutine(StopVideo(seconds));
         };
+        yield break;
     }
 
     /// <summary>
     /// Fires when video clip stops to signal end of experiment.
     /// </summary>
-    public void StopVideo()
+    public IEnumerator StopVideo(float seconds)
     {
         CurrentProgress = Progress.End;
-        SendSignal("Video finished. Shutting down...");
-        EndRecording();
         projectorController.player.Stop();
+        SendSignal("Video finished. Shutting down in " + seconds.ToString() + " seconds...", seconds,
+            BitConverter.GetBytes((short)Distractions.Distraction.StopVideo));
+        yield return new WaitForSeconds(seconds);
+        EndRecording();
+        
         StartCoroutine(FadeOut());
+
+        yield break;
     }
 
     /// <summary>

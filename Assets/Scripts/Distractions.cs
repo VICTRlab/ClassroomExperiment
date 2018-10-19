@@ -7,17 +7,30 @@ public class Distractions : MonoBehaviour
 {
     public static Distractions Instance;
 
-    public enum DistractionType
+    public enum Distraction
     {
-        Phone,
-        Stretch,
-        NumTypes
+        None,
+        HumanAudio,
+        HumanVisual, 
+        TechAudio,
+        TechVisual,
+        Count,
+        StartVideo,
+        StopVideo
     }
 
-    public static Dictionary<string, DistractionType> typeMap = new Dictionary<string, DistractionType>
+    //public static Dictionary<string, > typemap = new dictionary<string, distractiontype>
+    //{
+    //    { "phone", distractiontype.phone },
+    //    { "stretch", distractiontype.stretch }
+    //};
+
+    public static readonly Dictionary<string, Distraction> distractionMap = new Dictionary<string, Distraction>
     {
-        { "phone", DistractionType.Phone },
-        { "stretch", DistractionType.Stretch }
+        { "phone", Distraction.TechAudio },
+        { "stretch", Distraction.HumanVisual },
+        { "cough", Distraction.HumanAudio },
+        { "laptop", Distraction.TechVisual }
     };
 
     public class DistractionEvent
@@ -30,21 +43,19 @@ public class Distractions : MonoBehaviour
         /// Which distraction agent to use
         /// </summary>
         public int index = 0;
-        /// <summary>
-        /// Which type of distraction to use
-        /// </summary>
-        public DistractionType type = DistractionType.Phone;
+        public Distraction distraction = Distraction.None;
     }
 
     public List<DistractionEvent> distractionEvents = new List<DistractionEvent>();
 
     public int distractionIndex = 0;
 
-    public AudioSource[] sources;
+    public DistractionAgent[] Agents;
 
     public Vector2 Frequency = new Vector2(1.0f, 10.0f);
 
     bool hasBegun = false;
+    public DateTime distractionsBeganAt;
 
     private void Awake()
     {
@@ -90,14 +101,15 @@ public class Distractions : MonoBehaviour
                 var index = c[1];
                 var type = c[2];
 
-                DistractionEvent de = new DistractionEvent();
-
-                de.runAt = TimeSpan.Parse(timestamp);
-                de.index = int.Parse(index);
-                de.type = typeMap[type];
+                DistractionEvent de = new DistractionEvent
+                {
+                    runAt = TimeSpan.Parse(timestamp),
+                    index = int.Parse(index),
+                    distraction = distractionMap[type]
+                };
 
                 Debug.Log(string.Format("Adding distraction event: {0}, {1}, {2}",
-                    de.runAt.ToString(), de.index, de.type));
+                    de.runAt.ToString(), de.index, de.distraction.ToString()));
 
                 distractionEvents.Add(de);
             }
@@ -117,8 +129,8 @@ public class Distractions : MonoBehaviour
             DistractionEvent de = new DistractionEvent
             {
                 runAt = TimeSpan.FromSeconds(t),
-                index = UnityEngine.Random.Range(0, sources.Length),
-                type = (DistractionType)UnityEngine.Random.Range(0, (int)DistractionType.NumTypes)
+                index = UnityEngine.Random.Range(0, Agents.Length),
+                distraction = (Distraction)UnityEngine.Random.Range(1, (int)Distraction.Count)
             };
             distractionEvents.Add(de);
             t += UnityEngine.Random.Range(Frequency.x, Frequency.y);
@@ -127,8 +139,10 @@ public class Distractions : MonoBehaviour
 
     void Distract(DistractionEvent de)
     {
-        sources[de.index].Play();
-        Experiment.Instance.SendSignal("Distraction from " + sources[de.index].name);
+        short dt = (short)de.distraction;
+        float dl = Agents[de.index].Distract(de);
+        Experiment.Instance.SendSignal(de.distraction.ToString() 
+            + " distraction from " + Agents[de.index].name, dl, BitConverter.GetBytes(dt));
     }
 	
 	// Update is called once per frame
@@ -137,11 +151,12 @@ public class Distractions : MonoBehaviour
 		if (Experiment.Instance.CurrentProgress == Experiment.Progress.VideoStarted && !hasBegun)
         {
             hasBegun = true;
+            distractionsBeganAt = DateTime.Now;
         }
 
         if (hasBegun && Experiment.Instance.CurrentProgress != Experiment.Progress.End)
         {
-            TimeSpan diff = DateTime.Now - Experiment.Instance.recordingBeganAt;
+            TimeSpan diff = DateTime.Now - distractionsBeganAt;
 
             if (distractionIndex < distractionEvents.Count 
                 && diff >= distractionEvents[distractionIndex].runAt)

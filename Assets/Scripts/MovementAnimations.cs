@@ -31,21 +31,21 @@ public class MovementAnimations : MonoBehaviour {
 	}
 	
 	void Update () {
-        return;
+        //return;
         // SHOULDERS (CLAVICLE) ARE INDEXED AT 41 AND 74
         // THIS DOESN'T WORK YET BECAUSE CURRENT AVATAR DOES NOT HAVE HANDS AT SIDE
-        if (transform.parent.parent.GetComponent<CharacterController>().velocity.sqrMagnitude > 0) {
-            Vector3 rot = bones[74].localRotation.eulerAngles;
-            bones[74].localRotation = Quaternion.Euler(new Vector3(Mathf.Sin(Time.time / swayPeriod) * swayAmplitude, rot.y, rot.z));
-            rot = bones[41].localRotation.eulerAngles;
-            bones[41].localRotation = Quaternion.Euler(new Vector3(Mathf.Sin(Time.time / swayPeriod) * swayAmplitude, rot.y, rot.z));
-        } else {
-            bones[41].localRotation = leftShoulderRelaxed;
-            bones[74].localRotation = rightShoulderRelaxed;
-        }
+        //if (transform.parent.parent.GetComponent<CharacterController>().velocity.sqrMagnitude > 0) {
+        //    Vector3 rot = bones[74].localRotation.eulerAngles;
+        //    bones[74].localRotation = Quaternion.Euler(new Vector3(Mathf.Sin(Time.time / swayPeriod) * swayAmplitude, rot.y, rot.z));
+        //    rot = bones[41].localRotation.eulerAngles;
+        //    bones[41].localRotation = Quaternion.Euler(new Vector3(Mathf.Sin(Time.time / swayPeriod) * swayAmplitude, rot.y, rot.z));
+        //} else {
+        //    bones[41].localRotation = leftShoulderRelaxed;
+        //    bones[74].localRotation = rightShoulderRelaxed;
+        //}
 
-        Quaternion headRot = UnityEngine.XR.InputTracking.GetLocalRotation(UnityEngine.XR.XRNode.Head);
-        neck.localRotation = headRot;
+        //Quaternion headRot = UnityEngine.XR.InputTracking.GetLocalRotation(UnityEngine.XR.XRNode.Head);
+        //neck.localRotation = headRot;
 
         //if (!UnityEngine.XR.XRSettings.enabled)  {
         //    float z = neckLength * Mathf.Sin(pitch * Mathf.Deg2Rad);

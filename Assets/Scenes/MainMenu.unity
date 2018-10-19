@@ -184,6 +184,7 @@ GameObject:
   m_Component:
   - component: {fileID: 285162796}
   - component: {fileID: 285162795}
+  - component: {fileID: 285162797}
   m_Layer: 0
   m_Name: ExperimentConfig
   m_TagString: Untagged
@@ -202,8 +203,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65d2d538a63d7c44b85d3eaee386ea14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  participantAvatarFile: 
   videoFile: 
+  eventCues: 
+  eventsFromFile: 0
+  dataFolder: 
+  sessionAvatar: 
+  sessionName: Participant
   readyToStart: 0
   experimentStarted: 0
   interfaceMode: 0
@@ -220,6 +225,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &285162797
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 285162794}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa7fb94e6c0634c8e8e8db420e0c5b4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  portNames:
+  - COM3
+  speed: 115200
+  logDebugInfos: 0
 --- !u!1 &1714018643
 GameObject:
   m_ObjectHideFlags: 0

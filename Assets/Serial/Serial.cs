@@ -380,10 +380,16 @@ public class Serial : MonoBehaviour
 			s_serial.Write (message);
 	}
 
-	/// <summary>
-	/// Send data to the serial port and append a new line character (\n)
-	/// </summary>
-	public static void WriteLn (string message = "")
+    public static void Write(byte[] bytes)
+    {
+        if (checkOpen())
+            s_serial.Write(bytes, 0, bytes.Length);
+    }
+
+    /// <summary>
+    /// Send data to the serial port and append a new line character (\n)
+    /// </summary>
+    public static void WriteLn (string message = "")
 	{
 		s_serial.Write (message + "\n");
 	}

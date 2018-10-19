@@ -1,0 +1,759 @@
+fileFormatVersion: 2
+guid: 87885128dad80f044a260a45639d4f1b
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: CC_Base_Body
+    100004: CC_Base_BoneRoot
+    100006: CC_Base_Eye
+    100008: CC_Base_FacialBone
+    100010: CC_Base_Head
+    100012: CC_Base_HeadNub
+    100014: CC_Base_Hip
+    100016: CC_Base_JawRoot
+    100018: CC_Base_L_Abdominal
+    100020: CC_Base_L_AbdominalNub
+    100022: CC_Base_L_Breast
+    100024: CC_Base_L_BreastNub
+    100026: CC_Base_L_Calf
+    100028: CC_Base_L_CalfTwist01
+    100030: CC_Base_L_CalfTwist02
+    100032: CC_Base_L_Clavicle
+    100034: CC_Base_L_Elbow
+    100036: CC_Base_L_Eye
+    100038: CC_Base_L_EyeRoot
+    100040: CC_Base_L_Finger00
+    100042: CC_Base_L_Finger01
+    100044: CC_Base_L_Finger02
+    100046: CC_Base_L_Finger0Nub
+    100048: CC_Base_L_Finger10
+    100050: CC_Base_L_Finger11
+    100052: CC_Base_L_Finger12
+    100054: CC_Base_L_Finger1Nub
+    100056: CC_Base_L_Finger20
+    100058: CC_Base_L_Finger21
+    100060: CC_Base_L_Finger22
+    100062: CC_Base_L_Finger2Nub
+    100064: CC_Base_L_Finger30
+    100066: CC_Base_L_Finger31
+    100068: CC_Base_L_Finger32
+    100070: CC_Base_L_Finger3Nub
+    100072: CC_Base_L_Finger40
+    100074: CC_Base_L_Finger41
+    100076: CC_Base_L_Finger42
+    100078: CC_Base_L_Finger4Nub
+    100080: CC_Base_L_Foot
+    100082: CC_Base_L_Forearm
+    100084: CC_Base_L_ForearmTwist01
+    100086: CC_Base_L_ForearmTwist02
+    100088: CC_Base_L_Hand
+    100090: CC_Base_L_Hip0
+    100092: CC_Base_L_Hip0Nub
+    100094: CC_Base_L_Knee
+    100096: CC_Base_L_Ribs
+    100098: CC_Base_L_RibsNub
+    100100: CC_Base_L_RibsTwist
+    100102: CC_Base_L_Thigh
+    100104: CC_Base_L_ThighTwist01
+    100106: CC_Base_L_ThighTwist02
+    100108: CC_Base_L_Toe00
+    100110: CC_Base_L_Toe00Nub
+    100112: CC_Base_L_Toe10
+    100114: CC_Base_L_Toe10Nub
+    100116: CC_Base_L_Toe20
+    100118: CC_Base_L_Toe20Nub
+    100120: CC_Base_L_Toe30
+    100122: CC_Base_L_Toe30Nub
+    100124: CC_Base_L_Toe40
+    100126: CC_Base_L_Toe40Nub
+    100128: CC_Base_L_ToeBase
+    100130: CC_Base_L_ToeBaseShareBone
+    100132: CC_Base_L_Upperarm
+    100134: CC_Base_L_UpperarmTwist01
+    100136: CC_Base_L_UpperarmTwist02
+    100138: CC_Base_NeckTwist01
+    100140: CC_Base_NeckTwist02
+    100142: CC_Base_Pelvis
+    100144: CC_Base_R_Abdominal
+    100146: CC_Base_R_AbdominalNub
+    100148: CC_Base_R_Breast
+    100150: CC_Base_R_BreastNub
+    100152: CC_Base_R_Calf
+    100154: CC_Base_R_CalfTwist01
+    100156: CC_Base_R_CalfTwist02
+    100158: CC_Base_R_Clavicle
+    100160: CC_Base_R_Elbow
+    100162: CC_Base_R_Eye
+    100164: CC_Base_R_EyeRoot
+    100166: CC_Base_R_Finger00
+    100168: CC_Base_R_Finger01
+    100170: CC_Base_R_Finger02
+    100172: CC_Base_R_Finger0Nub
+    100174: CC_Base_R_Finger10
+    100176: CC_Base_R_Finger11
+    100178: CC_Base_R_Finger12
+    100180: CC_Base_R_Finger1Nub
+    100182: CC_Base_R_Finger20
+    100184: CC_Base_R_Finger21
+    100186: CC_Base_R_Finger22
+    100188: CC_Base_R_Finger2Nub
+    100190: CC_Base_R_Finger30
+    100192: CC_Base_R_Finger31
+    100194: CC_Base_R_Finger32
+    100196: CC_Base_R_Finger3Nub
+    100198: CC_Base_R_Finger40
+    100200: CC_Base_R_Finger41
+    100202: CC_Base_R_Finger42
+    100204: CC_Base_R_Finger4Nub
+    100206: CC_Base_R_Foot
+    100208: CC_Base_R_Forearm
+    100210: CC_Base_R_ForearmTwist01
+    100212: CC_Base_R_ForearmTwist02
+    100214: CC_Base_R_Hand
+    100216: CC_Base_R_Hip0
+    100218: CC_Base_R_Hip0Nub
+    100220: CC_Base_R_Knee
+    100222: CC_Base_R_Ribs
+    100224: CC_Base_R_RibsNub
+    100226: CC_Base_R_RibsTwist
+    100228: CC_Base_R_Thigh
+    100230: CC_Base_R_ThighTwist01
+    100232: CC_Base_R_ThighTwist02
+    100234: CC_Base_R_Toe00
+    100236: CC_Base_R_Toe00Nub
+    100238: CC_Base_R_Toe10
+    100240: CC_Base_R_Toe10Nub
+    100242: CC_Base_R_Toe20
+    100244: CC_Base_R_Toe20Nub
+    100246: CC_Base_R_Toe30
+    100248: CC_Base_R_Toe30Nub
+    100250: CC_Base_R_Toe40
+    100252: CC_Base_R_Toe40Nub
+    100254: CC_Base_R_ToeBase
+    100256: CC_Base_R_ToeBaseShareBone
+    100258: CC_Base_R_Upperarm
+    100260: CC_Base_R_UpperarmTwist01
+    100262: CC_Base_R_UpperarmTwist02
+    100264: CC_Base_Spine01
+    100266: CC_Base_Spine02
+    100268: CC_Base_Teeth
+    100270: CC_Base_Teeth01
+    100272: CC_Base_Teeth02
+    100274: CC_Base_Tongue
+    100276: CC_Base_Tongue01
+    100278: CC_Base_Tongue02
+    100280: CC_Base_Tongue03
+    100282: CC_Base_Tongue03Nub
+    100284: CC_Base_UpperJaw
+    100286: CC_Base_Waist
+    100288: Dress
+    100290: High-heels
+    100292: RL_G6_Hair
+    400000: //RootNode
+    400002: CC_Base_Body
+    400004: CC_Base_BoneRoot
+    400006: CC_Base_Eye
+    400008: CC_Base_FacialBone
+    400010: CC_Base_Head
+    400012: CC_Base_HeadNub
+    400014: CC_Base_Hip
+    400016: CC_Base_JawRoot
+    400018: CC_Base_L_Abdominal
+    400020: CC_Base_L_AbdominalNub
+    400022: CC_Base_L_Breast
+    400024: CC_Base_L_BreastNub
+    400026: CC_Base_L_Calf
+    400028: CC_Base_L_CalfTwist01
+    400030: CC_Base_L_CalfTwist02
+    400032: CC_Base_L_Clavicle
+    400034: CC_Base_L_Elbow
+    400036: CC_Base_L_Eye
+    400038: CC_Base_L_EyeRoot
+    400040: CC_Base_L_Finger00
+    400042: CC_Base_L_Finger01
+    400044: CC_Base_L_Finger02
+    400046: CC_Base_L_Finger0Nub
+    400048: CC_Base_L_Finger10
+    400050: CC_Base_L_Finger11
+    400052: CC_Base_L_Finger12
+    400054: CC_Base_L_Finger1Nub
+    400056: CC_Base_L_Finger20
+    400058: CC_Base_L_Finger21
+    400060: CC_Base_L_Finger22
+    400062: CC_Base_L_Finger2Nub
+    400064: CC_Base_L_Finger30
+    400066: CC_Base_L_Finger31
+    400068: CC_Base_L_Finger32
+    400070: CC_Base_L_Finger3Nub
+    400072: CC_Base_L_Finger40
+    400074: CC_Base_L_Finger41
+    400076: CC_Base_L_Finger42
+    400078: CC_Base_L_Finger4Nub
+    400080: CC_Base_L_Foot
+    400082: CC_Base_L_Forearm
+    400084: CC_Base_L_ForearmTwist01
+    400086: CC_Base_L_ForearmTwist02
+    400088: CC_Base_L_Hand
+    400090: CC_Base_L_Hip0
+    400092: CC_Base_L_Hip0Nub
+    400094: CC_Base_L_Knee
+    400096: CC_Base_L_Ribs
+    400098: CC_Base_L_RibsNub
+    400100: CC_Base_L_RibsTwist
+    400102: CC_Base_L_Thigh
+    400104: CC_Base_L_ThighTwist01
+    400106: CC_Base_L_ThighTwist02
+    400108: CC_Base_L_Toe00
+    400110: CC_Base_L_Toe00Nub
+    400112: CC_Base_L_Toe10
+    400114: CC_Base_L_Toe10Nub
+    400116: CC_Base_L_Toe20
+    400118: CC_Base_L_Toe20Nub
+    400120: CC_Base_L_Toe30
+    400122: CC_Base_L_Toe30Nub
+    400124: CC_Base_L_Toe40
+    400126: CC_Base_L_Toe40Nub
+    400128: CC_Base_L_ToeBase
+    400130: CC_Base_L_ToeBaseShareBone
+    400132: CC_Base_L_Upperarm
+    400134: CC_Base_L_UpperarmTwist01
+    400136: CC_Base_L_UpperarmTwist02
+    400138: CC_Base_NeckTwist01
+    400140: CC_Base_NeckTwist02
+    400142: CC_Base_Pelvis
+    400144: CC_Base_R_Abdominal
+    400146: CC_Base_R_AbdominalNub
+    400148: CC_Base_R_Breast
+    400150: CC_Base_R_BreastNub
+    400152: CC_Base_R_Calf
+    400154: CC_Base_R_CalfTwist01
+    400156: CC_Base_R_CalfTwist02
+    400158: CC_Base_R_Clavicle
+    400160: CC_Base_R_Elbow
+    400162: CC_Base_R_Eye
+    400164: CC_Base_R_EyeRoot
+    400166: CC_Base_R_Finger00
+    400168: CC_Base_R_Finger01
+    400170: CC_Base_R_Finger02
+    400172: CC_Base_R_Finger0Nub
+    400174: CC_Base_R_Finger10
+    400176: CC_Base_R_Finger11
+    400178: CC_Base_R_Finger12
+    400180: CC_Base_R_Finger1Nub
+    400182: CC_Base_R_Finger20
+    400184: CC_Base_R_Finger21
+    400186: CC_Base_R_Finger22
+    400188: CC_Base_R_Finger2Nub
+    400190: CC_Base_R_Finger30
+    400192: CC_Base_R_Finger31
+    400194: CC_Base_R_Finger32
+    400196: CC_Base_R_Finger3Nub
+    400198: CC_Base_R_Finger40
+    400200: CC_Base_R_Finger41
+    400202: CC_Base_R_Finger42
+    400204: CC_Base_R_Finger4Nub
+    400206: CC_Base_R_Foot
+    400208: CC_Base_R_Forearm
+    400210: CC_Base_R_ForearmTwist01
+    400212: CC_Base_R_ForearmTwist02
+    400214: CC_Base_R_Hand
+    400216: CC_Base_R_Hip0
+    400218: CC_Base_R_Hip0Nub
+    400220: CC_Base_R_Knee
+    400222: CC_Base_R_Ribs
+    400224: CC_Base_R_RibsNub
+    400226: CC_Base_R_RibsTwist
+    400228: CC_Base_R_Thigh
+    400230: CC_Base_R_ThighTwist01
+    400232: CC_Base_R_ThighTwist02
+    400234: CC_Base_R_Toe00
+    400236: CC_Base_R_Toe00Nub
+    400238: CC_Base_R_Toe10
+    400240: CC_Base_R_Toe10Nub
+    400242: CC_Base_R_Toe20
+    400244: CC_Base_R_Toe20Nub
+    400246: CC_Base_R_Toe30
+    400248: CC_Base_R_Toe30Nub
+    400250: CC_Base_R_Toe40
+    400252: CC_Base_R_Toe40Nub
+    400254: CC_Base_R_ToeBase
+    400256: CC_Base_R_ToeBaseShareBone
+    400258: CC_Base_R_Upperarm
+    400260: CC_Base_R_UpperarmTwist01
+    400262: CC_Base_R_UpperarmTwist02
+    400264: CC_Base_Spine01
+    400266: CC_Base_Spine02
+    400268: CC_Base_Teeth
+    400270: CC_Base_Teeth01
+    400272: CC_Base_Teeth02
+    400274: CC_Base_Tongue
+    400276: CC_Base_Tongue01
+    400278: CC_Base_Tongue02
+    400280: CC_Base_Tongue03
+    400282: CC_Base_Tongue03Nub
+    400284: CC_Base_UpperJaw
+    400286: CC_Base_Waist
+    400288: Dress
+    400290: High-heels
+    400292: RL_G6_Hair
+    2100000: Skin_Body
+    2100002: Skin_Head
+    2100004: Eyelash
+    2100006: Fingernail
+    2100008: Toenail
+    2100010: Tongue
+    2100012: Eye
+    2100014: Cornea
+    2100016: Upper_Teeth
+    2100018: Lower_Teeth
+    2100020: High-Heels
+    2100022: Dress
+    2100024: Scalp_High_polytail
+    2100026: High_polytail
+    4300000: CC_Base_Body
+    4300002: CC_Base_Tongue
+    4300004: CC_Base_Eye
+    4300006: CC_Base_Teeth
+    4300008: High-heels
+    4300010: Dress
+    4300012: RL_G6_Hair
+    7400000: Stretch
+    7400002: Cough
+    9500000: //RootNode
+    13700000: CC_Base_Body
+    13700002: CC_Base_Eye
+    13700004: CC_Base_Teeth
+    13700006: CC_Base_Tongue
+    13700008: Dress
+    13700010: High-heels
+    13700012: RL_G6_Hair
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Cornea
+    second: {fileID: 2100000, guid: 4004915e3858b1549b5276eec66f3ea9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Dress
+    second: {fileID: 2100000, guid: d7f5554628bf3cd449a664e172bddb97, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Eye
+    second: {fileID: 2100000, guid: 94ec14ae0888fe44791e67541723c91b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Eyelash
+    second: {fileID: 2100000, guid: f2aeccb893a63dc4b849b513d093fbab, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Fingernail
+    second: {fileID: 2100000, guid: 53bead89c55010f489cccb9aee3cc72a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: High-Heels
+    second: {fileID: 2100000, guid: 0204a2764f909bc41adda76b6ffc3797, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: High_polytail
+    second: {fileID: 2100000, guid: f1d866b024e1a284fa98f158a5bde45f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Lower_Teeth
+    second: {fileID: 2100000, guid: 34dd0eb19d1f16f46b0e86c5587e5a9e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Scalp_High_polytail
+    second: {fileID: 2100000, guid: f69752854e9f1aa40abacb7f3eda9179, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Skin_Body
+    second: {fileID: 2100000, guid: bb27dde3a334e734c883a5e20f86d40b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Skin_Head
+    second: {fileID: 2100000, guid: 1bd4fd2c82f8c264fa66fe3fff6320cd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Toenail
+    second: {fileID: 2100000, guid: 397c6a0199a298d4386e2c8662744728, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Tongue
+    second: {fileID: 2100000, guid: 5d28eb9abdc814b43bae64af191a5c3c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Upper_Teeth
+    second: {fileID: 2100000, guid: 2672982756ee4b54d8a1e8c96bf7b59a, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Cornea_Diffuse
+    second: {fileID: 2800000, guid: 5e78c40216582184abbe2e7c16abe106, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Cornea_Normal
+    second: {fileID: 2800000, guid: f2f16a32aa2ec5e4fbda65be798f0f64, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Cornea_Reflection
+    second: {fileID: 2800000, guid: 2b26fd8485a35674daba5fd452959f9c, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Dress_Diffuse
+    second: {fileID: 2800000, guid: 5a648fc34c18bc34191a18baa8c5a675, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Dress_Normal
+    second: {fileID: 2800000, guid: ab2f31bde94d0824b92d41cd2a06a5dc, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Dress_Specular
+    second: {fileID: 2800000, guid: 175eaa1ba24c71c4783885d2dc6376c2, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Eye_Diffuse
+    second: {fileID: 2800000, guid: d1df03df890245c438f92ce77055d53d, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Eye_Normal
+    second: {fileID: 2800000, guid: fc70b756222b6b443a221b30bf7749ea, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Eye_Reflection
+    second: {fileID: 2800000, guid: 50003d11d0e4861428fb8d3973db7d3a, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Eyelash_Diffuse
+    second: {fileID: 2800000, guid: 80fed8220e24b45468e66ada24cf9263, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Eyelash_Opacity
+    second: {fileID: 2800000, guid: 167efc653f296124697f27156f955406, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Eyelash_Specular
+    second: {fileID: 2800000, guid: bb4950ec548a0a94cb918d3cf9bd80fa, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Fingernail_Diffuse
+    second: {fileID: 2800000, guid: b62fa2f61abdc154183a3d524d9df6d8, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Fingernail_Normal
+    second: {fileID: 2800000, guid: 519d4038dd65ab947a684030335328e2, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Fingernail_Specular
+    second: {fileID: 2800000, guid: 45ee3e6f5d0d8244d958bbc64881aa2e, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: High-Heels_Diffuse
+    second: {fileID: 2800000, guid: 8521d378e5f4ab1489d6a1fbe631d1c8, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: High-Heels_Normal
+    second: {fileID: 2800000, guid: 5062e2cb73769ab4cae4be84c810e3b3, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: High-Heels_Specular
+    second: {fileID: 2800000, guid: 25ae677f55ed4cb4ca6390c1d65cfe6d, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: High_polytail_Bump
+    second: {fileID: 2800000, guid: cc0e214995e9d484582d3637bf73fe8e, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: High_polytail_Diffuse
+    second: {fileID: 2800000, guid: 393a67fbc2cf6f94e81ab4a4ba2bdeba, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: High_polytail_Opacity
+    second: {fileID: 2800000, guid: b5e5f91c57639654bbe02ecb585b4f5a, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: High_polytail_Specular
+    second: {fileID: 2800000, guid: d5997a3281cdbb54383be49dcb6e7cb4, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Lower_Teeth_Diffuse
+    second: {fileID: 2800000, guid: 5f4f9e02989b0b54396df308246e1754, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Lower_Teeth_Normal
+    second: {fileID: 2800000, guid: da3212b2ce29efa48aae7b21abaf5b75, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Lower_Teeth_Specular
+    second: {fileID: 2800000, guid: 502cf19e28d8d06448ca52d16750cacf, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Scalp_High_polytail_Bump
+    second: {fileID: 2800000, guid: 7a2d5e0a8bbdec44a839f6a5b990c8d9, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Scalp_High_polytail_Diffuse
+    second: {fileID: 2800000, guid: 660251efb7063cb41bce454e5c279bdd, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Scalp_High_polytail_Opacity
+    second: {fileID: 2800000, guid: 7d61ea5f0eadc314d99f62a73b965f78, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Scalp_High_polytail_Specular
+    second: {fileID: 2800000, guid: fa46cb3aab49b424680476e26bb5a9a1, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Skin_Body_Diffuse
+    second: {fileID: 2800000, guid: d98cc338ca01d2b4a9037eca31c87553, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Skin_Body_Normal
+    second: {fileID: 2800000, guid: 072f1ec21cef5f44f84787d8d2c6e6e6, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Skin_Body_Specular
+    second: {fileID: 2800000, guid: 5fb01164971382548b8e0e47101b0038, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Skin_Head_Diffuse
+    second: {fileID: 2800000, guid: ffcff742d267fc146afd5a210cf0d09f, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Skin_Head_Normal
+    second: {fileID: 2800000, guid: c328e3f44cebe5a49978c09e17e0e9eb, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Skin_Head_Specular
+    second: {fileID: 2800000, guid: 7d59ed3845c8cd342aec3b80e49e01a5, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Toenail_Diffuse
+    second: {fileID: 2800000, guid: 471d6316e11043d4c813addc6e391b55, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Toenail_Normal
+    second: {fileID: 2800000, guid: 36a63a757d2143145aae5b0f3db944a6, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Toenail_Specular
+    second: {fileID: 2800000, guid: 5f06b1542e31fa84bbdecc047b2e3045, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Tongue_Diffuse
+    second: {fileID: 2800000, guid: 1e8fcad620be1384fab45394b59a017d, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Tongue_Normal
+    second: {fileID: 2800000, guid: 0a339dfc65af74c4dabff46ff1948746, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Tongue_Specular
+    second: {fileID: 2800000, guid: 5b4550e6001c83147bf0e5f26647d331, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Upper_Teeth_Diffuse
+    second: {fileID: 2800000, guid: dd3584fe9761fb5429e8426bb0930e98, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Upper_Teeth_Normal
+    second: {fileID: 2800000, guid: 42607544c05d4954eb77991b32ac8149, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Upper_Teeth_Specular
+    second: {fileID: 2800000, guid: b1ab000cfa0701748814d647333dc015, type: 3}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Stretch
+      takeName: Take 001
+      firstFrame: 0
+      lastFrame: 360
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Cough
+      takeName: Take 001
+      firstFrame: 360
+      lastFrame: 511
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 0.01
+    hasPreviousCalculatedGlobalScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
