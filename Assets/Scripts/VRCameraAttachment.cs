@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class VRCameraAttachment : MonoBehaviour
 {
-
+    public static VRCameraAttachment Instance;
     /// <summary>
     /// The target anchor point for the VR camera
     /// </summary>
@@ -119,11 +119,16 @@ public class VRCameraAttachment : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        Instance = this;
+    }
+
     // Update is called once per frame
     void Update()
     {
         // Compute the transforms between the VR headset and the attachment
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetButtonDown("XboxB"))
         {
             Resync();
         }

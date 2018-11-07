@@ -25,6 +25,8 @@ public class Experiment : MonoBehaviour {
     public Transform participantSkeletonRoot;
     public Transform participantStart;
 
+    public RuntimeAnimatorController participantController;
+
     public float avatarScale = 0.01f;
 
     public float SitTime = 1.0f;
@@ -199,7 +201,7 @@ public class Experiment : MonoBehaviour {
 
             if (CurrentProgress == Progress.Seated)
             {
-                StartCoroutine(StartVideoDelayed(5.0f));
+                StartCoroutine(StartVideoDelayed(3.0f));
                 return;
             }
         }
@@ -337,7 +339,7 @@ public class Experiment : MonoBehaviour {
 
         var cg = fadeCanvas.GetComponent<CanvasGroup>();
 
-        float fadeTime = 5.0f;
+        float fadeTime = 3.0f;
 
         float t = 0.0f;
 
@@ -376,6 +378,13 @@ public class Experiment : MonoBehaviour {
 
                 participantAvatar = new GameObject("Participant");
 
+                loaderOptions.AddAnimationSubclip("Walk", new KeyValuePair<int, int>(0, 83));
+                loaderOptions.AddAnimationSubclip("Sit", new KeyValuePair<int, int>(84, 97));
+                loaderOptions.AddAnimationSubclip("Idle", new KeyValuePair<int, int>(100, 300));
+                loaderOptions.DefaultAnimationClip = "Idle";
+
+
+
                 assetLoader.LoadFromFile(participantAvatarFile, loaderOptions, participantAvatar);
 
                 //participantAvatar = newParticipantAvatar;
@@ -389,6 +398,36 @@ public class Experiment : MonoBehaviour {
                 participantAvatar.transform.localScale = Vector3.one * avatarScale;
                 participantAvatar.transform.position = participantStart.transform.position;
                 participantAvatar.transform.rotation = participantStart.transform.rotation;
+
+                var playerObj = GameObject.Find("Player");
+                if (playerObj)
+                {
+                    participantAvatar.transform.parent = playerObj.transform;
+
+                    participantAvatar.transform.rotation *= Quaternion.Euler(0, 180f, 0);
+                }
+
+                // Look for neck in participant avatar
+                Stack<Transform> participantBones = new Stack<Transform>();
+                participantBones.Push(participantAvatar.transform);
+                
+                while (participantBones.Any())
+                {
+                    var bone = participantBones.Pop();
+                    if (bone.gameObject.name.ToLower().Contains("head"))
+                    {
+                        var ma = bone.gameObject.AddComponent<MovementAnimations>();
+                        ma.neck = bone;
+                        break;
+                    }
+                    else
+                    {
+                        for(int i = 0; i < bone.childCount; i++)
+                        {
+                            participantBones.Push(bone.GetChild(i));
+                        }
+                    }
+                }
 
                 CurrentProgress = Progress.SelectedAvatar;
             }

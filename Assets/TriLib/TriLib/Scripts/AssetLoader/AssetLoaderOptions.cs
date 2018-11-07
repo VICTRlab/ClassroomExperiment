@@ -50,6 +50,15 @@ namespace TriLib
         /// </summary>
         public bool AutoPlayAnimations = true;
 
+        public List<KeyValuePair<string, KeyValuePair<int, int>>> AnimationSubclips = new List<KeyValuePair<string, KeyValuePair<int, int>>>();
+
+        public string DefaultAnimationClip = string.Empty;
+
+        public void AddAnimationSubclip(string name, KeyValuePair<int, int> frames)
+        {
+            AnimationSubclips.Add(new KeyValuePair<string, KeyValuePair<int, int>>(name, frames));
+        }
+
         /// <summary>
         /// Use this field to change default animations wrap mode.
         /// </summary>

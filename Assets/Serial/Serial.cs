@@ -414,6 +414,21 @@ public class Serial : MonoBehaviour
 		}
 	}
 
+    public static bool IsOpen
+    {
+        get
+        {
+            if (s_serial != null)
+            {
+                return s_serial.IsOpen;
+            }
+            else
+            {
+                return false;
+            }
+        }
+    }
+
 	/// <summary>
 	/// Verify if the serial port is opened and opens it if necessary
 	/// </summary>

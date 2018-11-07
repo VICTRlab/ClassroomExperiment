@@ -30,7 +30,7 @@ public class MovementAnimations : MonoBehaviour {
         //rightShoulderRelaxed = bones[74].localRotation;
 	}
 	
-	void Update () {
+	void LateUpdate () {
         //return;
         // SHOULDERS (CLAVICLE) ARE INDEXED AT 41 AND 74
         // THIS DOESN'T WORK YET BECAUSE CURRENT AVATAR DOES NOT HAVE HANDS AT SIDE
@@ -44,8 +44,18 @@ public class MovementAnimations : MonoBehaviour {
         //    bones[74].localRotation = rightShoulderRelaxed;
         //}
 
-        //Quaternion headRot = UnityEngine.XR.InputTracking.GetLocalRotation(UnityEngine.XR.XRNode.Head);
-        //neck.localRotation = headRot;
+        if (UnityEngine.XR.XRSettings.enabled)
+        {
+            //var headRot = VRCameraAttachment.Instance.VRCamera.transform.rotation;
+            //neck.rotation = Quaternion.Slerp(neck.rotation, headRot, 0.75f);
+            //Quaternion headRot = UnityEngine.XR.InputTracking.GetLocalRotation(UnityEngine.XR.XRNode.Head);
+            var headRot = VRCameraAttachment.Instance.VRCamera.transform.localRotation;
+            neck.localRotation = Quaternion.Euler(-headRot.eulerAngles.x, headRot.eulerAngles.y, -headRot.eulerAngles.z);
+
+            //neck.localRotation = headRot;
+        }
+
+
 
         //if (!UnityEngine.XR.XRSettings.enabled)  {
         //    float z = neckLength * Mathf.Sin(pitch * Mathf.Deg2Rad);

@@ -813,6 +813,7 @@ namespace TriLib
         {
             if (options == null || options.UseLegacyAnimations)
             {
+                Debug.Log("TriLib creating legacy animation");
                 var unityAnimation = gameObject.GetComponent<Animation>();
                 if (unityAnimation == null)
                 {
@@ -827,8 +828,10 @@ namespace TriLib
                         continue;
                     }
                     unityAnimation.AddClip(unityAnimationClip, unityAnimationClip.name);
-                    if (c == 0)
+                    if ((string.IsNullOrEmpty(options.DefaultAnimationClip) && c == 0)
+                        || unityAnimationClip.name == options.DefaultAnimationClip)
                     {
+                        Debug.Log("Setting default animation clip to " + unityAnimationClip.name);
                         defaultClip = unityAnimationClip;
                     }
                 }
@@ -840,6 +843,7 @@ namespace TriLib
             }
             else
             {
+                Debug.Log("TriLib creating animator");
                 var unityAnimator = gameObject.GetComponent<Animator>();
                 if (unityAnimator == null)
                 {
@@ -1092,7 +1096,7 @@ namespace TriLib
                 {
                     var propertyName = animationCurveData.Key;
                     var curveData = animationCurveData.Value;
-                    var animationCurve = FixCurve(animationData.Length, new AnimationCurve { keys = curveData.Keyframes });
+                    var animationCurve = FixCurve(animationData.Length, new AnimationCurve { keys = curveData.Keyframes.ToArray() });
                     curveData.AnimationCurve = animationCurve;
                     animationClip.SetCurve(nodePath, typeof(Transform), propertyName, animationCurve);
                 }
@@ -2383,7 +2387,160 @@ namespace TriLib
                 }
                 animationData.WrapMode = options != null ? options.AnimationWrapMode : WrapMode.Loop;
                 AnimationData[a] = animationData;
+
+                if (animationCount == 1 && options.AnimationSubclips.Count > 0)
+                {
+                    AnimationData = new AnimationData[options.AnimationSubclips.Count];
+
+                    var defaultAnimData = animationData;
+
+                    float totalLength = 0f;
+                    for(int i = 0; i < options.AnimationSubclips.Count; i++)
+                    {
+                        var sc = options.AnimationSubclips[i];
+
+                        var frameDiff = sc.Value.Value - sc.Value.Key;
+                        float subLength = (float)frameDiff / ticksPerSecond;
+                        float startTime = (float)sc.Value.Key / ticksPerSecond;
+                        float endTime = startTime + subLength;
+                        
+
+                        var subclip = new AnimationData
+                        {
+                            Name = sc.Key,
+                            Legacy = options == null || options.UseLegacyAnimations,
+                            FrameRate = ticksPerSecond,
+                            Length = subLength,
+                            ChannelData = new AnimationChannelData[animationChannelCount]
+                        };
+                        subclip.WrapMode = options != null ? options.AnimationWrapMode : WrapMode.Loop;
+
+                        for (uint n = 0; n < animationChannelCount; n++)
+                        {
+                            var nodeAnimationChannel = AssimpInterop.aiAnimation_GetAnimationChannel(sceneAnimation, n);
+                            var nodeName = AssimpInterop.aiNodeAnim_GetNodeName(nodeAnimationChannel);
+                            AnimationChannelData channelData =
+
+                                    new AnimationChannelData
+                                    {
+                                        CurveData = new Dictionary<string, AnimationCurveData>(),
+                                        NodeName = nodeName
+                                    };
+                            var numPositionKeys = AssimpInterop.aiNodeAnim_GetNumPositionKeys(nodeAnimationChannel);
+                            if (numPositionKeys > 0)
+                            {
+                                var unityPositionCurveX = new AnimationCurveData();
+                                var unityPositionCurveY = new AnimationCurveData();
+                                var unityPositionCurveZ = new AnimationCurveData();
+                                for (uint p = 0; p < numPositionKeys; p++)
+                                {
+                                    var positionKey = AssimpInterop.aiNodeAnim_GetPositionKey(nodeAnimationChannel, p);
+                                    var time = AssimpInterop.aiVectorKey_GetTime(positionKey) / ticksPerSecond;
+
+                                    if (time >= startTime && time <= endTime)
+                                    {
+                                        time -= startTime;
+                                        var unityVector3 = AssimpInterop.aiVectorKey_GetValue(positionKey);
+                                        unityPositionCurveX.AddKey(time, unityVector3[0]);
+                                        unityPositionCurveY.AddKey(time, unityVector3[1]);
+                                        unityPositionCurveZ.AddKey(time, unityVector3[2]);
+                                    }
+                                }
+                                if (unityPositionCurveX.Keyframes.Count > 0)
+                                {
+                                    channelData.SetCurve("localPosition.x", unityPositionCurveX);
+                                }
+                                if (unityPositionCurveY.Keyframes.Count > 0)
+                                {
+                                    channelData.SetCurve("localPosition.y", unityPositionCurveY);
+                                }
+                                if (unityPositionCurveZ.Keyframes.Count > 0)
+                                {
+                                    channelData.SetCurve("localPosition.z", unityPositionCurveZ);
+                                }
+                            }
+                            var numRotationKeys = AssimpInterop.aiNodeAnim_GetNumRotationKeys(nodeAnimationChannel);
+                            if (numRotationKeys > 0)
+                            {
+                                var unityRotationCurveX = new AnimationCurveData();
+                                var unityRotationCurveY = new AnimationCurveData();
+                                var unityRotationCurveZ = new AnimationCurveData();
+                                var unityRotationCurveW = new AnimationCurveData();
+                                for (uint r = 0; r < numRotationKeys; r++)
+                                {
+                                    var rotationKey = AssimpInterop.aiNodeAnim_GetRotationKey(nodeAnimationChannel, r);
+                                    var time = AssimpInterop.aiQuatKey_GetTime(rotationKey) / ticksPerSecond;
+
+                                    if (time >= startTime && time <= endTime)
+                                    {
+                                        time -= startTime;
+                                        var unityQuaternion = AssimpInterop.aiQuatKey_GetValue(rotationKey);
+                                        unityRotationCurveX.AddKey(time, unityQuaternion[1]);
+                                        unityRotationCurveY.AddKey(time, unityQuaternion[2]);
+                                        unityRotationCurveZ.AddKey(time, unityQuaternion[3]);
+                                        unityRotationCurveW.AddKey(time, unityQuaternion[0]);
+                                    }
+                                }
+                                if (unityRotationCurveX.Keyframes.Count > 0)
+                                {
+                                    channelData.SetCurve("localRotation.x", unityRotationCurveX);
+                                }
+                                if (unityRotationCurveY.Keyframes.Count > 0)
+                                {
+                                    channelData.SetCurve("localRotation.y", unityRotationCurveY);
+                                }
+                                if (unityRotationCurveZ.Keyframes.Count > 0)
+                                {
+                                    channelData.SetCurve("localRotation.z", unityRotationCurveZ);
+                                }
+                                if (unityRotationCurveW.Keyframes.Count > 0)
+                                {
+                                    channelData.SetCurve("localRotation.w", unityRotationCurveW);
+                                }
+                            }
+                            var numScalingKeys = AssimpInterop.aiNodeAnim_GetNumScalingKeys(nodeAnimationChannel);
+                            if (numScalingKeys > 0)
+                            {
+                                var unityScaleCurveX = new AnimationCurveData();
+                                var unityScaleCurveY = new AnimationCurveData();
+                                var unityScaleCurveZ = new AnimationCurveData();
+                                for (uint s = 0; s < numScalingKeys; s++)
+                                {
+                                    var scaleKey = AssimpInterop.aiNodeAnim_GetScalingKey(nodeAnimationChannel, s);
+                                    var time = AssimpInterop.aiVectorKey_GetTime(scaleKey) / ticksPerSecond;
+                                    if (time >= startTime && time <= endTime)
+                                    {
+                                        time -= startTime;
+                                        var unityVector3 = AssimpInterop.aiVectorKey_GetValue(scaleKey);
+                                        unityScaleCurveX.AddKey(time, unityVector3[0]);
+                                        unityScaleCurveY.AddKey(time, unityVector3[1]);
+                                        unityScaleCurveZ.AddKey(time, unityVector3[2]);
+                                    }
+                                }
+                                if (unityScaleCurveX.Keyframes.Count > 0)
+                                {
+                                    channelData.SetCurve("localScale.x", unityScaleCurveX);
+                                }
+                                if (unityScaleCurveY.Keyframes.Count > 0)
+                                {
+                                    channelData.SetCurve("localScale.y", unityScaleCurveY);
+                                }
+                                if (unityScaleCurveZ.Keyframes.Count > 0)
+                                {
+                                    channelData.SetCurve("localScale.z", unityScaleCurveZ);
+                                }
+                            }
+                            subclip.ChannelData[n] = channelData;
+                        }
+
+                        totalLength += subLength;
+
+                        AnimationData[i] = subclip;
+                    }
+                }
             }
+
+            // Create subclips 
         }
 
         /// <summary>

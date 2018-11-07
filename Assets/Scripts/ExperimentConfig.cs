@@ -210,8 +210,9 @@ public class ExperimentConfig : MonoBehaviour {
         if (experimentStarted) return;
 
         Rect guiRect = new Rect(Screen.width * 0.4f, Screen.height * 0.2f, 100f, 40f);
-
-        selectedToolbar = GUI.Toolbar(guiRect, selectedToolbar, toolbarNames);
+        Rect menuRect = new Rect(guiRect);
+        menuRect.width = Screen.width * 0.4f;
+        selectedToolbar = GUI.Toolbar(menuRect, selectedToolbar, toolbarNames);
         guiRect.y += 50f;
 
         if (selectedToolbar == 0)
@@ -331,10 +332,17 @@ public class ExperimentConfig : MonoBehaviour {
 
             guiRect.width = 400f;
 
-            sc.portName = GUI.TextField(guiRect, sc.portName);
+            var nameRect = new Rect(guiRect);
+            GUI.Label(nameRect, "Port name");
+
+            nameRect.x += 150f;
+            sc.portName = GUI.TextField(nameRect, sc.portName);
             guiRect.y += 50f;
 
-            string speedStr = GUI.TextField(guiRect, sc.speed.ToString());
+            var speedRect = new Rect(guiRect);
+            GUI.Label(speedRect, "Speed");
+            speedRect.x += 150f;
+            string speedStr = GUI.TextField(speedRect, sc.speed.ToString());
             if (speedStr != sc.speed.ToString())
             {
                 int newSpeed = sc.speed;
@@ -347,11 +355,18 @@ public class ExperimentConfig : MonoBehaviour {
 
             int parityInt = (int)sc.parity;
 
-            parityInt = GUI.Toolbar(guiRect, parityInt, System.Enum.GetNames(typeof(System.IO.Ports.Parity)));
+            Rect parityRect = new Rect(guiRect);
+            GUI.Label(parityRect, "Parity");
+            parityRect.x += 150f;
+            parityInt = GUI.Toolbar(parityRect, parityInt, System.Enum.GetNames(typeof(System.IO.Ports.Parity)));
             sc.parity = (System.IO.Ports.Parity)parityInt;
             guiRect.y += 50f;
 
-            string dataBitsStr = GUI.TextField(guiRect, sc.dataBits.ToString());
+            Rect bitsRect = new Rect(guiRect);
+            GUI.Label(bitsRect, "Data bits");
+            bitsRect.x += 150f;
+            bitsRect.width -= 150f;
+            string dataBitsStr = GUI.TextField(bitsRect, sc.dataBits.ToString());
             if (dataBitsStr != sc.dataBits.ToString())
             {
                 int newDB = sc.dataBits;
@@ -362,37 +377,38 @@ public class ExperimentConfig : MonoBehaviour {
             }
             guiRect.y += 50f;
 
+            Rect stopRect = new Rect(guiRect);
+            GUI.Label(stopRect, "Stop bits");
             int stopBit = (int)sc.stopBits;
-            stopBit = GUI.Toolbar(guiRect, stopBit, System.Enum.GetNames(typeof(System.IO.Ports.StopBits)));
+            stopRect.x += 150f;
+            stopBit = GUI.Toolbar(stopRect, stopBit, System.Enum.GetNames(typeof(System.IO.Ports.StopBits)));
             sc.stopBits = (System.IO.Ports.StopBits)stopBit;
             guiRect.y += 50f;
 
-            if (GUI.Button(guiRect, "Close"))
+            Rect ioRect = new Rect(guiRect);
+            ioRect.width = 150f;
+            if (GUI.Button(ioRect, "Close port"))
             {
                 Serial.ClosePort();
             }
-            guiRect.x += 50f;
-            if (GUI.Button(guiRect, "Open"))
+            ioRect.x += 150f;
+            if (GUI.Button(ioRect, "Open port"))
             {
                 Serial.checkOpen();
             }
-            guiRect.x -= 50f;
+            ioRect.x += 150f;
+            GUI.Label(ioRect, "Status: " + (Serial.IsOpen ? "Open" : "Closed"));
             guiRect.y += 50f;
+
+            guiRect.width = 150f;
+            GUI.Label(guiRect, "Test string");
+            guiRect.x += 150f;
+
             serialSend = GUI.TextField(guiRect, serialSend);
-            guiRect.y += 50f;
-            if (GUI.Button(guiRect, "Send str"))
+            guiRect.x += 150f;
+            if (GUI.Button(guiRect, "Send"))
             {
                 Serial.Write(serialSend);
-            }
-            guiRect.x += 50f;
-            if (GUI.Button(guiRect, "Send bytes"))
-            {
-                List<byte> bytes = new List<byte>();
-                foreach(var c in serialSend)
-                {
-                    bytes.Add(System.BitConverter.GetBytes(c)[0]);
-                }
-                Serial.Write(bytes.ToArray());
             }
         }
     }
