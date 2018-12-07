@@ -1,0 +1,719 @@
+fileFormatVersion: 2
+guid: 0b8a716645438a047a41d7d24f9420b1
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: BoneRoot
+    100002: Bra
+    100004: CC_Base_Body
+    100006: CC_Base_Eye
+    100008: CC_Base_Teeth
+    100010: CC_Base_Tongue
+    100012: FacialBone
+    100014: Hair
+    100016: Head
+    100018: Hip
+    100020: Hoodie
+    100022: JawRoot
+    100024: L_BigToe1
+    100026: L_Breast
+    100028: L_Calf
+    100030: L_CalfTwist01
+    100032: L_CalfTwist02
+    100034: L_Clavicle
+    100036: L_ElbowShareBone
+    100038: L_Eye
+    100040: L_Foot
+    100042: L_Forearm
+    100044: L_ForearmTwist01
+    100046: L_ForearmTwist02
+    100048: L_Hand
+    100050: L_Index1
+    100052: L_Index2
+    100054: L_Index3
+    100056: L_IndexToe1
+    100058: L_KneeShareBone
+    100060: L_Mid1
+    100062: L_Mid2
+    100064: L_Mid3
+    100066: L_MidToe1
+    100068: L_Pinky1
+    100070: L_Pinky2
+    100072: L_Pinky3
+    100074: L_PinkyToe1
+    100076: L_RibsTwist
+    100078: L_Ring1
+    100080: L_Ring2
+    100082: L_Ring3
+    100084: L_RingToe1
+    100086: L_Thigh
+    100088: L_ThighTwist01
+    100090: L_ThighTwist02
+    100092: L_Thumb1
+    100094: L_Thumb2
+    100096: L_Thumb3
+    100098: L_ToeBase
+    100100: L_ToeBaseShareBone
+    100102: L_Upperarm
+    100104: L_UpperarmTwist01
+    100106: L_UpperarmTwist02
+    100108: NeckTwist01
+    100110: NeckTwist02
+    100112: Pelvis
+    100114: R_BigToe1
+    100116: R_Breast
+    100118: R_Calf
+    100120: R_CalfTwist01
+    100122: R_CalfTwist02
+    100124: R_Clavicle
+    100126: R_ElbowShareBone
+    100128: R_Eye
+    100130: R_Foot
+    100132: R_Forearm
+    100134: R_ForearmTwist01
+    100136: R_ForearmTwist02
+    100138: R_Hand
+    100140: R_Index1
+    100142: R_Index2
+    100144: R_Index3
+    100146: R_IndexToe1
+    100148: R_KneeShareBone
+    100150: R_Mid1
+    100152: R_Mid2
+    100154: R_Mid3
+    100156: R_MidToe1
+    100158: R_Pinky1
+    100160: R_Pinky2
+    100162: R_Pinky3
+    100164: R_PinkyToe1
+    100166: R_RibsTwist
+    100168: R_Ring1
+    100170: R_Ring2
+    100172: R_Ring3
+    100174: R_RingToe1
+    100176: R_Thigh
+    100178: R_ThighTwist01
+    100180: R_ThighTwist02
+    100182: R_Thumb1
+    100184: R_Thumb2
+    100186: R_Thumb3
+    100188: R_ToeBase
+    100190: R_ToeBaseShareBone
+    100192: R_Upperarm
+    100194: R_UpperarmTwist01
+    100196: R_UpperarmTwist02
+    100198: Skinny Pants
+    100200: Sneakers
+    100202: Spine01
+    100204: Spine02
+    100206: //RootNode
+    100208: Tank top
+    100210: Teeth01
+    100212: Teeth02
+    100214: Tongue01
+    100216: Tongue02
+    100218: Tongue03
+    100220: Underwear Bottoms
+    100222: UpperJaw
+    100224: Waist
+    400000: BoneRoot
+    400002: Bra
+    400004: CC_Base_Body
+    400006: CC_Base_Eye
+    400008: CC_Base_Teeth
+    400010: CC_Base_Tongue
+    400012: FacialBone
+    400014: Hair
+    400016: Head
+    400018: Hip
+    400020: Hoodie
+    400022: JawRoot
+    400024: L_BigToe1
+    400026: L_Breast
+    400028: L_Calf
+    400030: L_CalfTwist01
+    400032: L_CalfTwist02
+    400034: L_Clavicle
+    400036: L_ElbowShareBone
+    400038: L_Eye
+    400040: L_Foot
+    400042: L_Forearm
+    400044: L_ForearmTwist01
+    400046: L_ForearmTwist02
+    400048: L_Hand
+    400050: L_Index1
+    400052: L_Index2
+    400054: L_Index3
+    400056: L_IndexToe1
+    400058: L_KneeShareBone
+    400060: L_Mid1
+    400062: L_Mid2
+    400064: L_Mid3
+    400066: L_MidToe1
+    400068: L_Pinky1
+    400070: L_Pinky2
+    400072: L_Pinky3
+    400074: L_PinkyToe1
+    400076: L_RibsTwist
+    400078: L_Ring1
+    400080: L_Ring2
+    400082: L_Ring3
+    400084: L_RingToe1
+    400086: L_Thigh
+    400088: L_ThighTwist01
+    400090: L_ThighTwist02
+    400092: L_Thumb1
+    400094: L_Thumb2
+    400096: L_Thumb3
+    400098: L_ToeBase
+    400100: L_ToeBaseShareBone
+    400102: L_Upperarm
+    400104: L_UpperarmTwist01
+    400106: L_UpperarmTwist02
+    400108: NeckTwist01
+    400110: NeckTwist02
+    400112: Pelvis
+    400114: R_BigToe1
+    400116: R_Breast
+    400118: R_Calf
+    400120: R_CalfTwist01
+    400122: R_CalfTwist02
+    400124: R_Clavicle
+    400126: R_ElbowShareBone
+    400128: R_Eye
+    400130: R_Foot
+    400132: R_Forearm
+    400134: R_ForearmTwist01
+    400136: R_ForearmTwist02
+    400138: R_Hand
+    400140: R_Index1
+    400142: R_Index2
+    400144: R_Index3
+    400146: R_IndexToe1
+    400148: R_KneeShareBone
+    400150: R_Mid1
+    400152: R_Mid2
+    400154: R_Mid3
+    400156: R_MidToe1
+    400158: R_Pinky1
+    400160: R_Pinky2
+    400162: R_Pinky3
+    400164: R_PinkyToe1
+    400166: R_RibsTwist
+    400168: R_Ring1
+    400170: R_Ring2
+    400172: R_Ring3
+    400174: R_RingToe1
+    400176: R_Thigh
+    400178: R_ThighTwist01
+    400180: R_ThighTwist02
+    400182: R_Thumb1
+    400184: R_Thumb2
+    400186: R_Thumb3
+    400188: R_ToeBase
+    400190: R_ToeBaseShareBone
+    400192: R_Upperarm
+    400194: R_UpperarmTwist01
+    400196: R_UpperarmTwist02
+    400198: Skinny Pants
+    400200: Sneakers
+    400202: Spine01
+    400204: Spine02
+    400206: //RootNode
+    400208: Tank top
+    400210: Teeth01
+    400212: Teeth02
+    400214: Tongue01
+    400216: Tongue02
+    400218: Tongue03
+    400220: Underwear Bottoms
+    400222: UpperJaw
+    400224: Waist
+    2100000: Std_Tongue
+    2100002: Std_Upper_Teeth
+    2100004: Std_Lower_Teeth
+    2100006: Std_Eye_R
+    2100008: Std_Cornea_R
+    2100010: Std_Eye_L
+    2100012: Std_Cornea_L
+    2100014: Std_Skin_Head
+    2100016: Std_Skin_Body
+    2100018: Std_Skin_Arm
+    2100020: Std_Skin_Leg
+    2100022: Std_Nails
+    2100024: Std_Eyelash
+    2100026: Bra
+    2100028: Underwear Bottoms
+    2100030: Tank top
+    2100032: Hoodie
+    2100034: Sneakers
+    2100036: Skinny Pants
+    2100038: Long_Center_Part
+    2100040: Long_Center_Part_Scalp
+    4300000: CC_Base_Tongue
+    4300002: CC_Base_Teeth
+    4300004: CC_Base_Eye
+    4300006: CC_Base_Body
+    4300008: Bra
+    4300010: Underwear Bottoms
+    4300012: Tank top
+    4300014: Hoodie
+    4300016: Sneakers
+    4300018: Skinny Pants
+    4300020: Hair
+    7400000: CC_Base_TempMotion
+    9500000: //RootNode
+    13700000: Bra
+    13700002: CC_Base_Body
+    13700004: CC_Base_Eye
+    13700006: CC_Base_Teeth
+    13700008: CC_Base_Tongue
+    13700010: Hair
+    13700012: Hoodie
+    13700014: Skinny Pants
+    13700016: Sneakers
+    13700018: Tank top
+    13700020: Underwear Bottoms
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Bra
+    second: {fileID: 2100000, guid: 40ebb829e21bbb8479d0db57a9c67e34, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Hoodie
+    second: {fileID: 2100000, guid: a61f28403d81eae4badfc78486d20903, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Long_Center_Part
+    second: {fileID: 2100000, guid: 0f84344bb6b1d6542b75704737fe15d3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Long_Center_Part_Scalp
+    second: {fileID: 2100000, guid: 57785f76321786a4f9813d752e279c8e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Skinny Pants
+    second: {fileID: 2100000, guid: cb54e002ad055614cb6e4153c9f64883, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Sneakers
+    second: {fileID: 2100000, guid: e48b099970f181b4b95ce73b2224bec2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Std_Cornea_L
+    second: {fileID: 2100000, guid: ddb1d4cd2944c824cb5698654ae48e5d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Std_Cornea_R
+    second: {fileID: 2100000, guid: b438f6cfb43d21347bec4f49768571f7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Std_Eye_L
+    second: {fileID: 2100000, guid: bc41ecd44e271764a80d4e960e448e38, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Std_Eye_R
+    second: {fileID: 2100000, guid: 0eb9855d172ebaf42a94d475c4b1ebcd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Std_Eyelash
+    second: {fileID: 2100000, guid: cbd004f7bea6f13469e50663847afbc5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Std_Lower_Teeth
+    second: {fileID: 2100000, guid: fcef7f3b0694f2248a21837338a15f53, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Std_Nails
+    second: {fileID: 2100000, guid: 8406afdad3627244dbe8b5d277d6034e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Std_Skin_Arm
+    second: {fileID: 2100000, guid: ab5643bf9c191ce4abf9a02ef1dd7f8c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Std_Skin_Body
+    second: {fileID: 2100000, guid: e8032f3af59cf62458c4a9d979cc2f35, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Std_Skin_Head
+    second: {fileID: 2100000, guid: b9b07dcf6e5f70e40815d0b77c2b1a41, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Std_Skin_Leg
+    second: {fileID: 2100000, guid: 95f7dd3af44db1e4f8b468282af5d19d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Std_Tongue
+    second: {fileID: 2100000, guid: b1f05ad98463b584f86914db8deac7d1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Std_Upper_Teeth
+    second: {fileID: 2100000, guid: b295113c6a040fa4e8171ddfe1ece33b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Tank top
+    second: {fileID: 2100000, guid: 6c28eb8390b50d241af05d6f9e66e2d9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Underwear Bottoms
+    second: {fileID: 2100000, guid: 7fc455b0d088d8e4e8b39aed7f399b38, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: ' Sneakers_Diffuse'
+    second: {fileID: 2800000, guid: bbe5c75dc0f9b65439923810d0347aeb, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: ' Sneakers_Normal'
+    second: {fileID: 2800000, guid: 01d6ea8dd2296044da5a821f3f37a5e8, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: ' Sneakers_Specular'
+    second: {fileID: 2800000, guid: b90878157fd97b748a9fcf909552baed, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Bra_Diffuse
+    second: {fileID: 2800000, guid: 58c7f3e75a751774e99d4f743f5f2ba4, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Bra_Normal
+    second: {fileID: 2800000, guid: 1ec46f0953844ba4790a8d30328737ee, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Bra_Specular
+    second: {fileID: 2800000, guid: 6ccd78298fa519341b0552227b7b069a, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Hoodie_Diffuse
+    second: {fileID: 2800000, guid: 7b08f16a9a1486a409f5a7b7e8f85728, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Hoodie_Normal
+    second: {fileID: 2800000, guid: 69e29a0c53534db458cac406389d5596, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Hoodie_Specular
+    second: {fileID: 2800000, guid: 24f9242318a488b4a8406d3bd907d93c, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Long_Center_Part_Bump
+    second: {fileID: 2800000, guid: e219210d435c3c446892f5b79b6f216a, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Long_Center_Part_Diffuse
+    second: {fileID: 2800000, guid: 844ce8744be84d44b868cf3df45567cf, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Long_Center_Part_Scalp_Diffuse
+    second: {fileID: 2800000, guid: f5e9253017c59ff4b9842d9b5b207115, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Skinny Pants_Diffuse
+    second: {fileID: 2800000, guid: 882abe521c440ec4faf584bb697dc8c6, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Skinny Pants_Normal
+    second: {fileID: 2800000, guid: 7268a35985348544a82f6d124e77693a, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Skinny Pants_Specular
+    second: {fileID: 2800000, guid: d40fec2a520c6bc4c897e6f13a61fbf9, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Std_Cornea_L_Diffuse
+    second: {fileID: 2800000, guid: dee13bc2e00e79c4088cb5d15ceb53a1, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Std_Cornea_R_Diffuse
+    second: {fileID: 2800000, guid: 29b68b1d9c1c0084ba657e9604fd1962, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Std_Eye_L_Diffuse
+    second: {fileID: 2800000, guid: 955fdad7ac2ee0240a8a5ad1e4e952e8, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Std_Eye_L_Normal
+    second: {fileID: 2800000, guid: da6d0697d6ca0144cadd7efdc4c258c1, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Std_Eye_R_Diffuse
+    second: {fileID: 2800000, guid: f24f747123a5d5f4d9fe725bcab418c8, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Std_Eye_R_Normal
+    second: {fileID: 2800000, guid: 971925e485cb5f943a40207e2a56f471, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Std_Eyelash_Diffuse
+    second: {fileID: 2800000, guid: 216e30f1a9c06e041b5fb752f9e2352a, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Std_Eyelash_Normal
+    second: {fileID: 2800000, guid: ea5d8cf5586ce6445a4f409668ad048b, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Std_Eyelash_Specular
+    second: {fileID: 2800000, guid: 8b655e5f876f7bf42b2a660fff8330b3, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Std_Lower_Teeth_Diffuse
+    second: {fileID: 2800000, guid: 0330ac8dc416e7848a3d9b40c6f316a2, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Std_Lower_Teeth_Normal
+    second: {fileID: 2800000, guid: f32eec98542636748bf2b344d2fa0559, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Std_Nails_Diffuse
+    second: {fileID: 2800000, guid: 08ebe72a0f1771d4a9f65579c60cc26b, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Std_Nails_Normal
+    second: {fileID: 2800000, guid: 9d951df75ca895143b69e5ccd607c6be, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Std_Nails_Specular
+    second: {fileID: 2800000, guid: c4331f324ffc4e44fa00098014108572, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Std_Skin_Arm_Diffuse
+    second: {fileID: 2800000, guid: 28261ec427b235b42b2ad72aa358c4d3, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Std_Skin_Arm_Normal
+    second: {fileID: 2800000, guid: 135649d71a3100f40bf9621cd7f47084, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Std_Skin_Arm_Specular
+    second: {fileID: 2800000, guid: f7da6bcca65851d44a3a290044c85644, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Std_Skin_Body_Diffuse
+    second: {fileID: 2800000, guid: 871b7287615c17846ad4a9430b6746c3, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Std_Skin_Body_Normal
+    second: {fileID: 2800000, guid: 3344105fda6e75f45bd16de2d74e79a1, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Std_Skin_Body_Specular
+    second: {fileID: 2800000, guid: dfd49a681cd8aec4ba02bfabb9fe9c71, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Std_Skin_Head_Diffuse
+    second: {fileID: 2800000, guid: dc155d3e41836b745b753a31c2fca2b7, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Std_Skin_Head_Normal
+    second: {fileID: 2800000, guid: 69c2f309073101d428d69e913e2adb1a, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Std_Skin_Head_Specular
+    second: {fileID: 2800000, guid: f6bd2b8a16c51b743af5043c2f7d8c9a, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Std_Skin_Leg_Diffuse
+    second: {fileID: 2800000, guid: fdb30b9abd2709e4cba2888bc649b951, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Std_Skin_Leg_Normal
+    second: {fileID: 2800000, guid: 3b42aa1bc47430f409d27d3a557baad6, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Std_Skin_Leg_Specular
+    second: {fileID: 2800000, guid: c582badc880651546bf3fe133e9e6e9a, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Std_Tongue_Diffuse
+    second: {fileID: 2800000, guid: 0c8fdb7e32938ef4696f153f07a8af43, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Std_Tongue_Normal
+    second: {fileID: 2800000, guid: 2c28a09c7d37ff6488767233001323ed, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Std_Upper_Teeth_Diffuse
+    second: {fileID: 2800000, guid: eed0e19a0608f304898031ca162fe882, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Std_Upper_Teeth_Normal
+    second: {fileID: 2800000, guid: b2806849404aaea449896a9904bfe525, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Tank top_Diffuse
+    second: {fileID: 2800000, guid: b368aadfa60126943b359574c9d8c61a, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Tank top_Normal
+    second: {fileID: 2800000, guid: 232d33befe01c15408b2c09d7159d69e, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Tank top_Specular
+    second: {fileID: 2800000, guid: 861aed46a425fb449ad4c47a5d550159, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Underwear Bottoms_Diffuse
+    second: {fileID: 2800000, guid: 63f3872a22180114195e76f84f1b81ba, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Underwear Bottoms_Normal
+    second: {fileID: 2800000, guid: 3bb8b95d9fdf26c47bbfc17522d0649f, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Underwear Bottoms_Specular
+    second: {fileID: 2800000, guid: a4caa6d66ca12844d9b6105da7ec3a4a, type: 3}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 0.01
+    hasPreviousCalculatedGlobalScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
