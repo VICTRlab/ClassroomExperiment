@@ -140,9 +140,9 @@ public class Distractions : MonoBehaviour
 
     void Distract(DistractionEvent de)
     {
-        float dl = Agents[de.index].Distract(de);
+        float distractionLength = Agents[de.index].Distract(de);
         Experiment.Instance.SendSignal(de.distraction.ToString()
-            + " distraction from " + Agents[de.index].name, dl, de.distraction);
+            + " distraction from " + Agents[de.index].name, distractionLength, de.distraction);
     }
 	
 	// Update is called once per frame

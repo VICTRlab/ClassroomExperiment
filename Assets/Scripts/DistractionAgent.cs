@@ -34,9 +34,21 @@ public class DistractionAgent : MonoBehaviour {
         // Get tech video to first frame
         if (techVideo)
         {
+            techVideo.Prepare();
             techVideo.Play();
             techVideo.Pause();
-            techVideo.time = 0.0;
+            techVideo.frame = 1;
+
+            //StartCoroutine(PrepVideo());
+
+            techVideo.loopPointReached += (src) =>
+            {
+                techVideo.Play();
+                techVideo.Pause();
+                techVideo.frame = 1;
+                Debug.Log("Loop point reached");
+                //StartCoroutine(PrepVideo());
+            };
         }
 
         //stretchGraph = PlayableGraph.Create();
@@ -50,11 +62,29 @@ public class DistractionAgent : MonoBehaviour {
         //coughPlayable = AnimationClipPlayable.Create(coughGraph, coughClip);
         //coughOutput.SetSourcePlayable(coughPlayable);
     }
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
+    IEnumerator PrepVideo()
+    {
+        Debug.Log("Prepping distraction video");
+        techVideo.Stop();
+
+        techVideo.frameReady += TechVideo_frameReady;
+
+        techVideo.Play();
+        yield return null;
+    }
+
+    bool gotDatFrame = false;
+
+    private void TechVideo_frameReady(VideoPlayer source, long frameIdx)
+    {
+        if (frameIdx >= 1)
+        {
+            techVideo.frameReady -= TechVideo_frameReady;
+            techVideo.Pause();
+            Debug.Log("First frame ready");
+        }
+    }
 
     public float Distract(Distractions.DistractionEvent de)
     {
@@ -78,6 +108,7 @@ public class DistractionAgent : MonoBehaviour {
                 length = techAudio.length;
                 break;
             case Distractions.Distraction.TechVisual:
+                techVideo.Stop();
                 techVideo.Play();
                 length = (float)techVideo.clip.length;
                 break;
