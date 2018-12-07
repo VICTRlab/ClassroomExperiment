@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Video;
 using UnityEngine.Playables;
 using UnityEngine.Animations;
 
@@ -17,6 +18,8 @@ public class DistractionAgent : MonoBehaviour {
 
     public Animator humanAnimator;
 
+    public VideoPlayer techVideo;
+
     // Use this for initialization
     void Start () {
         if (!source)
@@ -26,6 +29,14 @@ public class DistractionAgent : MonoBehaviour {
         if (!humanAnimator)
         {
             humanAnimator = GetComponent<Animator>();
+        }
+
+        // Get tech video to first frame
+        if (techVideo)
+        {
+            techVideo.Play();
+            techVideo.Pause();
+            techVideo.time = 0.0;
         }
 
         //stretchGraph = PlayableGraph.Create();
@@ -67,7 +78,8 @@ public class DistractionAgent : MonoBehaviour {
                 length = techAudio.length;
                 break;
             case Distractions.Distraction.TechVisual:
-                length = 3.0f;
+                techVideo.Play();
+                length = (float)techVideo.clip.length;
                 break;
             case Distractions.Distraction.None:
             default:
