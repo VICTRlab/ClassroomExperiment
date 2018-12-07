@@ -4815,6 +4815,7 @@ MonoBehaviour:
   m_LandSound: {fileID: 8300000, guid: 3b09d59f4499d45428baa7a21e954296, type: 3}
   sitting: 0
   head: {fileID: 1802491514}
+  animator: {fileID: 0}
 --- !u!143 &569115579
 CharacterController:
   m_ObjectHideFlags: 0
@@ -12107,6 +12108,7 @@ GameObject:
   - component: {fileID: 1685493398}
   - component: {fileID: 1685493397}
   - component: {fileID: 1685493400}
+  - component: {fileID: 1685493401}
   m_Layer: 0
   m_Name: LaptopScreen
   m_TagString: Untagged
@@ -12216,6 +12218,24 @@ VideoPlayer:
   m_Looping: 0
   m_WaitForFirstFrame: 1
   m_FrameReadyEventEnabled: 0
+--- !u!114 &1685493401
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1685493395}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16dad41a4ce765643b57866626f1ff46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mesh: {fileID: 1685493399}
+  currentCam: {fileID: 2002834568}
+  percentVisible: 0
+  lookScore: 0
+  rowCount: 10
+  colCount: 10
+  testPointsVisible: 0
 --- !u!1 &1685701038
 GameObject:
   m_ObjectHideFlags: 0

@@ -199,7 +199,7 @@ public class PercentVisibleTracker : MonoBehaviour {
         Gizmos.color = Color.yellow;
         for (int i = 0; i < points.Length; i++)
         {
-            Gizmos.DrawSphere(points[i].world, 0.5f);
+            Gizmos.DrawSphere(points[i].world, 0.2f);
         }
 
         foreach (TestPoint p in testPoints)

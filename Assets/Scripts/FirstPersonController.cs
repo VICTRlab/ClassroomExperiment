@@ -46,6 +46,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         public bool sitting = false;
 
         public Transform head;
+        public new Animation animation;
 
         // Use this for initialization
         private void Start()
@@ -88,6 +89,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
             m_PreviouslyGrounded = m_CharacterController.isGrounded;
 
+            UpdateAnimation();
+
             //if (Input.GetKeyDown("4"))
             //{
             //    if(sitting)
@@ -113,12 +116,12 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_NextStep = m_StepCycle + .5f;
         }
 
+        float speed = 0.0f;
 
         private void FixedUpdate()
         {
             if (!sitting)
             {
-                float speed;
                 GetInput(out speed);
                 // always move along the camera forward as it is the direction that it being aimed at
                 Vector3 desiredMove = transform.forward * m_Input.y + transform.right * m_Input.x;
@@ -131,7 +134,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
                 m_MoveDir.x = desiredMove.x * speed;
                 m_MoveDir.z = desiredMove.z * speed;
-
 
                 if (m_CharacterController.isGrounded)
                 {
@@ -158,6 +160,59 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_MouseLook.UpdateCursorLock();
         }
 
+        enum AnimState
+        {
+            Idling,
+            Walking,
+            Sitting
+        }
+
+        AnimState animState = AnimState.Idling;
+        public bool animSatDown = false;
+
+        void UpdateAnimation()
+        {
+            if (animation == null)
+            {
+                animation = gameObject.GetComponentInChildren<Animation>();
+
+                if (animation == null)
+                {
+                    return;
+                }
+            }
+
+            float moveSpeed = m_CharacterController.velocity.magnitude;
+
+            if (animSatDown && animState != AnimState.Sitting)
+            {
+                //animation.Stop();
+                //animation.clip = sitClip;
+                //animation.clip.wrapMode = WrapMode.Once;
+                animation.Play("Sit", PlayMode.StopAll);
+                animState = AnimState.Sitting;
+                Debug.Log("Animation transition to sitting");
+            }
+            else if (animState != AnimState.Sitting)
+            {
+                if (Mathf.Abs(moveSpeed) < 1.0f && animState != AnimState.Idling)
+                {
+                    //animation.Stop();
+                    //animation.clip = idleClip;
+                    animation.Play("Idle", PlayMode.StopAll);
+                    animState = AnimState.Idling;
+                    Debug.Log("Animation transition to idling");
+                }
+                else if (Mathf.Abs(moveSpeed) >= 1.0f && animState != AnimState.Walking)
+                {
+                    //animation.Stop();
+                    //animation.clip = walkClip;
+                    animation.Play("Walk", PlayMode.StopAll);
+                    animState = AnimState.Walking;
+                    Debug.Log("Animation transition to walking");
+                }
+            }
+        }
 
         private void PlayJumpSound()
         {

@@ -50,13 +50,27 @@ namespace TriLib
         /// </summary>
         public bool AutoPlayAnimations = true;
 
-        public List<KeyValuePair<string, KeyValuePair<int, int>>> AnimationSubclips = new List<KeyValuePair<string, KeyValuePair<int, int>>>();
+        public class AnimationSubclip
+        {
+            public string name = "clip";
+            public Vector2Int keyRange = new Vector2Int(0, 0);
+            public WrapMode wrapMode = WrapMode.Loop;
+        }
+
+        // List of subclips. String is name of clip, key value pair is 
+        //public List<KeyValuePair<string, KeyValuePair<int, int>>> AnimationSubclips = new List<KeyValuePair<string, KeyValuePair<int, int>>>();
+        public List<AnimationSubclip> AnimationSubclips = new List<AnimationSubclip>();
 
         public string DefaultAnimationClip = string.Empty;
 
-        public void AddAnimationSubclip(string name, KeyValuePair<int, int> frames)
+        public void AddAnimationSubclip(string clipName, Vector2Int frames, WrapMode wrap = WrapMode.Loop)
         {
-            AnimationSubclips.Add(new KeyValuePair<string, KeyValuePair<int, int>>(name, frames));
+            AnimationSubclips.Add(new AnimationSubclip
+            {
+                name = clipName,
+                keyRange = frames,
+                wrapMode = wrap
+            });
         }
 
         /// <summary>

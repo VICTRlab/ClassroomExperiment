@@ -97,13 +97,17 @@ public class Experiment : MonoBehaviour {
         var fpsRB = fps.GetComponent<Rigidbody>();
 
         Vector3 startPos = fps.transform.position;
-        Vector3 endPos = seat.transform.position + new Vector3(0, -0.25f, 0);
+        Vector3 endPos = seat.transform.position;// + new Vector3(0, -0.25f, 0);
+        endPos.y = startPos.y;
         Quaternion startRot = fps.transform.rotation;
         Quaternion endRot = seat.transform.rotation;
 
         Vector3 lookTowards = projectorController.transform.position - seat.transform.position;
 
         endRot = Quaternion.LookRotation(lookTowards.normalized, Vector3.up);
+
+        // Flag that sit down animation should begin
+        fps.animSatDown = true;
 
         while (t <= SitTime)
         {
@@ -378,9 +382,9 @@ public class Experiment : MonoBehaviour {
 
                 participantAvatar = new GameObject("Participant");
 
-                loaderOptions.AddAnimationSubclip("Walk", new KeyValuePair<int, int>(0, 83));
-                loaderOptions.AddAnimationSubclip("Sit", new KeyValuePair<int, int>(84, 97));
-                loaderOptions.AddAnimationSubclip("Idle", new KeyValuePair<int, int>(100, 300));
+                loaderOptions.AddAnimationSubclip("Walk", new Vector2Int(0, 83));
+                loaderOptions.AddAnimationSubclip("Sit", new Vector2Int(84, 97), WrapMode.Once);
+                loaderOptions.AddAnimationSubclip("Idle", new Vector2Int(100, 300));
                 loaderOptions.DefaultAnimationClip = "Idle";
 
 

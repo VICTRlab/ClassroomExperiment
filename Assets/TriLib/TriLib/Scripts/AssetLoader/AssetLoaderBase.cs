@@ -2399,21 +2399,21 @@ namespace TriLib
                     {
                         var sc = options.AnimationSubclips[i];
 
-                        var frameDiff = sc.Value.Value - sc.Value.Key;
+                        var frameDiff = sc.keyRange.y - sc.keyRange.x;
                         float subLength = (float)frameDiff / ticksPerSecond;
-                        float startTime = (float)sc.Value.Key / ticksPerSecond;
+                        float startTime = (float)sc.keyRange.x / ticksPerSecond;
                         float endTime = startTime + subLength;
                         
 
                         var subclip = new AnimationData
                         {
-                            Name = sc.Key,
+                            Name = sc.name,
                             Legacy = options == null || options.UseLegacyAnimations,
                             FrameRate = ticksPerSecond,
                             Length = subLength,
-                            ChannelData = new AnimationChannelData[animationChannelCount]
+                            ChannelData = new AnimationChannelData[animationChannelCount],
+                            WrapMode = sc.wrapMode
                         };
-                        subclip.WrapMode = options != null ? options.AnimationWrapMode : WrapMode.Loop;
 
                         for (uint n = 0; n < animationChannelCount; n++)
                         {
