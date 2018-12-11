@@ -13,6 +13,9 @@ public class SkeletonVisibilityTracker : MonoBehaviour {
         public Vector3 world;
         public Vector3 screen;
         public Vector3 clampedScreen;
+        // How close to center of screen (0.5, 0.5) is it?
+        public Vector2 centerDist;
+        public float centerScore;
         public bool visible;
 
         public static bool isVisible(Vector3 screen)
@@ -32,7 +35,16 @@ public class SkeletonVisibilityTracker : MonoBehaviour {
                 Mathf.Clamp(screen.y, 0.0f, 1.0f),
                 screen.z);
 
+            centerDist = new Vector2(clampedScreen.x - 0.5f, clampedScreen.y - 0.5f);
             visible = isVisible(screen);
+            if (visible)
+            {
+                centerScore = 1.0f - (centerDist.magnitude / 0.70710678f);
+            }
+            else
+            {
+                centerScore = 0f;
+            }
         }
     }
     public WorldScreen[] points = new WorldScreen[1];
@@ -58,6 +70,7 @@ public class SkeletonVisibilityTracker : MonoBehaviour {
     public float totalBoneLength = 0f;
 
     public float percentSkeletonVisible = 0f;
+    public float centerScore = 0f;
 
     void Start ()
     {
@@ -136,6 +149,8 @@ public class SkeletonVisibilityTracker : MonoBehaviour {
         }
 
         percentSkeletonVisible = 0f;
+        centerScore = 0f;
+        int visCount = 0;
 
         for(int i = 0; i < bones.Length; i++)
         {
@@ -146,7 +161,14 @@ public class SkeletonVisibilityTracker : MonoBehaviour {
             if (bones[i].visible)
             {
                 percentSkeletonVisible += bones[i].boneWeight;
+                centerScore += (points[pi].centerScore + points[ci].centerScore) * 0.5f;
+                visCount++;
             }
+        }
+
+        if (visCount > 0)
+        {
+            centerScore /= (float)visCount;
         }
 	}
 
