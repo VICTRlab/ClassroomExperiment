@@ -4815,7 +4815,8 @@ MonoBehaviour:
   m_LandSound: {fileID: 8300000, guid: 3b09d59f4499d45428baa7a21e954296, type: 3}
   sitting: 0
   head: {fileID: 1802491514}
-  animator: {fileID: 0}
+  animation: {fileID: 0}
+  animSatDown: 0
 --- !u!143 &569115579
 CharacterController:
   m_ObjectHideFlags: 0
@@ -8832,6 +8833,7 @@ GameObject:
   - component: {fileID: 1189267154}
   - component: {fileID: 1200233784}
   - component: {fileID: 1200233785}
+  - component: {fileID: 1200233786}
   m_Layer: 0
   m_Name: student1
   m_TagString: Untagged
@@ -8974,6 +8976,22 @@ MonoBehaviour:
   coughClip: {fileID: 7400002, guid: 87885128dad80f044a260a45639d4f1b, type: 3}
   humanAnimator: {fileID: 1189267154}
   techVideo: {fileID: 1685493400}
+--- !u!114 &1200233786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1200233782}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fc7275d1a104234786de45feffe7ee8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bones: []
+  rootJoint: {fileID: 1639074951}
+  stopAt: []
+  currentCam: {fileID: 2002834568}
+  percentSkeletonVisible: 0
 --- !u!1 &1201343958
 GameObject:
   m_ObjectHideFlags: 0
