@@ -281,7 +281,7 @@ public class Experiment : MonoBehaviour {
             projectorController.player.time,
             headPos.x, headPos.y, headPos.z,
             headRot.x, headRot.y, headRot.z,
-            screenTracker.lookScore,
+            screenTracker.lookScore.ToString(),
             screenTracker.percentVisible,
             events);
 

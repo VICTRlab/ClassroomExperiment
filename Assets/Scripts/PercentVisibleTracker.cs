@@ -39,7 +39,9 @@ public class PercentVisibleTracker : MonoBehaviour {
 
     public float percentVisible = 0.0f;
 
-    public float lookScore = 0.0f;
+    // x and y are values between -180 and 180 degrees. A 0 indicates a perfectly-centered object on the screen
+    // for that axis. 
+    public Vector2 lookScore = Vector2.zero;
 
     //bool initialized = false;
 
@@ -129,20 +131,29 @@ public class PercentVisibleTracker : MonoBehaviour {
         //    initialized = true;
         //}
 
+        // Get look score by comparing camera's forward and the object itself
         Vector3 camForward = currentCam.transform.forward;
 
         Vector3 screenForward = (mesh.transform.position - currentCam.transform.position).normalized;
 
-        float angle = Vector3.Angle(camForward, screenForward);
+        Vector2 camX = new Vector2(camForward.z, camForward.y).normalized;
+        Vector2 screenX = new Vector2(screenForward.z, screenForward.y).normalized;
+        Vector2 camY = new Vector2(camForward.x, camForward.z).normalized;
+        Vector2 screenY = new Vector2(screenForward.x, screenForward.z).normalized;
 
-        if (angle <= 90.0f)
-        {
-            lookScore = 1.0f - angle / 90.0f;
-        }
-        else
-        {
-            lookScore = (90.0f - angle) / 90.0f;
-        }
+        lookScore.x = Vector2.SignedAngle(camX, screenX);
+        lookScore.y = Vector2.SignedAngle(camY, screenY);
+
+        //float angle = Vector3.Angle(camForward, screenForward);
+
+        //if (angle <= 90.0f)
+        //{
+        //    lookScore = 1.0f - angle / 90.0f;
+        //}
+        //else
+        //{
+        //    lookScore = (90.0f - angle) / 90.0f;
+        //}
 
 
         int numVisible = 0;
